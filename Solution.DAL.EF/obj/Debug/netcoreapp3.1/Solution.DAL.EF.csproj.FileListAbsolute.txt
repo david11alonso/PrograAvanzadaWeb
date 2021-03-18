@@ -1,0 +1,17 @@
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.deps.json
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.dll
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.pdb
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.AssemblyInfoInputs.cache
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.AssemblyInfo.cs
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.csproj.CoreCompileInputs.cache
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.dll
+C:\Users\Win10\source\repos\Solution_Project\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.pdb
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.deps.json
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.dll
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\bin\Debug\netcoreapp3.1\Solution.DAL.EF.pdb
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.csprojAssemblyReference.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.AssemblyInfoInputs.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.AssemblyInfo.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.csproj.CoreCompileInputs.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.dll
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.EF\obj\Debug\netcoreapp3.1\Solution.DAL.EF.pdb
