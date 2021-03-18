@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rxLhpLJNN2oqm5hsFdojagZoK5Npu5lyS5Jfray6sfz8LbaYNykFwi+iCzL8hebfhHgo0pA/FoFIgX93wehNSw==",
+  "dgSpecHash": "/oGgIxN6zinLI8HepCL5uHys1BScNLquz9TBXqxwqVm/f6rDCFgldRcutJzWh4nj2x0dgTXp/pOmVVikFTdL/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
   "expectedPackageFiles": [
@@ -43,10 +43,10 @@
     "C:\\Users\\Win10\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.0\\swashbuckle.aspnetcore.6.1.0.nupkg.sha512",
-    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.0\\swashbuckle.aspnetcore.swagger.6.1.0.nupkg.sha512",
-    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.0\\swashbuckle.aspnetcore.swaggergen.6.1.0.nupkg.sha512",
-    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.0\\swashbuckle.aspnetcore.swaggerui.6.1.0.nupkg.sha512",
+    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.1\\swashbuckle.aspnetcore.6.1.1.nupkg.sha512",
+    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.1\\swashbuckle.aspnetcore.swagger.6.1.1.nupkg.sha512",
+    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.1.1\\swashbuckle.aspnetcore.swaggergen.6.1.1.nupkg.sha512",
+    "C:\\Users\\Win10\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.1.1\\swashbuckle.aspnetcore.swaggerui.6.1.1.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\Win10\\.nuget\\packages\\system.collections.immutable\\1.7.1\\system.collections.immutable.1.7.1.nupkg.sha512",
