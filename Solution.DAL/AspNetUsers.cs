@@ -9,14 +9,14 @@ using data = Solution.DO.Objects;
 
 namespace Solution.DAL
 {
-    public class AspNetUsers : ICRUD<data.AspNetUsers>
+    public class AspNetUsers : ICRUDAspNetUserRoles<data.AspNetUsers>
     {
 
-        private Repository<data.AspNetUsers> _repository = null;
+        private RepositoryAspNetUsersRoles<data.AspNetUsers> _repository = null;
 
         public AspNetUsers(SolutionDbContext solutionDbContext)
         {
-            _repository = new Repository<data.AspNetUsers>(solutionDbContext);
+            _repository = new RepositoryAspNetUsersRoles<data.AspNetUsers>(solutionDbContext);
         }
 
         public void Delete(data.AspNetUsers t)
@@ -35,10 +35,6 @@ namespace Solution.DAL
             return _repository.GetOneById(id);
         }
 
-        public data.AspNetUsers GetOneById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Insert(data.AspNetUsers t)
         {

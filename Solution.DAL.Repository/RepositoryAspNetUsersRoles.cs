@@ -6,11 +6,11 @@ using System.Linq.Expressions;
 
 namespace Solution.DAL.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class RepositoryAspNetUsersRoles<T> : IRepositoryAspNetUsersRoles<T> where T : class
     {
         protected readonly SolutionDbContext dbContext;
 
-        public Repository(SolutionDbContext context)
+        public RepositoryAspNetUsersRoles(SolutionDbContext context)
         {
             dbContext = context;
         }
@@ -54,7 +54,7 @@ namespace Solution.DAL.Repository
             return dbContext.Set<T>().Where(predicado).FirstOrDefault();
         }
 
-        public T GetOneById(int id)
+        public T GetOneById(string id)
         {
             return dbContext.Set<T>().Find(id);
         }

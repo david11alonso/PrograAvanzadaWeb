@@ -11,7 +11,5 @@ namespace Solution.DO.Interfaces
         void Update(T t);
         IEnumerable<T> GetAll();
         T GetOneById(int id);
-
-
     }
 }

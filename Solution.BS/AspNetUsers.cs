@@ -8,7 +8,7 @@ using data = Solution.DO.Objects;
 
 namespace Solution.BS
 {
-    public class AspNetUsers : ICRUD<data.AspNetUsers>
+    public class AspNetUsers : ICRUDAspNetUserRoles<data.AspNetUsers>
     {
         private SolutionDbContext context;
 
@@ -32,10 +32,6 @@ namespace Solution.BS
             return new DAL.AspNetUsers(context).GetOneById(id);
         }
 
-        public data.AspNetUsers GetOneById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Insert(data.AspNetUsers t)
         {
