@@ -59,6 +59,11 @@ namespace Solution.DAL.Repository
             return dbContext.Set<T>().Find(id);
         }
 
+        public T GetOneById(String id)
+        {
+            return dbContext.Set<T>().Find(id);
+        }
+
         public void Insert(T t)
         {
             if (dbContext.Entry<T>(t).State == Microsoft.EntityFrameworkCore.EntityState.Detached)

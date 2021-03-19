@@ -16,3 +16,11 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\netcoreapp3.1\Solution.DAL.Repository.csproj.CoreCompileInputs.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\netcoreapp3.1\Solution.DAL.Repository.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\netcoreapp3.1\Solution.DAL.Repository.pdb
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DAL.Repository.runtimeconfig.json
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DAL.Repository.runtimeconfig.dev.json
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DAL.EF.dll
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DO.dll
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DAL.EF.pdb
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\bin\Debug\netcoreapp3.1\Solution.DO.pdb
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\netcoreapp3.1\Solution.DAL.Repository.csproj.CopyComplete
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.DAL.Repository\obj\Debug\netcoreapp3.1\Solution.DAL.Repository.genruntimeconfig.cache
