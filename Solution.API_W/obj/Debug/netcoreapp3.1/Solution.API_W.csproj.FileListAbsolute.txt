@@ -222,3 +222,4 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.API_W\bin\Debug\netcoreap
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.API_W\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.API_W\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.API_W\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution.API_W\obj\Debug\netcoreapp3.1\Solution.API_W.csprojAssemblyReference.cache

@@ -96,15 +96,15 @@ namespace Solution.API.Controllers
         // POST: api/AspNetUsers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<datamodels.AspNetUsers>> PostAspNetUsers(datamodels.AspNetUsers user)
-        {
-            var mapaux = _mapper.Map<datamodels.AspNetUsers, data.AspNetUsers>(user);
+        //[HttpPost]
+        //public async Task<ActionResult<datamodels.AspNetUsers>> PostAspNetUsers(datamodels.AspNetUsers user)
+        //{
+        //    var mapaux = _mapper.Map<datamodels.AspNetUsers, data.AspNetUsers>(user);
 
-            new Solution.BS.AspNetUsers(_context).Insert(mapaux);
+        //    new Solution.BS.AspNetUsers(_context).Insert(mapaux);
 
-            return CreatedAtAction("GetAspNetUsers", new { id = user.Id }, user);
-        }
+        //    return CreatedAtAction("GetAspNetUsers", new { id = user.Id }, user);
+        //}
 
         // DELETE: api/AspNetUsers/5
         [HttpDelete("{id}")]

@@ -13,6 +13,8 @@ namespace Solution.API.Mapping
         public MappingProfile()
         {
             CreateMap<data.AspNetUsers, DataModels.AspNetUsers>().ReverseMap();
+            CreateMap<data.AspNetRoles, DataModels.AspNetRoles>().ReverseMap();
+            CreateMap<data.AspNetUserRoles, DataModels.AspNetUserRoles>().ReverseMap();
 
         }
     }
