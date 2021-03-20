@@ -1501,6 +1501,7 @@
       "Solution.DAL.EF/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "3.1.12",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.12",
           "Solution.DO": "1.0.0"
         },
         "runtime": {
