@@ -22,10 +22,10 @@ namespace Solution.DAL.EF
         //public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         //public virtual DbSet<Comentario> Comentario { get; set; }
-        //public virtual DbSet<Departamento> Departamento { get; set; }
-        //public virtual DbSet<Foro> Foro { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Foro> Foro { get; set; }
         //public virtual DbSet<Noticia> Noticia { get; set; }
-        //public virtual DbSet<Propuesta> Propuesta { get; set; }
+        public virtual DbSet<Propuesta> Propuesta { get; set; }
         //public virtual DbSet<UsuarioDepartamento> UsuarioDepartamento { get; set; }
         //public virtual DbSet<VotoPropuesta> VotoPropuesta { get; set; }
 
@@ -160,31 +160,31 @@ namespace Solution.DAL.EF
             //        .HasConstraintName("FK_Comentario_Usuario");
             //});
 
-            //modelBuilder.Entity<Departamento>(entity =>
-            //{
-            //    entity.Property(e => e.DepartamentoId)
-            //        .HasColumnName("DepartamentoID")
-            //        .ValueGeneratedNever();
+            modelBuilder.Entity<Departamento>(entity =>
+            {
+                entity.Property(e => e.DepartamentoId)
+                    .HasColumnName("DepartamentoID")
+                    .ValueGeneratedNever();
 
-            //    entity.Property(e => e.Nombre)
-            //        .IsRequired()
-            //        .IsUnicode(false);
-            //});
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .IsUnicode(false);
+            });
 
-            //modelBuilder.Entity<Foro>(entity =>
-            //{
-            //    entity.Property(e => e.ForoId)
-            //        .HasColumnName("ForoID")
-            //        .ValueGeneratedNever();
+            modelBuilder.Entity<Foro>(entity =>
+            {
+                entity.Property(e => e.ForoId)
+                    .HasColumnName("ForoID")
+                    .ValueGeneratedNever();
 
-            //    entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
-            //    entity.HasOne(d => d.Propuesta)
-            //        .WithMany(p => p.Foro)
-            //        .HasForeignKey(d => d.PropuestaId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Foro_Propuesta");
-            //});
+                entity.HasOne(d => d.Propuesta)
+                    .WithMany(p => p.Foro)
+                    .HasForeignKey(d => d.PropuestaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Foro_Propuesta");
+            });
 
             //modelBuilder.Entity<Noticia>(entity =>
             //{
@@ -208,52 +208,52 @@ namespace Solution.DAL.EF
             //        .HasConstraintName("FK_Noticia_Usuario");
             //});
 
-            //modelBuilder.Entity<Propuesta>(entity =>
-            //{
-            //    entity.Property(e => e.PropuestaId)
-            //        .HasColumnName("PropuestaID")
-            //        .ValueGeneratedNever();
+            modelBuilder.Entity<Propuesta>(entity =>
+            {
+                entity.Property(e => e.PropuestaId)
+                    .HasColumnName("PropuestaID")
+                    .ValueGeneratedNever();
 
-            //    entity.Property(e => e.Beneficios)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.Beneficios)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.Descripcion)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
+                entity.Property(e => e.FechaFinalizacion).HasColumnType("date");
 
-            //    entity.Property(e => e.FechaPublicacion).HasColumnType("date");
+                entity.Property(e => e.FechaPublicacion).HasColumnType("date");
 
-            //    entity.Property(e => e.Problema)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.Problema)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.ResultadoEsperado)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.ResultadoEsperado)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.Riesgos)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.Riesgos)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.Titulo)
-            //        .IsRequired()
-            //        .HasMaxLength(250)
-            //        .IsUnicode(false);
+                entity.Property(e => e.Titulo)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.UsuarioId)
-            //        .IsRequired()
-            //        .HasColumnName("UsuarioID")
-            //        .HasMaxLength(450);
+                entity.Property(e => e.UsuarioId)
+                    .IsRequired()
+                    .HasColumnName("UsuarioID")
+                    .HasMaxLength(450);
 
-            //    entity.HasOne(d => d.Usuario)
-            //        .WithMany(p => p.Propuesta)
-            //        .HasForeignKey(d => d.UsuarioId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Propuesta_User");
-            //});
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Propuesta)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Propuesta_User");
+            });
 
             //modelBuilder.Entity<UsuarioDepartamento>(entity =>
             //{
