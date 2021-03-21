@@ -23,3 +23,12 @@ C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution.DO\obj\Debug\netcoreapp3.1
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.csproj.CoreCompileInputs.cache
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.dll
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.pdb
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.deps.json
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.dll
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\bin\Debug\netcoreapp3.1\Solution.DO.pdb
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.csprojAssemblyReference.cache
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.AssemblyInfoInputs.cache
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.AssemblyInfo.cs
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.dll
+C:\Users\User\Documents\PAW-ProyectoU\Solution.DO\obj\Debug\netcoreapp3.1\Solution.DO.pdb

@@ -30,6 +30,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.12",
           "Solution.BS": "1.0.0",
           "Solution.DAL": "1.0.0",
+          "Solution.DAL.EF": "1.0.0",
           "Solution.DO": "1.0.0",
           "Swashbuckle.AspNetCore": "6.1.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
