@@ -1,8 +1,4 @@
-
-*.cache
-*.cache
-*.cache
-Solution.DAL.Repository/obj/Debug/netcoreapp3.1/Solution.DAL.Repository.csprojAssemblyReference.cache
+Solution.DAL.Repository/obj/Debug/netcoreapp3.1/
 FrontEnd/.vs/FrontEnd/v16/.suo
 Solution/.vs/Solution/v16/.suo
 *.cache
@@ -10,3 +6,4 @@ Solution/.vs/Solution/v16/.suo
 *.dll
 *.exe
 *.pdb
+
