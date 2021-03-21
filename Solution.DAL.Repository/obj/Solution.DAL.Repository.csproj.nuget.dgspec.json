@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {}
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
         "projectName": "Solution.DAL.EF",
-        "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\obj\\",
+        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\Solution.DO.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\Solution.DO.csproj"
+              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
               }
             }
           }
@@ -74,21 +74,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
         "projectName": "Solution.DAL.Repository",
-        "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.Repository\\obj\\",
+        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
+        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,8 +102,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
+              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
               }
             }
           }
@@ -144,21 +144,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\Solution.DO.csproj": {
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\Solution.DO.csproj",
+        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
         "projectName": "Solution.DO",
-        "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\Solution.DO.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\Solution.DO\\obj\\",
+        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -198,7 +198,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

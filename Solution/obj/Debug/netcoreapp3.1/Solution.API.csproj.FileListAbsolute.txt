@@ -38,7 +38,6 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\S
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.pdb
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.genruntimeconfig.cache
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
