@@ -21,16 +21,16 @@ namespace Solution.DAL.EF
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         //public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        //public virtual DbSet<Comentario> Comentario { get; set; }
+        public virtual DbSet<Comentario> Comentario { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
         public virtual DbSet<Foro> Foro { get; set; }
-        //public virtual DbSet<Noticia> Noticia { get; set; }
+        public virtual DbSet<Noticia> Noticia { get; set; }
         public virtual DbSet<Propuesta> Propuesta { get; set; }
 
         public virtual DbSet<PropuestaDepartamento> PropuestaDepartamento { get; set; }
 
         public virtual DbSet<UsuarioDepartamento> UsuarioDepartamento { get; set; }
-        //public virtual DbSet<VotoPropuesta> VotoPropuesta { get; set; }
+        public virtual DbSet<VotoPropuesta> VotoPropuesta { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -132,36 +132,35 @@ namespace Solution.DAL.EF
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
-            //modelBuilder.Entity<Comentario>(entity =>
-            //{
-            //    entity.Property(e => e.ComentarioId)
-            //        .HasColumnName("ComentarioID")
-            //        .ValueGeneratedNever();
+            modelBuilder.Entity<Comentario>(entity =>
+            {
+                entity.Property(e => e.ComentarioId)
+                    .HasColumnName("ComentarioID");
 
-            //    entity.Property(e => e.Comentario1)
-            //        .IsRequired()
-            //        .HasColumnName("Comentario")
-            //        .IsUnicode(false);
+                entity.Property(e => e.Comentario1)
+                    .IsRequired()
+                    .HasColumnName("Comentario")
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.ForoId).HasColumnName("ForoID");
+                entity.Property(e => e.ForoId).HasColumnName("ForoID");
 
-            //    entity.Property(e => e.UsuarioId)
-            //        .IsRequired()
-            //        .HasColumnName("UsuarioID")
-            //        .HasMaxLength(450);
+                entity.Property(e => e.UsuarioId)
+                    .IsRequired()
+                    .HasColumnName("UsuarioID")
+                    .HasMaxLength(450);
 
-            //    entity.HasOne(d => d.Foro)
-            //        .WithMany(p => p.Comentario)
-            //        .HasForeignKey(d => d.ForoId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Comentario_Foro");
+                entity.HasOne(d => d.Foro)
+                    .WithMany(p => p.Comentario)
+                    .HasForeignKey(d => d.ForoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comentario_Foro");
 
-            //    entity.HasOne(d => d.Usuario)
-            //        .WithMany(p => p.Comentario)
-            //        .HasForeignKey(d => d.UsuarioId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Comentario_Usuario");
-            //});
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Comentario)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comentario_Usuario");
+            });
 
             modelBuilder.Entity<Departamento>(entity =>
             {
