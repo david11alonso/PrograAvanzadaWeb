@@ -26,6 +26,9 @@ namespace Solution.DAL.EF
         public virtual DbSet<Foro> Foro { get; set; }
         //public virtual DbSet<Noticia> Noticia { get; set; }
         public virtual DbSet<Propuesta> Propuesta { get; set; }
+
+        public virtual DbSet<PropuestaDepartamento> PropuestaDepartamento { get; set; }
+
         public virtual DbSet<UsuarioDepartamento> UsuarioDepartamento { get; set; }
         //public virtual DbSet<VotoPropuesta> VotoPropuesta { get; set; }
 
@@ -254,6 +257,29 @@ namespace Solution.DAL.EF
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Propuesta_User");
             });
+
+
+            modelBuilder.Entity<PropuestaDepartamento>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
+
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
+
+                entity.HasOne(d => d.Departamento)
+                    .WithMany()
+                    .HasForeignKey(d => d.DepartamentoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PropuestaDepartamento_Departamento");
+
+                entity.HasOne(d => d.Propuesta)
+                    .WithMany()
+                    .HasForeignKey(d => d.PropuestaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PropuestaDepartamento_Propuesta");
+            });
+
 
             modelBuilder.Entity<UsuarioDepartamento>(entity =>
             {
