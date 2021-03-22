@@ -146,18 +146,14 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Comentario>(entity =>
             {
-                entity.Property(e => e.ComentarioId)
-                    .HasColumnName("ComentarioID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ComentarioId).HasColumnName("ComentarioID");
 
                 entity.Property(e => e.Comentario1)
                     .IsRequired()
                     .HasColumnName("Comentario")
                     .IsUnicode(false);
 
-                entity.Property(e => e.ForoId)
-                    .HasColumnName("ForoID")
-                    .ValueGeneratedOnAdd();
+                entity.Property(e => e.ForoId).HasColumnName("ForoID");
 
                 entity.Property(e => e.UsuarioId)
                     .IsRequired()
@@ -312,6 +308,10 @@ namespace Solution.API_W.Models
             modelBuilder.Entity<VotoPropuesta>(entity =>
             {
                 entity.HasNoKey();
+
+                entity.Property(e => e.Comentario)
+                    .IsRequired()
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 

@@ -10,8 +10,9 @@ namespace Solution.API_W.Models
     public partial class VotoPropuesta
     {
         public int PropuestaId { get; set; }
-        public int? Votacion { get; set; }
+        public int Votacion { get; set; }
         public string UsuarioId { get; set; }
+        public string Comentario { get; set; }
 
         public virtual Propuesta Propuesta { get; set; }
         public virtual AspNetUsers Usuario { get; set; }

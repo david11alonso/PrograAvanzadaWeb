@@ -297,6 +297,9 @@ namespace Solution.DAL.EF
             modelBuilder.Entity<VotoPropuesta>(entity =>
             {
                 entity.HasNoKey();
+                entity.Property(e => e.Comentario)
+                    .IsRequired()
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
