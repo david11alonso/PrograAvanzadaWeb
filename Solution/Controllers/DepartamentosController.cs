@@ -20,9 +20,11 @@ namespace Solution.API.Controllers
 
         private readonly IMapper _mapper;
 
-        public DepartamentosController(SolutionDbContext context)
+        public DepartamentosController(SolutionDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+
         }
 
 
