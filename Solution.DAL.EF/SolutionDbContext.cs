@@ -26,7 +26,7 @@ namespace Solution.DAL.EF
         public virtual DbSet<Foro> Foro { get; set; }
         //public virtual DbSet<Noticia> Noticia { get; set; }
         public virtual DbSet<Propuesta> Propuesta { get; set; }
-        //public virtual DbSet<UsuarioDepartamento> UsuarioDepartamento { get; set; }
+        public virtual DbSet<UsuarioDepartamento> UsuarioDepartamento { get; set; }
         //public virtual DbSet<VotoPropuesta> VotoPropuesta { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -255,29 +255,29 @@ namespace Solution.DAL.EF
                     .HasConstraintName("FK_Propuesta_User");
             });
 
-            //modelBuilder.Entity<UsuarioDepartamento>(entity =>
-            //{
-            //    entity.HasNoKey();
+            modelBuilder.Entity<UsuarioDepartamento>(entity =>
+            {
+                entity.HasNoKey();
 
-            //    entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
+                entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
-            //    entity.Property(e => e.UsuarioId)
-            //        .IsRequired()
-            //        .HasColumnName("UsuarioID")
-            //        .HasMaxLength(450);
+                entity.Property(e => e.UsuarioId)
+                    .IsRequired()
+                    .HasColumnName("UsuarioID")
+                    .HasMaxLength(450);
 
-            //    entity.HasOne(d => d.Departamento)
-            //        .WithMany()
-            //        .HasForeignKey(d => d.DepartamentoId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_UsuarioDepartamento_Departamento");
+                entity.HasOne(d => d.Departamento)
+                    .WithMany()
+                    .HasForeignKey(d => d.DepartamentoId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UsuarioDepartamento_Departamento");
 
-            //    entity.HasOne(d => d.Usuario)
-            //        .WithMany()
-            //        .HasForeignKey(d => d.UsuarioId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_UsuarioDepartamento_Usuario");
-            //});
+                entity.HasOne(d => d.Usuario)
+                    .WithMany()
+                    .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UsuarioDepartamento_Usuario");
+            });
 
             //modelBuilder.Entity<VotoPropuesta>(entity =>
             //{
