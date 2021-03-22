@@ -251,20 +251,20 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<PropuestaDepartamento>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.PropuestaDepartamentoId).HasColumnName("PropuestaDepartamentoID");
 
                 entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
                 entity.HasOne(d => d.Departamento)
-                    .WithMany()
+                    .WithMany(p => p.PropuestaDepartamento)
                     .HasForeignKey(d => d.DepartamentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PropuestaDepartamento_Departamento");
 
                 entity.HasOne(d => d.Propuesta)
-                    .WithMany()
+                    .WithMany(p => p.PropuestaDepartamento)
                     .HasForeignKey(d => d.PropuestaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PropuestaDepartamento_Propuesta");
@@ -272,7 +272,7 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<UsuarioDepartamento>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.UsuarioDepartamentoId).HasColumnName("UsuarioDepartamentoID");
 
                 entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
@@ -282,13 +282,13 @@ namespace Solution.DAL.EF
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Departamento)
-                    .WithMany()
+                    .WithMany(p => p.UsuarioDepartamento)
                     .HasForeignKey(d => d.DepartamentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioDepartamento_Departamento");
 
                 entity.HasOne(d => d.Usuario)
-                    .WithMany()
+                    .WithMany(p => p.UsuarioDepartamento)
                     .HasForeignKey(d => d.UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioDepartamento_Usuario");
@@ -296,7 +296,8 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<VotoPropuesta>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.VotoPropuestaId).HasColumnName("VotoPropuestaID");
+
                 entity.Property(e => e.Comentario)
                     .IsRequired()
                     .IsUnicode(false);
@@ -309,13 +310,13 @@ namespace Solution.DAL.EF
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Propuesta)
-                    .WithMany()
+                    .WithMany(p => p.VotoPropuesta)
                     .HasForeignKey(d => d.PropuestaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Voto_Propuesta");
 
                 entity.HasOne(d => d.Usuario)
-                    .WithMany()
+                    .WithMany(p => p.VotoPropuesta)
                     .HasForeignKey(d => d.UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VotoPropuesta_Usuario");

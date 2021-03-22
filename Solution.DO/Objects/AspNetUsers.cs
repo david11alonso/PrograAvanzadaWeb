@@ -15,6 +15,8 @@ namespace Solution.DO.Objects
             Comentario = new HashSet<Comentario>();
             Noticia = new HashSet<Noticia>();
             Propuesta = new HashSet<Propuesta>();
+            UsuarioDepartamento = new HashSet<UsuarioDepartamento>();
+            VotoPropuesta = new HashSet<VotoPropuesta>();
         }
 
         public string Id { get; set; }
@@ -40,5 +42,7 @@ namespace Solution.DO.Objects
         public virtual ICollection<Comentario> Comentario { get; set; }
         public virtual ICollection<Noticia> Noticia { get; set; }
         public virtual ICollection<Propuesta> Propuesta { get; set; }
+        public virtual ICollection<UsuarioDepartamento> UsuarioDepartamento { get; set; }
+        public virtual ICollection<VotoPropuesta> VotoPropuesta { get; set; }
     }
 }

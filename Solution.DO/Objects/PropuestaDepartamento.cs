@@ -6,6 +6,7 @@ namespace Solution.DO.Objects
 {
     public class PropuestaDepartamento
     {
+        public int PropuestaDepartamentoId { get; set; }
         public int PropuestaId { get; set; }
         public int DepartamentoId { get; set; }
 

@@ -9,6 +9,7 @@ namespace Solution.API_W.Models
 {
     public partial class VotoPropuesta
     {
+        public int VotoPropuestaId { get; set; }
         public int PropuestaId { get; set; }
         public int Votacion { get; set; }
         public string UsuarioId { get; set; }

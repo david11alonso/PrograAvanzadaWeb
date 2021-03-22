@@ -9,6 +9,7 @@ namespace Solution.API_W.Models
 {
     public partial class UsuarioDepartamento
     {
+        public int UsuarioDepartamentoId { get; set; }
         public string UsuarioId { get; set; }
         public int DepartamentoId { get; set; }
 

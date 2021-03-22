@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Solution.DO.Objects
+namespace Solution.API.DataModels
 {
     public class Propuesta
     {
-        public Propuesta()
-        {
-            Foro = new HashSet<Foro>();
-            PropuestaDepartamento = new HashSet<PropuestaDepartamento>();
-            VotoPropuesta = new HashSet<VotoPropuesta>();
-        }
-
         public int PropuestaId { get; set; }
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
@@ -27,8 +21,5 @@ namespace Solution.DO.Objects
         public string Beneficios { get; set; }
 
         public virtual AspNetUsers Usuario { get; set; }
-        public virtual ICollection<Foro> Foro { get; set; }
-        public virtual ICollection<PropuestaDepartamento> PropuestaDepartamento { get; set; }
-        public virtual ICollection<VotoPropuesta> VotoPropuesta { get; set; }
     }
 }
