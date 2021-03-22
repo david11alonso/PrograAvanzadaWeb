@@ -96,7 +96,7 @@ namespace Solution.API.Controllers
 
             new Solution.BS.Departamento(_context).Insert(mapaux);
 
-            return CreatedAtAction("GetCourse", new { id = departamento.DepartamentoId }, departamento);
+            return CreatedAtAction("GetDepartamento", new { id = departamento.DepartamentoId }, departamento);
         }
 
         // DELETE: api/Departamentoes/5
