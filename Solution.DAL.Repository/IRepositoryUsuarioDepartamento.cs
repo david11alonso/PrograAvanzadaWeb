@@ -10,6 +10,6 @@ namespace Solution.DAL.Repository
     {
         Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsync();
         // Aca le quitamos el IEnumerable xq solo estramos trayendo un dato
-        Task<data.UsuarioDepartamento> GetOneWithAsync(int id);
+        Task<IEnumerable<data.UsuarioDepartamento>> GetOneWithAsync(int id);
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {}
+    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
         "projectName": "Solution.DAL.EF",
-        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
-        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\obj\\",
+        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
-                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
+              "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+                "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
               }
             }
           }
@@ -78,17 +78,17 @@
         }
       }
     },
-    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
+    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
         "projectName": "Solution.DAL.Repository",
-        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
-        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\obj\\",
+        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj",
+        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,8 +102,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
-                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
+              "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+                "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
               }
             }
           }
@@ -148,17 +148,17 @@
         }
       }
     },
-    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {
+    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj",
         "projectName": "Solution.DAL",
-        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj",
-        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\obj\\",
+        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj",
+        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -172,14 +172,14 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
-                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
+              "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+                "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
               },
-              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
-                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj"
+              "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj": {
+                "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.Repository\\Solution.DAL.Repository.csproj"
               },
-              "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
-                "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
+              "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+                "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
               }
             }
           }
@@ -224,17 +224,17 @@
         }
       }
     },
-    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
         "projectName": "Solution.DO",
-        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
-        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
+        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

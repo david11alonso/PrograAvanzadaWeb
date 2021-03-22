@@ -6,6 +6,7 @@ using data = Solution.DO.Objects;
 using Microsoft.EntityFrameworkCore;
 using Solution.DAL.EF;
 using Solution.DO.Objects;
+using System.Linq;
 
 namespace Solution.DAL.Repository
 {
@@ -29,7 +30,7 @@ namespace Solution.DAL.Repository
                 .ToListAsync();
         }
 
-        public async Task<UsuarioDepartamento> GetOneWithAsync(int id)
+        public async Task<IEnumerable<UsuarioDepartamento>> GetOneWithAsync(int id)
         {
             return await _db.UsuarioDepartamento
                 .Include(m => m.Departamento)
