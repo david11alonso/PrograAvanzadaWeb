@@ -155,7 +155,9 @@ namespace Solution.API_W.Models
                     .HasColumnName("Comentario")
                     .IsUnicode(false);
 
-                entity.Property(e => e.ForoId).HasColumnName("ForoID");
+                entity.Property(e => e.ForoId)
+                    .HasColumnName("ForoID")
+                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.UsuarioId)
                     .IsRequired()
@@ -177,9 +179,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Departamento>(entity =>
             {
-                entity.Property(e => e.DepartamentoId)
-                    .HasColumnName("DepartamentoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -188,9 +188,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Foro>(entity =>
             {
-                entity.Property(e => e.ForoId)
-                    .HasColumnName("ForoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ForoId).HasColumnName("ForoID");
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
@@ -203,9 +201,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Noticia>(entity =>
             {
-                entity.Property(e => e.NoticiaId)
-                    .HasColumnName("NoticiaID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.NoticiaId).HasColumnName("NoticiaID");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
@@ -225,9 +221,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Propuesta>(entity =>
             {
-                entity.Property(e => e.PropuestaId)
-                    .HasColumnName("PropuestaID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
                 entity.Property(e => e.Beneficios)
                     .IsRequired()

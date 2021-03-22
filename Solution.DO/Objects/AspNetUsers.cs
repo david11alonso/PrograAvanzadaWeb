@@ -13,7 +13,7 @@ namespace Solution.DO.Objects
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             //AspNetUserTokens = new HashSet<AspNetUserTokens>();
             //Comentario = new HashSet<Comentario>();
-            //Noticia = new HashSet<Noticia>();
+            Noticia = new HashSet<Noticia>();
             Propuesta = new HashSet<Propuesta>();
         }
 
@@ -38,7 +38,7 @@ namespace Solution.DO.Objects
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         ////public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
         //public virtual ICollection<Comentario> Comentario { get; set; }
-        //public virtual ICollection<Noticia> Noticia { get; set; }
+        public virtual ICollection<Noticia> Noticia { get; set; }
         public virtual ICollection<Propuesta> Propuesta { get; set; }
     }
 }

@@ -165,9 +165,7 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<Departamento>(entity =>
             {
-                entity.Property(e => e.DepartamentoId)
-                    .HasColumnName("DepartamentoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -176,9 +174,7 @@ namespace Solution.DAL.EF
 
             modelBuilder.Entity<Foro>(entity =>
             {
-                entity.Property(e => e.ForoId)
-                    .HasColumnName("ForoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ForoId).HasColumnName("ForoID");
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
@@ -189,33 +185,29 @@ namespace Solution.DAL.EF
                     .HasConstraintName("FK_Foro_Propuesta");
             });
 
-            //modelBuilder.Entity<Noticia>(entity =>
-            //{
-            //    entity.Property(e => e.NoticiaId)
-            //        .HasColumnName("NoticiaID")
-            //        .ValueGeneratedNever();
+            modelBuilder.Entity<Noticia>(entity =>
+            {
+                entity.Property(e => e.NoticiaId).HasColumnName("NoticiaID");
 
-            //    entity.Property(e => e.Descripcion)
-            //        .IsRequired()
-            //        .IsUnicode(false);
+                entity.Property(e => e.Descripcion)
+                    .IsRequired()
+                    .IsUnicode(false);
 
-            //    entity.Property(e => e.UsuarioId)
-            //        .IsRequired()
-            //        .HasColumnName("UsuarioID")
-            //        .HasMaxLength(450);
+                entity.Property(e => e.UsuarioId)
+                    .IsRequired()
+                    .HasColumnName("UsuarioID")
+                    .HasMaxLength(450);
 
-            //    entity.HasOne(d => d.Usuario)
-            //        .WithMany(p => p.Noticia)
-            //        .HasForeignKey(d => d.UsuarioId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Noticia_Usuario");
-            //});
+                entity.HasOne(d => d.Usuario)
+                    .WithMany(p => p.Noticia)
+                    .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Noticia_Usuario");
+            });
 
             modelBuilder.Entity<Propuesta>(entity =>
             {
-                entity.Property(e => e.PropuestaId)
-                    .HasColumnName("PropuestaID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
                 entity.Property(e => e.Beneficios)
                     .IsRequired()
@@ -258,7 +250,6 @@ namespace Solution.DAL.EF
                     .HasConstraintName("FK_Propuesta_User");
             });
 
-
             modelBuilder.Entity<PropuestaDepartamento>(entity =>
             {
                 entity.HasNoKey();
@@ -279,7 +270,6 @@ namespace Solution.DAL.EF
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PropuestaDepartamento_Propuesta");
             });
-
 
             modelBuilder.Entity<UsuarioDepartamento>(entity =>
             {
@@ -305,29 +295,29 @@ namespace Solution.DAL.EF
                     .HasConstraintName("FK_UsuarioDepartamento_Usuario");
             });
 
-            //modelBuilder.Entity<VotoPropuesta>(entity =>
-            //{
-            //    entity.HasNoKey();
+            modelBuilder.Entity<VotoPropuesta>(entity =>
+            {
+                entity.HasNoKey();
 
-            //    entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
-            //    entity.Property(e => e.UsuarioId)
-            //        .IsRequired()
-            //        .HasColumnName("UsuarioID")
-            //        .HasMaxLength(450);
+                entity.Property(e => e.UsuarioId)
+                    .IsRequired()
+                    .HasColumnName("UsuarioID")
+                    .HasMaxLength(450);
 
-            //    entity.HasOne(d => d.Propuesta)
-            //        .WithMany()
-            //        .HasForeignKey(d => d.PropuestaId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_Voto_Propuesta");
+                entity.HasOne(d => d.Propuesta)
+                    .WithMany()
+                    .HasForeignKey(d => d.PropuestaId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Voto_Propuesta");
 
-            //    entity.HasOne(d => d.Usuario)
-            //        .WithMany()
-            //        .HasForeignKey(d => d.UsuarioId)
-            //        .OnDelete(DeleteBehavior.ClientSetNull)
-            //        .HasConstraintName("FK_VotoPropuesta_Usuario");
-            //});
+                entity.HasOne(d => d.Usuario)
+                    .WithMany()
+                    .HasForeignKey(d => d.UsuarioId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_VotoPropuesta_Usuario");
+            });
 
             OnModelCreatingPartial(modelBuilder);
         }
