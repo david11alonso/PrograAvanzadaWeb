@@ -7,3 +7,4 @@ Solution/.vs/Solution/v16/.suo
 *.exe
 *.pdb
 
+Solution/obj/*
