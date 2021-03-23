@@ -18,25 +18,33 @@ namespace Solution.BS
 
         }
 
+        public async Task<data.PropuestaDepartamento> GetOneByIDsAsync(int PropuestaId, int DepartamentoId)
+        {
+            return await new DAL.PropuestaDepartamento(_repo).GetOneByIDsAsync(PropuestaId, DepartamentoId);
+
+        }
+
         public void Delete(data.PropuestaDepartamento t)
         {
-            throw new NotImplementedException();
+            new DAL.PropuestaDepartamento(_repo).Delete(t);
         }
 
         public IEnumerable<data.PropuestaDepartamento> GetAll()
         {
-            throw new NotImplementedException();
+            return new DAL.PropuestaDepartamento(_repo).GetAll();
         }
 
         public data.PropuestaDepartamento GetOneById(int id)
         {
-            throw new NotImplementedException();
+            return new DAL.PropuestaDepartamento(_repo).GetOneById(id);
         }
 
         public void Insert(data.PropuestaDepartamento t)
         {
-            throw new NotImplementedException();
+            new DAL.PropuestaDepartamento(_repo).Insert(t);
         }
+
+        // No se ocupa actualizar
 
         public void Update(data.PropuestaDepartamento t)
         {
@@ -44,18 +52,18 @@ namespace Solution.BS
         }
 
 
-        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsync()
-        {
 
-            return await new DAL.PropuestaDepartamento(_repo).GetAllWithAsync();
+        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllPropuestasByDepartamentoAsync(int id)
+        {
+            return await new DAL.PropuestaDepartamento(_repo).GetAllPropuestasByDepartamentoAsync(id);
+        }
+
+        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsAsync()
+        {
+            return await new DAL.PropuestaDepartamento(_repo).GetAllWithAsAsync();
         }
 
 
-        //public async Task<data.Enrollment> GetOneByIdWithAsync(int id)
-        //{
-        //    return await new DAL.Enrollment(_repo).GetOneByIdWithAsync(id);
-
-        //}
 
 
     }

@@ -23,22 +23,28 @@ namespace Solution.DAL.Repository
             get { return dbContext as SolutionDbContext; }
         }
 
-        public async Task<IEnumerable<PropuestaDepartamento>> GetAllWithAsync()
-        {
-            return await _db.PropuestaDepartamento
-                .Include(m => m.Propuesta)
-                .Include(m => m.Departamento)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<PropuestaDepartamento>> GetOneWithAsync(int id)
+        public async Task<IEnumerable<PropuestaDepartamento>> GetAllPropuestasByDepartamentoAsync(int id)
         {
             return await _db.PropuestaDepartamento
                 .Include(m => m.Propuesta)
                 .Include(m => m.Departamento)
                 .Where(m => m.DepartamentoId == id).ToListAsync();
+        }
 
+        public async Task<IEnumerable<PropuestaDepartamento>> GetAllWithAsAsync()
+        {
+            return await _db.PropuestaDepartamento
+               .Include(m => m.Propuesta)
+               .Include(m => m.Departamento)
+               .ToListAsync();
+        }
 
+        public async Task<PropuestaDepartamento> GetOneByIDsAsync(int PropuestaId, int DepartamentoId)
+        {
+            return await _db.PropuestaDepartamento
+                .Include(m => m.Propuesta)
+                .Include(m => m.Departamento)
+                .SingleOrDefaultAsync(m => m.PropuestaId == PropuestaId && m.DepartamentoId == DepartamentoId);
         }
     }
 }

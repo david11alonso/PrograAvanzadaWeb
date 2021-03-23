@@ -19,6 +19,9 @@ namespace Solution.API.Mapping
             CreateMap<data.Foro, DataModels.Foro>().ReverseMap();
             CreateMap<data.VotoPropuesta, DataModels.VotoPropuesta>().ReverseMap();
             CreateMap<data.Propuesta, DataModels.Propuesta>().ReverseMap();
+            CreateMap<data.Propuesta, DataModels.Propuesta>().ReverseMap();
+            CreateMap<data.PropuestaDepartamento, DataModels.PropuestaDepartamento>().ReverseMap();
+
         }
     }
 }

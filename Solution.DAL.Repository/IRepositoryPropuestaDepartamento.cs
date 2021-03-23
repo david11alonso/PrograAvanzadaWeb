@@ -8,8 +8,8 @@ namespace Solution.DAL.Repository
 {
     public interface IRepositoryPropuestaDepartamento
     {
-        Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsync();
-        // Aca le quitamos el IEnumerable xq solo estramos trayendo un dato
-        Task<IEnumerable<data.PropuestaDepartamento>> GetOneWithAsync(int id);
+        Task<IEnumerable<data.PropuestaDepartamento>> GetAllPropuestasByDepartamentoAsync(int id);
+        Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsAsync();
+        Task<data.PropuestaDepartamento> GetOneByIDsAsync(int PropuestaId, int DepartamentoId);
     }
 }

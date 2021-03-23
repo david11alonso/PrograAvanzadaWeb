@@ -20,37 +20,47 @@ namespace Solution.DAL
 
         public void Delete(data.PropuestaDepartamento t)
         {
-            throw new NotImplementedException();
+            _repo.Delete(t);
+            _repo.Commit();
         }
 
         public IEnumerable<data.PropuestaDepartamento> GetAll()
         {
-            throw new NotImplementedException();
+            return _repo.GetAll();
         }
 
         public data.PropuestaDepartamento GetOneById(int id)
         {
-            throw new NotImplementedException();
+            return _repo.GetOneById(id);
         }
 
         public void Insert(data.PropuestaDepartamento t)
         {
-            throw new NotImplementedException();
+            _repo.Insert(t);
+            _repo.Commit();
         }
 
         public void Update(data.PropuestaDepartamento t)
         {
-            throw new NotImplementedException();
+            _repo.Update(t);
+            _repo.Commit();
         }
 
-        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsync()
+
+        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllPropuestasByDepartamentoAsync(int id)
         {
-            return await _repo.GetAllWithAsync();
+            return await _repo.GetAllPropuestasByDepartamentoAsync(id);
         }
 
-        public async Task<IEnumerable<data.PropuestaDepartamento>> GetOneByIdWithAsync(int id)
+        public async Task<IEnumerable<data.PropuestaDepartamento>> GetAllWithAsAsync()
         {
-            return await _repo.GetOneWithAsync(id);
+            return await _repo.GetAllWithAsAsync();
+        }
+
+        public async Task<data.PropuestaDepartamento> GetOneByIDsAsync(int PropuestaId, int DepartamentoId)
+        {
+            return await _repo.GetOneByIDsAsync(PropuestaId, DepartamentoId);
+
         }
 
     }
