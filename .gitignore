@@ -8,3 +8,9 @@ Solution/.vs/Solution/v16/.suo
 *.pdb
 
 Solution/obj/*
+Solution.API_W/obj/*
+Solution.BS/obj/*
+Solution.DAL.EF/obj/*
+Solution.DAL.Repository/obj/*
+Solution.DO/obj/*
+Solution.DAL/obj/*
