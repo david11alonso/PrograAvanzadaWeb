@@ -17,8 +17,8 @@ namespace Solution.API.Mapping
             CreateMap<data.AspNetUserRoles, DataModels.AspNetUserRoles>().ReverseMap();
             CreateMap<data.Departamento, DataModels.Departamento>().ReverseMap();
             CreateMap<data.Foro, DataModels.Foro>().ReverseMap();
-
-
+            CreateMap<data.VotoPropuesta, DataModels.VotoPropuesta>().ReverseMap();
+            CreateMap<data.Propuesta, DataModels.Propuesta>().ReverseMap();
         }
     }
 }

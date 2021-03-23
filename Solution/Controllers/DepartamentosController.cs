@@ -20,9 +20,11 @@ namespace Solution.API.Controllers
 
         private readonly IMapper _mapper;
 
-        public DepartamentosController(SolutionDbContext context)
+        public DepartamentosController(SolutionDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
+
         }
 
 
@@ -96,7 +98,7 @@ namespace Solution.API.Controllers
 
             new Solution.BS.Departamento(_context).Insert(mapaux);
 
-            return CreatedAtAction("GetCourse", new { id = departamento.DepartamentoId }, departamento);
+            return CreatedAtAction("GetDepartamento", new { id = departamento.DepartamentoId }, departamento);
         }
 
         // DELETE: api/Departamentoes/5

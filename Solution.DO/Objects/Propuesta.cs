@@ -9,6 +9,8 @@ namespace Solution.DO.Objects
         public Propuesta()
         {
             Foro = new HashSet<Foro>();
+            PropuestaDepartamento = new HashSet<PropuestaDepartamento>();
+            VotoPropuesta = new HashSet<VotoPropuesta>();
         }
 
         public int PropuestaId { get; set; }
@@ -26,5 +28,7 @@ namespace Solution.DO.Objects
 
         public virtual AspNetUsers Usuario { get; set; }
         public virtual ICollection<Foro> Foro { get; set; }
+        public virtual ICollection<PropuestaDepartamento> PropuestaDepartamento { get; set; }
+        public virtual ICollection<VotoPropuesta> VotoPropuesta { get; set; }
     }
 }

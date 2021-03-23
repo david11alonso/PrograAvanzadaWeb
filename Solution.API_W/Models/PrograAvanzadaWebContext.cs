@@ -146,9 +146,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Comentario>(entity =>
             {
-                entity.Property(e => e.ComentarioId)
-                    .HasColumnName("ComentarioID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ComentarioId).HasColumnName("ComentarioID");
 
                 entity.Property(e => e.Comentario1)
                     .IsRequired()
@@ -177,9 +175,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Departamento>(entity =>
             {
-                entity.Property(e => e.DepartamentoId)
-                    .HasColumnName("DepartamentoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
                 entity.Property(e => e.Nombre)
                     .IsRequired()
@@ -188,9 +184,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Foro>(entity =>
             {
-                entity.Property(e => e.ForoId)
-                    .HasColumnName("ForoID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ForoId).HasColumnName("ForoID");
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
@@ -203,9 +197,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Noticia>(entity =>
             {
-                entity.Property(e => e.NoticiaId)
-                    .HasColumnName("NoticiaID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.NoticiaId).HasColumnName("NoticiaID");
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
@@ -225,9 +217,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<Propuesta>(entity =>
             {
-                entity.Property(e => e.PropuestaId)
-                    .HasColumnName("PropuestaID")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
                 entity.Property(e => e.Beneficios)
                     .IsRequired()
@@ -272,20 +262,20 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<PropuestaDepartamento>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.PropuestaDepartamentoId).HasColumnName("PropuestaDepartamentoID");
 
                 entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
                 entity.HasOne(d => d.Departamento)
-                    .WithMany()
+                    .WithMany(p => p.PropuestaDepartamento)
                     .HasForeignKey(d => d.DepartamentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PropuestaDepartamento_Departamento");
 
                 entity.HasOne(d => d.Propuesta)
-                    .WithMany()
+                    .WithMany(p => p.PropuestaDepartamento)
                     .HasForeignKey(d => d.PropuestaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PropuestaDepartamento_Propuesta");
@@ -293,7 +283,7 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<UsuarioDepartamento>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.UsuarioDepartamentoId).HasColumnName("UsuarioDepartamentoID");
 
                 entity.Property(e => e.DepartamentoId).HasColumnName("DepartamentoID");
 
@@ -303,13 +293,13 @@ namespace Solution.API_W.Models
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Departamento)
-                    .WithMany()
+                    .WithMany(p => p.UsuarioDepartamento)
                     .HasForeignKey(d => d.DepartamentoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioDepartamento_Departamento");
 
                 entity.HasOne(d => d.Usuario)
-                    .WithMany()
+                    .WithMany(p => p.UsuarioDepartamento)
                     .HasForeignKey(d => d.UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioDepartamento_Usuario");
@@ -317,7 +307,11 @@ namespace Solution.API_W.Models
 
             modelBuilder.Entity<VotoPropuesta>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.VotoPropuestaId).HasColumnName("VotoPropuestaID");
+
+                entity.Property(e => e.Comentario)
+                    .IsRequired()
+                    .IsUnicode(false);
 
                 entity.Property(e => e.PropuestaId).HasColumnName("PropuestaID");
 
@@ -327,13 +321,13 @@ namespace Solution.API_W.Models
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Propuesta)
-                    .WithMany()
+                    .WithMany(p => p.VotoPropuesta)
                     .HasForeignKey(d => d.PropuestaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Voto_Propuesta");
 
                 entity.HasOne(d => d.Usuario)
-                    .WithMany()
+                    .WithMany(p => p.VotoPropuesta)
                     .HasForeignKey(d => d.UsuarioId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_VotoPropuesta_Usuario");

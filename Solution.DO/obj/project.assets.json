@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Win10\\.nuget\\packages\\": {}
+    "C:\\Users\\Familia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+      "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
       "projectName": "Solution.DO",
-      "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
-      "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
+      "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+      "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
