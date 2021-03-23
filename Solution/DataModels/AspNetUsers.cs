@@ -15,7 +15,7 @@ namespace Solution.API.DataModels
             ////AspNetUserTokens = new HashSet<AspNetUserTokens>();
             //Comentario = new HashSet<Comentario>();
             //Noticia = new HashSet<Noticia>();
-            //Propuesta = new HashSet<Propuesta>();
+            Propuesta = new HashSet<Propuesta>();
         }
 
         public string Id { get; set; }
@@ -40,6 +40,6 @@ namespace Solution.API.DataModels
         ////public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
         //public virtual ICollection<Comentario> Comentario { get; set; }
         //public virtual ICollection<Noticia> Noticia { get; set; }
-        //public virtual ICollection<Propuesta> Propuesta { get; set; }
+        public virtual ICollection<Propuesta> Propuesta { get; set; }
     }
 }

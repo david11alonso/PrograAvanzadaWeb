@@ -44,13 +44,13 @@ namespace Solution.API.Controllers
 
         // GET: api/AspNetUserRoles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<datamodels.AspNetUserRoles>> GetAspNetUserRoles(String id)
+        public async Task<ActionResult<IEnumerable<datamodels.AspNetUserRoles>>> GetAllRolesByUser(String id)
         {
             //var userRole = await _context.AspNetUserRoles.FindAsync(id);
 
-            var aux = await new Solution.BS.AspNetUserRoles(_context).GetOneWithAsAsync(id);
+            var aux = await new Solution.BS.AspNetUserRoles(_context).GetAllRolesByUserAsync(id);
 
-            var mapaux = _mapper.Map<data.AspNetUserRoles, datamodels.AspNetUserRoles>(aux);
+            var mapaux = _mapper.Map<IEnumerable<data.AspNetUserRoles>, IEnumerable< datamodels.AspNetUserRoles>>(aux).ToList();
 
             if (mapaux == null)
             {
@@ -60,38 +60,38 @@ namespace Solution.API.Controllers
             return mapaux;
         }
 
-        // PUT: api/AspNetUserRoles/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAspNetUserRoles(String id, datamodels.AspNetUserRoles userRole)
-        {
-            if (id != userRole.RoleId && id != userRole.UserId)
-            {
-                return BadRequest();
-            }
+        //// PUT: api/AspNetUserRoles/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
+        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutAspNetUserRoles(String id, datamodels.AspNetUserRoles userRole)
+        //{
+        //    if (id != userRole.RoleId && id != userRole.UserId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
+        //    try
+        //    {
 
-                var mapaux = _mapper.Map<datamodels.AspNetUserRoles, data.AspNetUserRoles>(userRole);
+        //        var mapaux = _mapper.Map<datamodels.AspNetUserRoles, data.AspNetUserRoles>(userRole);
 
-                new Solution.BS.AspNetUserRoles(_context).Update(mapaux);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserRoleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //        new Solution.BS.AspNetUserRoles(_context).Update(mapaux);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!UserRoleExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/AspNetUserRoles
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -99,43 +99,128 @@ namespace Solution.API.Controllers
         [HttpPost]
         public async Task<ActionResult<datamodels.AspNetUserRoles>> PostAspNetUserRoles(datamodels.AspNetUserRoles userRole)
         {
-            var mapaux = _mapper.Map<datamodels.AspNetUserRoles, data.AspNetUserRoles>(userRole);
 
-            new Solution.BS.AspNetUserRoles(_context).Insert(mapaux);
+            var aux = await new Solution.BS.AspNetUserRoles(_context).GetOneByIDsAsync(userRole.UserId, userRole.RoleId);
 
-            return CreatedAtAction("GetAspNetUserRoles", new { id = userRole.UserId }, userRole);
+
+            if (aux == null)
+            {
+
+
+                var mapaux = _mapper.Map<DataModels.AspNetUserRoles, data.AspNetUserRoles>(userRole);
+                new Solution.BS.AspNetUserRoles(_context).Insert(mapaux);
+
+                return Ok();
+
+            }
+            else
+            {
+                return BadRequest("El dato ya existe");
+            }
         }
 
         // DELETE: api/AspNetUserRoles/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<datamodels.AspNetUserRoles>> DeleteAspNetUserRoles(String id)
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<datamodels.AspNetUserRoles>> DeleteAspNetUserRoles(String id)
+        //{
+        //    var user = _context.AspNetUsers.Where(m => m.Id == id).FirstOrDefault();
+        //    try
+        //    {
+        //        var userRole = await _context.AspNetUserRoles.FindAsync(id, _context.AspNetUserRoles.Where(m => m.User == user).FirstOrDefault().RoleId);
+
+        //        if (userRole == null)
+        //        {
+        //            return NotFound();
+        //        }
+
+        //        new Solution.BS.AspNetUserRoles(_context).Delete(userRole);
+
+        //        var mapaux = _mapper.Map<data.AspNetUserRoles, datamodels.AspNetUserRoles>(userRole);
+
+        //        return mapaux;
+
+        //    } catch (NullReferenceException)
+        //    {
+        //        return BadRequest();
+        //    }
+            
+        //}
+
+        //private bool UserRoleExists(String userId, String roleId)
+        //{
+
+        //    var user = new Solution.BS.AspNetUsers(_context).GetOneById(userId);
+        //    var role = new Solution.BS.AspNetRoles(_context).GetOneById(roleId);
+
+        //    if (user != null || role != null)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+
+        //}
+
+        [HttpDelete]
+        public async Task<ActionResult<datamodels.AspNetUserRoles>> DeleteAspNetUserRole(String userId, String roleId)
         {
-            var user = _context.AspNetUsers.Where(m => m.Id == id).FirstOrDefault();
-            try
-            {
-                var userRole = await _context.AspNetUserRoles.FindAsync(id, _context.AspNetUserRoles.Where(m => m.User == user).FirstOrDefault().RoleId);
 
-                if (userRole == null)
-                {
-                    return NotFound();
-                }
+            var userRole = await new Solution.BS.AspNetUserRoles(_context).GetOneByIDsAsync(userId, roleId);
 
-                new Solution.BS.AspNetUserRoles(_context).Delete(userRole);
-
-                var mapaux = _mapper.Map<data.AspNetUserRoles, datamodels.AspNetUserRoles>(userRole);
-
-                return mapaux;
-
-            } catch (NullReferenceException)
+            if (userRole == null)
             {
                 return BadRequest();
+
+
             }
-            
+
+            new Solution.BS.AspNetUserRoles(_context).Delete(userRole);
+
+
+            var mapaux = _mapper.Map<data.AspNetUserRoles, datamodels.AspNetUserRoles>(userRole);
+
+            return mapaux;
         }
 
-        private bool UserRoleExists(String id)
-        {
-            return (new Solution.BS.AspNetUserRoles(_context).GetOneById(id) != null);
-        }
+        // PUT: api/AspNetUserRoles/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutAspNetUserRoles(String userId, String roleId)
+        //{
+
+        //    try
+        //    {
+        //        if (UserRoleExists(userId, roleId))
+        //        {
+        //            var userRole = _context.AspNetUserRoles.Where(r => r.RoleId == roleId && r.UserId == userId).FirstOrDefault();
+
+        //            var mapaux = _mapper.Map<data.AspNetUserRoles, datamodels.AspNetUserRoles>(userRole);
+
+        //            new Solution.BS.AspNetUserRoles(_context).Update(userRole);
+
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!UserRoleExists(userId, roleId))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+            
     }
 }

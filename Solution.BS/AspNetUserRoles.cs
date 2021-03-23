@@ -8,7 +8,7 @@ using data = Solution.DO.Objects;
 
 namespace Solution.BS
 {
-    public class AspNetUserRoles : ICRUD<data.AspNetUserRoles>
+    public class AspNetUserRoles : ICRUDAspNetUserRoles<data.AspNetUserRoles>
     {
         private SolutionDbContext context = null;
 
@@ -27,10 +27,6 @@ namespace Solution.BS
             return new DAL.AspNetUserRoles(context).GetAll();
         }
 
-        public data.AspNetUserRoles GetOneById(int id)
-        {
-            return new DAL.AspNetUserRoles(context).GetOneById(id);
-        }
 
         public data.AspNetUserRoles GetOneById(String id)
         {
@@ -56,6 +52,18 @@ namespace Solution.BS
         {
             return await new DAL.AspNetUserRoles(context).GetOneWithAsAsync(id);
         }
+
+        public async Task<IEnumerable<data.AspNetUserRoles>> GetAllRolesByUserAsync(string userId)
+        {
+            return await new DAL.AspNetUserRoles(context).GetAllRolesByUserAsync(userId);
+        }
+
+        public async Task<data.AspNetUserRoles> GetOneByIDsAsync(string userId, string roleId)
+        {
+            return await new DAL.AspNetUserRoles(context).GetOneByIDsAsync(userId, roleId);
+
+        }
+
 
     }
 }

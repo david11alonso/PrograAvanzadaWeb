@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {}
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
         "projectName": "Solution.DO",
-        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
-        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
+        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

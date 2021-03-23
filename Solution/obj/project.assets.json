@@ -6050,19 +6050,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Familia\\.nuget\\packages\\": {}
+    "C:\\Users\\Win10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution\\Solution.API.csproj",
+      "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution\\Solution.API.csproj",
       "projectName": "Solution.API",
-      "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution\\Solution.API.csproj",
-      "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution\\obj\\",
+      "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution\\Solution.API.csproj",
+      "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6076,17 +6076,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.BS\\Solution.BS.csproj": {
-              "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.BS\\Solution.BS.csproj"
+            "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.BS\\Solution.BS.csproj": {
+              "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.BS\\Solution.BS.csproj"
             },
-            "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
-              "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
+            "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj": {
+              "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj"
             },
-            "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {
-              "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj"
+            "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj": {
+              "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DAL\\Solution.DAL.csproj"
             },
-            "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
-              "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
+            "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+              "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
             }
           }
         }

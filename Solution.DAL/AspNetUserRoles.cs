@@ -9,7 +9,7 @@ using data = Solution.DO.Objects;
 
 namespace Solution.DAL
 {
-    public class AspNetUserRoles : ICRUD<data.AspNetUserRoles>
+    public class AspNetUserRoles : ICRUDAspNetUserRoles<data.AspNetUserRoles>
     {
 
         private RepositoryAspNetUserRoles _repository = null;
@@ -30,10 +30,6 @@ namespace Solution.DAL
             return _repository.GetAll();
         }
 
-        public data.AspNetUserRoles GetOneById(int id)
-        {
-            return _repository.GetOneById(id);
-        }
         public data.AspNetUserRoles GetOneById(String id)
         {
             return _repository.GetOneById(id);
@@ -56,9 +52,21 @@ namespace Solution.DAL
             return await _repository.GetAllWithAsAsync();
         }
 
-        public async Task<data.AspNetUserRoles> GetOneWithAsAsync(String id)
+        public async Task<data.AspNetUserRoles> GetOneWithAsAsync(string id)
         {
             return await _repository.GetOneWithAsAsync(id);
+        }
+
+        public async Task<IEnumerable<data.AspNetUserRoles>> GetAllRolesByUserAsync(string  userId)
+        {
+            return await _repository.GetAllRolesByUserAsync(userId);
+        }
+
+
+        public async Task<data.AspNetUserRoles> GetOneByIDsAsync(string userId, string roleId)
+        {
+            return await _repository.GetOneByIDsAsync(userId, roleId);
+
         }
     }
 }

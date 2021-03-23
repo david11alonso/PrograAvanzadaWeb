@@ -248,3 +248,4 @@ C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\So
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.dll
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.pdb
 C:\Users\Familia\Documents\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.genruntimeconfig.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Solution\obj\Debug\netcoreapp3.1\Solution.API.MvcApplicationPartsAssemblyInfo.cs

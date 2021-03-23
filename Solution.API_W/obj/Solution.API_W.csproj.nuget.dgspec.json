@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {}
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {
+    "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
+        "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
         "projectName": "Solution.API_W",
-        "projectPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
-        "packagesPath": "C:\\Users\\Familia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.API_W\\obj\\",
+        "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
+        "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\Solution.API_W\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Familia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
