@@ -38,23 +38,31 @@ namespace Solution.BS
             new DAL.UsuarioDepartamento(_repo).Insert(t);
         }
 
+        // No se ocupa actualizar
+
         public void Update(data.UsuarioDepartamento t)
         {
-            new DAL.UsuarioDepartamento(_repo).Update(t);
+            throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsync()
+
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
         {
+            return await new DAL.UsuarioDepartamento(_repo).GetAllUsuariosByDepartamentoAsync(id);
 
-            return await new DAL.UsuarioDepartamento(_repo).GetAllWithAsync();
         }
 
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsAsync()
+        {
+            return await new DAL.UsuarioDepartamento(_repo).GetAllWithAsAsync();
 
-        //public async Task<data.Enrollment> GetOneByIdWithAsync(int id)
-        //{
-        //    return await new DAL.Enrollment(_repo).GetOneByIdWithAsync(id);
+        }
 
-        //}
+        public async Task<data.UsuarioDepartamento> GetOneByIDsAsync(string UsuarioId, int DepartamentoId)
+        {
+            return await new DAL.UsuarioDepartamento(_repo).GetOneByIDsAsync(UsuarioId, DepartamentoId);
+
+        }
 
     }
 }

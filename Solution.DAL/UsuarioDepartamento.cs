@@ -48,14 +48,22 @@ namespace Solution.DAL
             _repo.Commit();
         }
 
-        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsync()
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
         {
-            return await _repo.GetAllWithAsync();
+            return await _repo.GetAllUsuariosByDepartamentoAsync(id);
+
         }
 
-        public async Task<IEnumerable<data.UsuarioDepartamento>> GetOneByIdWithAsync(int id)
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsAsync()
         {
-            return await _repo.GetOneWithAsync(id);
+            return await _repo.GetAllWithAsAsync();
+
+        }
+
+        public async Task<data.UsuarioDepartamento> GetOneByIDsAsync(string UsuarioId, int DepartamentoId)
+        {
+            return await _repo.GetOneByIDsAsync(UsuarioId, DepartamentoId);
+
         }
 
     }

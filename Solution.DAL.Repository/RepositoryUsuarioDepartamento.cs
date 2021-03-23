@@ -22,22 +22,29 @@ namespace Solution.DAL.Repository
             get { return dbContext as SolutionDbContext; }
         }
 
-        public async Task<IEnumerable<UsuarioDepartamento>> GetAllWithAsync()
+        public async Task<IEnumerable<UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
         {
             return await _db.UsuarioDepartamento
-                .Include(m => m.Departamento)
                 .Include(m => m.Usuario)
-                .ToListAsync();
+                .Include(m => m.Departamento)
+                .Where(m => m.DepartamentoId == id).ToListAsync();
         }
 
-        public async Task<IEnumerable<UsuarioDepartamento>> GetOneWithAsync(int id)
+        public async Task<IEnumerable<UsuarioDepartamento>> GetAllWithAsAsync()
         {
             return await _db.UsuarioDepartamento
-                .Include(m => m.Departamento)
-                .Include(m => m.Usuario)
-                .Where(m => m.UsuarioId.Equals(id)).ToListAsync();
-
-
+               .Include(m => m.Usuario)
+               .Include(m => m.Departamento)
+               .ToListAsync();
         }
+
+        public async Task<UsuarioDepartamento> GetOneByIDsAsync(string UsuarioId, int DepartamentoId)
+        {
+            return await _db.UsuarioDepartamento
+                .Include(m => m.Usuario)
+                .Include(m => m.Departamento)
+                .SingleOrDefaultAsync(m => m.UsuarioId == UsuarioId && m.DepartamentoId == DepartamentoId);
+        }
+    
     }
 }
