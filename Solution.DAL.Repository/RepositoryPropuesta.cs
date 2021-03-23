@@ -24,14 +24,14 @@ namespace Solution.DAL.Repository
         public async Task<IEnumerable<Propuesta>> GetAllWithAsync()
         {
             return await _db.Propuesta
-                .Include(m => m.Foro)
+                .Include(m => m.Usuario)
                 .ToListAsync();
         }
 
         public async Task<Propuesta> GetOneWithAsync(int id)
         {
             return await _db.Propuesta
-                .Include(m => m.Foro)
+                .Include(m => m.Usuario)
                 .SingleOrDefaultAsync(m => m.PropuestaId == id);
         }
     }

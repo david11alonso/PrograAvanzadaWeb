@@ -1,62 +1,58 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Text;
-using data = Solution.DO.Objects;
 using System.Threading.Tasks;
 using Solution.DAL.EF;
 using Solution.DAL.Repository;
 using Solution.DO.Interfaces;
+using data = Solution.DO.Objects;
 
-namespace Solution.DAL
+
+namespace Solution.BS
 {
     public class Propuesta : ICRUD<data.Propuesta>
     {
 
-        private RepositoryPropuesta _repo = null;
+        private SolutionDbContext _repo = null;
 
         public Propuesta(SolutionDbContext solutionDbContext)
         {
-            _repo = new RepositoryPropuesta(solutionDbContext);
+            _repo = solutionDbContext;
         }
 
         public void Delete(data.Propuesta t)
         {
-            _repo.Delete(t);
-            _repo.Commit();
+            new DAL.Propuesta(_repo).Delete(t);
         }
 
         public IEnumerable<data.Propuesta> GetAll()
         {
-            return _repo.GetAll();
+            return new DAL.Propuesta(_repo).GetAll();
         }
 
         public data.Propuesta GetOneById(int id)
         {
-            return _repo.GetOneById(id);
+            return new DAL.Propuesta(_repo).GetOneById(id);
         }
 
         public void Insert(data.Propuesta t)
         {
-            _repo.Insert(t);
-            _repo.Commit();
+            new DAL.Propuesta(_repo).Insert(t);
         }
 
         public void Update(data.Propuesta t)
         {
-            _repo.Update(t);
-            _repo.Commit();
+            new DAL.Propuesta(_repo).Update(t);
         }
 
         public async Task<IEnumerable<data.Propuesta>> GetAllWithAsync()
         {
-            return await _repo.GetAllWithAsync();
-
+            return await new DAL.Propuesta(_repo).GetAllWithAsync();
         }
 
-        public async Task<data.Propuesta> GetOneWithAsync(int id)
-        {
-            return await _repo.GetOneWithAsync(id);
 
+        public async Task<data.Propuesta> GetOneByIdWithAsync(int id)
+        {
+            return await new DAL.Propuesta(_repo).GetOneWithAsync(id);
         }
     }
 }
