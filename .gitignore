@@ -7,3 +7,10 @@ Solution/.vs/Solution/v16/.suo
 *.exe
 *.pdb
 
+Solution/obj/Debug*
+Solution.API_W/obj/Debug/*
+Solution.BS/obj/Debug/*
+Solution.DAL.EF/obj/Debug/*
+Solution.DAL.Repository/obj/Debug/*
+Solution.DO/obj/Debug/*
+Solution.DAL/obj/Debug/*
