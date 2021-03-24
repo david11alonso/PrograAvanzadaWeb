@@ -63,35 +63,35 @@ namespace Solution.API.Controllers
         // PUT: api/Foro/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutForo(int id, datamodels.Foro foro)
-        {
-            if (id != foro.ForoId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutForo(int id, datamodels.Foro foro)
+        //{
+        //    if (id != foro.ForoId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
+        //    try
+        //    {
 
-                var mapaux = _mapper.Map<datamodels.Foro, data.Foro>(foro);
+        //        var mapaux = _mapper.Map<datamodels.Foro, data.Foro>(foro);
 
-                new Solution.BS.Foro(_context).Update(mapaux);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserRoleExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //        new Solution.BS.Foro(_context).Update(mapaux);
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!UserRoleExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Foro
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

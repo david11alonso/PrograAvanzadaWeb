@@ -21,5 +21,7 @@ namespace Solution.API.DataModels
         public string Beneficios { get; set; }
 
         public virtual AspNetUsers Usuario { get; set; }
+
+
     }
 }

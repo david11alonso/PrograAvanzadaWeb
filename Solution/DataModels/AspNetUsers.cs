@@ -15,7 +15,7 @@ namespace Solution.API.DataModels
             ////AspNetUserTokens = new HashSet<AspNetUserTokens>();
             //Comentario = new HashSet<Comentario>();
             //Noticia = new HashSet<Noticia>();
-            Propuesta = new HashSet<Propuesta>();
+            //Propuesta = new HashSet<Propuesta>();
         }
 
         public string Id { get; set; }
@@ -23,7 +23,7 @@ namespace Solution.API.DataModels
         //public string NormalizedUserName { get; set; }
         public string Email { get; set; }
         //public string NormalizedEmail { get; set; }
-        public bool EmailConfirmed { get; set; }
+        //public bool EmailConfirmed { get; set; }
         //public string PasswordHash { get; set; }
         //public string SecurityStamp { get; set; }
         //public string ConcurrencyStamp { get; set; }
@@ -40,6 +40,6 @@ namespace Solution.API.DataModels
         ////public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
         //public virtual ICollection<Comentario> Comentario { get; set; }
         //public virtual ICollection<Noticia> Noticia { get; set; }
-        public virtual ICollection<Propuesta> Propuesta { get; set; }
+        //public virtual ICollection<Propuesta> Propuesta { get; set; }
     }
 }
