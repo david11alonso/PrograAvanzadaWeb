@@ -16,7 +16,7 @@ namespace Solution.API.DataModels
         public int ForoId { get; set; }
         public int PropuestaId { get; set; }
 
-        //public virtual Propuesta Propuesta { get; set; }
+        public virtual Propuesta Propuesta { get; set; }
         //public virtual ICollection<Comentario> Comentario { get; set; }
 
     }
