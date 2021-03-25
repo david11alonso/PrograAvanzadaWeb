@@ -62,7 +62,7 @@ namespace Solution.API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutNoticiat(int id, datamodels.Noticia noticia)
+        public async Task<IActionResult> PutNoticia(int id, datamodels.Noticia noticia)
         {
             if (id != noticia.NoticiaId)
             {

@@ -22,6 +22,8 @@ namespace Solution.API.DataModels
 
         public virtual AspNetUsers Usuario { get; set; }
 
+        //public virtual ICollection<Foro> Foro { get; set; }
+
 
     }
 }
