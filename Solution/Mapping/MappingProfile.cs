@@ -22,6 +22,7 @@ namespace Solution.API.Mapping
             CreateMap<data.Propuesta, DataModels.Propuesta>().ReverseMap();
             CreateMap<data.PropuestaDepartamento, DataModels.PropuestaDepartamento>().ReverseMap();
             CreateMap<data.UsuarioDepartamento, DataModels.UsuarioDepartamento>().ReverseMap();
+            CreateMap<data.Noticia, DataModels.Noticia>().ReverseMap();
 
 
         }
