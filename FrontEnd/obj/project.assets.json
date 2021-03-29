@@ -5698,26 +5698,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Win10\\.nuget\\packages\\": {}
+    "/Users/davidrodriguez/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\FrontEnd\\FrontEnd.csproj",
+      "projectUniqueName": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj",
       "projectName": "FrontEnd",
-      "projectPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\FrontEnd\\FrontEnd.csproj",
-      "packagesPath": "C:\\Users\\Win10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Win10\\source\\repos\\PrograAvanzadaWeb\\FrontEnd\\obj\\",
+      "projectPath": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj",
+      "packagesPath": "/Users/davidrodriguez/.nuget/packages/",
+      "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Win10\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5769,6 +5767,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.8, 3.1.8]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5777,7 +5781,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }
