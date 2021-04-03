@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj": {}
+    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\FrontEnd\\FrontEnd.csproj": {}
   },
   "projects": {
-    "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj": {
+    "C:\\Users\\User\\Documents\\PAW-ProyectoU\\FrontEnd\\FrontEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\FrontEnd\\FrontEnd.csproj",
         "projectName": "FrontEnd",
-        "projectPath": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/FrontEnd.csproj",
-        "packagesPath": "/Users/davidrodriguez/.nuget/packages/",
-        "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/FrontEnd/obj/",
+        "projectPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\FrontEnd\\FrontEnd.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\PAW-ProyectoU\\FrontEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,11 +56,19 @@
               "target": "Package",
               "version": "[3.1.13, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.13, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.13, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
             }
           },
           "imports": [
@@ -71,12 +81,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.8, 3.1.8]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -85,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
