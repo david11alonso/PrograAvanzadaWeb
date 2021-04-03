@@ -4,32 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<h1>Departamentos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary btn-sm" asp-action="Create">
+        <i class="fas fa-plus">
+        </i>
+        Agregar nuevo
+    </a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartamentoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartamentoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartamentoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+
+        <div class="card-body p-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td class="project-actions text-right">
+                                <a class="btn btn-info btn-sm" asp-action="Editar" asp-route-id="@item.DepartamentoId">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Edit
+                                </a>
+                                <a class="btn btn-primary btn-sm" asp-action="Detalles" asp-route-id="@item.DepartamentoId">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    Details
+                                </a>
+                                <a class="btn btn-danger btn-sm" asp-action="Eliminar" asp-route-id="@item.DepartamentoId">
+                                    <i class="fas fa-trash">
+                                    </i>
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
