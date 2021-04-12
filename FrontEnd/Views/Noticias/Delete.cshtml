@@ -1,0 +1,66 @@
+﻿@model FrontEnd.Models.Noticia
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Eliminación Noticia</h1>
+<hr />
+
+
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class="card col-md-6">
+
+                <div class="card-body p-0" style="overflow-x:auto;">
+                    <br />
+                    <table class="table table-striped projects">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Descripcion)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Usuario.Id)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="NoticiaId" />
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+            <!-- /.card -->
+            <div class="form-group">
+
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+</section>
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div>
+            <a asp-action="Index">Volver a Noticias</a>
+        </div>
+    </div>
+</section>

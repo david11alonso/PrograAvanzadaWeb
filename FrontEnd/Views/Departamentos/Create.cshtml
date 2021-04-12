@@ -1,0 +1,53 @@
+﻿@model FrontEnd.Models.Departamento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Formulario Nuevo Departamento</h1>
+<hr />
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class=" card card-default col-md-6" >
+
+                <!-- /.card-header -->
+
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Crear departamento" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="Index">Volver al Menú Principal</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
