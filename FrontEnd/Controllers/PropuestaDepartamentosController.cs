@@ -9,11 +9,11 @@ using FrontEnd.Models;
 
 namespace FrontEnd.Controllers
 {
-    public class PropuestaDepartamentoesController : Controller
+    public class PropuestaDepartamentosController : Controller
     {
         private readonly PrograAvanzadaWebContext _context;
 
-        public PropuestaDepartamentoesController(PrograAvanzadaWebContext context)
+        public PropuestaDepartamentosController(PrograAvanzadaWebContext context)
         {
             _context = context;
         }

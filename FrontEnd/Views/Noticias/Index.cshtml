@@ -3,28 +3,25 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h1>Noticias</h1>
+<h1>Gestión Noticias</h1>
 <hr />
-
 <!-- Main content -->
 <section class="content">
-
     <div class="container-index">
         <img src="~/img/Business.jpg" style="opacity: .8; width:100%; height:100%">
         <div class="container-fluid2">
-            <br />
-            <p>
-                <a class="btn btn-primary btn-sm" asp-action="Create">
-                    <i class="fas fa-plus">
-                    </i>
-                    Agregar nuevo
-                </a>
-            </p>
             <!-- Default box -->
             <div class="card">
-
                 <div class="card-body p-0" style="overflow-x:auto;">
+                    <div class="col-md-12">
+                        <br />
+                        <a class="btn btn-primary btn-sm" asp-action="Create">
+                            <i class="fas fa-plus">
+                            </i>
+                            Agregar nuevo
+                        </a>
+                    </div>
+                    <br />
                     <table class="table table-striped projects">
                         <thead>
                             <tr>

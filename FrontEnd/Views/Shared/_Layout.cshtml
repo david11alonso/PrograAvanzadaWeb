@@ -61,41 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
-                        @*<li class="nav-item menu-open">
 
-            <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                    Starter Pages
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Active Page</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Inactive Page</p>
-                    </a>
-                </li>
-            </ul>
-        </li>*@
-                        @*<li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                    Simple Link
-                    <span class="right badge badge-danger">New</span>
-                </p>
-            </a>
-        </li>*@
                         <li class="nav-item">
                             <a href="@Url.Action("Index", "Departamentos")" class="nav-link">
                                 <i class="fa fa-home nav-icon"></i>
@@ -105,12 +71,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Propuestas")" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="far fa-file-alt nav-icon"></i>
                                 <p>
                                     Propuestas
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Propuestas")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>GestionPropuestas</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "PropuestaDepartamentos")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>PropuestaDepartamento</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Foros")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ForosPropuesta</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "Comentarios")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>ComentariosPropuesta</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index", "VotoPropuestas")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>VotoPropuesta</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="@Url.Action("Index", "Noticias")" class="nav-link">
@@ -157,13 +157,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </aside>
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer" style="text-align:center">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2021 Grupo Encuestas Programaci&oacute;n Avanzada Web</a>.</strong> Todos los derechos reservados.
+            <strong>Copyright &copy; 2021 Grupo Encuestas Programaci&oacute;n Avanzada Web.</strong> Todos los derechos reservados.
         </footer>
     </div>
     <!-- ./wrapper -->

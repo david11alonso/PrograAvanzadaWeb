@@ -4,114 +4,128 @@
     ViewData["Title"] = "Detalles de Propuesta";
 }
 
-<h1>Información de Propuesta</h1>
-
-
+<h1>Detalles Propuesta</h1>
 <hr />
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
-
-        <!-- SECTION TITLE  -->
-        <div class="card card-default">
-
-            <div class="card-header">
-                <h3 class="card-title">Detalles de propuesta</h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+            <!-- SECTION TITLE  -->
+            <div class="card col-md-6">
+                <br />
+                <div class="card-body p-0" style="overflow-x:auto;">
+                    <table class="table table-striped projects">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Titulo)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Titulo)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Descripcion)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Pendiente)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Pendiente)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Tipo)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Tipo)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaPublicacion)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.FechaPublicacion)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaFinalizacion)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.FechaFinalizacion)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Problema)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Problema)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ResultadoEsperado)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.ResultadoEsperado)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Riesgos)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Riesgos)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Beneficios)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Beneficios)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </th>
+                                <td>
+                                    @Html.DisplayFor(model => model.Usuario.Id)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <br />
             </div>
-            <!-- /.card-header -->
 
-            <div class="card-body">
-
-
-                <dl class="row">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Titulo)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Titulo)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Descripcion)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Descripcion)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Pendiente)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Pendiente)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Tipo)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Tipo)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.FechaPublicacion)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.FechaPublicacion)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.FechaFinalizacion)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.FechaFinalizacion)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Problema)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Problema)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.ResultadoEsperado)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.ResultadoEsperado)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Riesgos)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Riesgos)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Beneficios)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Beneficios)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Usuario)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Usuario.Id)
-                    </dd>
-                </dl>
-            </div>
+            <!-- /.card -->
         </div>
-        <!-- /.card-body -->
+        <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
 <br />
+
 
 <section class="content">
     <div class="container-fluid">
         <div>
             <a asp-action="Edit" asp-route-id="@Model.PropuestaId">Editar Propuesta</a> |
-            <a asp-action="Index">Volver al Menú Principal</a>
+            <a asp-action="Index">Volver a Propuestas</a>
 
         </div>
         <div>

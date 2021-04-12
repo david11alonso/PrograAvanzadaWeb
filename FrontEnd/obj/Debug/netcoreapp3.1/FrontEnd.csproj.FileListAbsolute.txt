@@ -484,11 +484,6 @@ C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Vie
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Noticias\Details.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Noticias\Edit.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Noticias\Index.cshtml.g.cs
-C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentoes\Create.cshtml.g.cs
-C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentoes\Delete.cshtml.g.cs
-C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentoes\Details.cshtml.g.cs
-C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentoes\Edit.cshtml.g.cs
-C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentoes\Index.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\UsuarioDepartamentoes\Create.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\UsuarioDepartamentoes\Delete.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\UsuarioDepartamentoes\Details.cshtml.g.cs
@@ -500,3 +495,8 @@ C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Vie
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Foros\Edit.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Foros\Index.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\Create.cshtml.g.cs
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\Delete.cshtml.g.cs
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\Details.cshtml.g.cs
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\Edit.cshtml.g.cs
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\Index.cshtml.g.cs
