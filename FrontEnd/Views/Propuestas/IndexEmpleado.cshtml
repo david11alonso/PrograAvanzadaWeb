@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FrontEnd.Models.Propuesta>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "IndexEmpleado";
 }
 <h1>Gestión Propuestas</h1>
 <hr />
@@ -11,7 +11,7 @@
         <img src="~/img/Business.jpg" style="opacity: .8; width:100%; height:100%">
         <div class="container-fluid2">
             <!-- Default box -->
-            <div class="card" style="height:100%" >
+            <div class="card" style="height:100%">
 
                 <div class="card-body p-0 container-fluid3">
                     <div class="col-md-12">
@@ -74,17 +74,12 @@
                                         <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.PropuestaId">
                                             <i class="fas fa-pencil-alt">
                                             </i>
-                                            Editar
+                                            Votar
                                         </a>
                                         <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.PropuestaId">
                                             <i class="fas fa-folder">
                                             </i>
-                                            Ver detalles
-                                        </a>
-                                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.PropuestaId">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Eliminar
+                                            Comentar
                                         </a>
                                     </td>
                                 </tr>
