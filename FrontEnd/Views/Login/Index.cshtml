@@ -1,0 +1,50 @@
+﻿@model LoginViewModel
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="~/css/Login.css">
+</head>
+
+<body>
+    <style>
+    </style>
+
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Encuestas.<br> Inicio de sesi&oacute;n</h2>
+            <p>Por favor digite sus credenciales.</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-black">Iniciar Sesi&oacute;n</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</hmtl>
+
+

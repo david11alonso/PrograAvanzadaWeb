@@ -31,8 +31,12 @@ namespace FrontEnd
             services.AddDbContext<PrograAvanzadaWebContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<PrograAvanzadaWebContext>();
+            services.AddDbContext<IdentityDBContext>(options =>
+            options.UseSqlServer(
+            Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().
+                AddEntityFrameworkStores<IdentityDBContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
