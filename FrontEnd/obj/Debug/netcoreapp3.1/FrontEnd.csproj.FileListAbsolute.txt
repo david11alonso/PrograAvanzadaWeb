@@ -644,3 +644,4 @@ C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Are
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\IndexEmpleado.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutEmpleado.cshtml.g.cs
+C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
