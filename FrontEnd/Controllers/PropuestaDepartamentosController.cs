@@ -49,7 +49,7 @@ namespace FrontEnd.Controllers
         public IActionResult Create()
         {
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre");
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios");
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace FrontEnd.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", propuestaDepartamento.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 
@@ -85,7 +85,7 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", propuestaDepartamento.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 
@@ -122,7 +122,7 @@ namespace FrontEnd.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", propuestaDepartamento.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 

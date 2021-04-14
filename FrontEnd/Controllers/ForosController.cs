@@ -47,7 +47,7 @@ namespace FrontEnd.Controllers
         // GET: Foroes/Create
         public IActionResult Create()
         {
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios");
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace FrontEnd.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", foro.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 
@@ -81,7 +81,7 @@ namespace FrontEnd.Controllers
             {
                 return NotFound();
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", foro.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 
@@ -117,7 +117,7 @@ namespace FrontEnd.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", foro.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 

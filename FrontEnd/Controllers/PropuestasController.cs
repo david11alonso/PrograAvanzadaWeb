@@ -25,6 +25,13 @@ namespace FrontEnd.Controllers
             return View(await prograAvanzadaWebContext.ToListAsync());
         }
 
+        public async Task<IActionResult> IndexEmpleado()
+        {
+            var prograAvanzadaWebContext = _context.Propuesta.Include(p => p.Usuario);
+            return View(await prograAvanzadaWebContext.ToListAsync());
+        }
+
+
         // GET: Propuestas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
