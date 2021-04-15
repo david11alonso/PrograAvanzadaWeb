@@ -1,6 +1,7 @@
 ﻿using FrontEnd.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace FrontEnd.Controllers
 {
     public class AdminController : Controller
     {
-
+        private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
         private IPasswordHasher<IdentityUser> passwordHasher;
 
@@ -26,11 +27,20 @@ namespace FrontEnd.Controllers
             return View(userManager.Users);
         }
 
-        public ViewResult Create() => View();
+        public ViewResult Create()
+        {
+
+            ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
+
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(AspNetUsers user)
         {
+
+
             if (ModelState.IsValid)
             {
                 IdentityUser appUser = new IdentityUser
@@ -55,6 +65,7 @@ namespace FrontEnd.Controllers
         public async Task<IActionResult> Update(string id)
         {
             IdentityUser user = await userManager.FindByIdAsync(id);
+
             if (user != null)
                 return View(user);
             else

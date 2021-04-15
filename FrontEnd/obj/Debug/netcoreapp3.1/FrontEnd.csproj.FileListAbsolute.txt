@@ -888,4 +888,13 @@ C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Vie
 =======
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Create.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Update.cshtml.g.cs
+<<<<<<< Updated upstream
 >>>>>>> bec865915389d59cdc67ec738d32b4460a2eec81
+=======
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetRoles\Create.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetRoles\Delete.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetRoles\Details.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetRoles\Edit.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetRoles\Index.cshtml.g.cs
+>>>>>>> Stashed changes
