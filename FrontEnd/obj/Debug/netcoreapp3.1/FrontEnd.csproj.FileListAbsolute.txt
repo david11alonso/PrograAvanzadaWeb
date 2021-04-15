@@ -631,7 +631,6 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\F
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.pdb
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.genruntimeconfig.cache
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
@@ -878,3 +877,7 @@ C:\Users\Familia\Documents\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Fr
 C:\Users\Familia\Documents\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.dll
 C:\Users\Familia\Documents\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.pdb
 C:\Users\Familia\Documents\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.genruntimeconfig.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\IndexEmpleado.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutEmpleado.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
