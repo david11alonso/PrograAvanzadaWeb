@@ -88,7 +88,7 @@ namespace FrontEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password, string normalizeduserName, IFormCollection formValues)
+        public async Task<IActionResult> Update(string id, string email, string password, IFormCollection formValues)
         {
             string role = formValues["rol"];
 
@@ -104,10 +104,7 @@ namespace FrontEnd.Controllers
                     user.PasswordHash = passwordHasher.HashPassword(user, password);
                 else
                     ModelState.AddModelError("", "La contraseña no puede estar vacía");
-                if (!string.IsNullOrEmpty(email))
-                    user.NormalizedUserName = normalizeduserName;
-                else
-                    ModelState.AddModelError("", "El nombre no puede estar vacío");
+             
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
                     IdentityResult result = await userManager.UpdateAsync(user);
