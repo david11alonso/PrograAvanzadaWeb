@@ -25,6 +25,7 @@ namespace FrontEnd.Controllers
         // GET: Admin
         public IActionResult Index()
         {
+            ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
             return View(userManager.Users);
         }
 
@@ -38,68 +39,91 @@ namespace FrontEnd.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(AspNetUsers user, FormCollection formValues)
+        public async Task<IActionResult> Create(AspNetUsers user, IFormCollection formValues)
         {
             string role = formValues["rol"];
+            
 
             if (ModelState.IsValid)
             {
                 IdentityUser appUser = new IdentityUser
                 {
-                    UserName = user.Email,
+                    UserName = user.NormalizedUserName.Replace(" ", ""),
+                    NormalizedUserName = user.NormalizedUserName,
                     Email = user.Email,
                     EmailConfirmed = true
-                };
 
+                };
+                string id = appUser.Id;
                 IdentityResult result = await userManager.CreateAsync(appUser, user.PasswordHash);
-                if (result.Succeeded)
+
+                if (result.Succeeded) { 
+                    new AspNetUserRolesController(_context).CreateUserRole(id, role);
+
                     return RedirectToAction("Index");
+                }
                 else
                 {
                     foreach (IdentityError error in result.Errors)
                         ModelState.AddModelError("", error.Description);
                 }
+                }
+                return View(user);
             }
-            return View(user);
-        }
 
         public async Task<IActionResult> Update(string id)
         {
+
             IdentityUser user = await userManager.FindByIdAsync(id);
 
             if (user != null)
+            {
+                ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name", new AspNetUserRolesController(_context).getRole(user.Id));
+                //ViewData["roleAsignado"] = new AspNetUserRolesController(_context).getRole(user.Id);
+
                 return View(user);
+            }
             else
                 return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password)
+        public async Task<IActionResult> Update(string id, string email, string password, string normalizeduserName, IFormCollection formValues)
         {
+            string role = formValues["rol"];
+
             IdentityUser user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
                 if (!string.IsNullOrEmpty(email))
                     user.Email = email;
                 else
-                    ModelState.AddModelError("", "Email cannot be empty");
+                    ModelState.AddModelError("", "El email no puede estar vacío");
 
                 if (!string.IsNullOrEmpty(password))
                     user.PasswordHash = passwordHasher.HashPassword(user, password);
                 else
-                    ModelState.AddModelError("", "Password cannot be empty");
-
+                    ModelState.AddModelError("", "La contraseña no puede estar vacía");
+                if (!string.IsNullOrEmpty(email))
+                    user.NormalizedUserName = normalizeduserName;
+                else
+                    ModelState.AddModelError("", "El nombre no puede estar vacío");
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
                     IdentityResult result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
+                    {
+                        var aux = new AspNetUserRolesController(_context);
+                        aux.DeleteRole(id);
+                        aux.CreateUserRole(id, role);
                         return RedirectToAction("Index");
+                    }
                     else
                         Errors(result);
                 }
             }
             else
-                ModelState.AddModelError("", "User Not Found");
+                ModelState.AddModelError("", "Usuario no encontrado");
             return View(user);
         }
 
@@ -123,7 +147,7 @@ namespace FrontEnd.Controllers
                     Errors(result);
             }
             else
-                ModelState.AddModelError("", "User Not Found");
+                ModelState.AddModelError("", "Usuario no encontrado");
             return View("Index", userManager.Users);
         }
     }
