@@ -50,7 +50,20 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Votacion)
+                                        @if (item.Votacion == 0)
+                                        {
+                                            <p>De acuerdo</p>
+                                        }
+                                        else if (item.Votacion == 1)
+                                        {
+                                            <p>Neutral</p>
+
+                                        }
+                                        else if (item.Votacion == 2)
+                                        {
+                                            <p>Desacuerdo</p>
+
+                                        }
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Comentario)

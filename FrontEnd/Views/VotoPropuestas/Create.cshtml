@@ -27,7 +27,11 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="Votacion" class="control-label"></label>
-                            <input asp-for="Votacion" class="form-control" />
+                            <select asp-for="Votacion" class="form-control">
+                                <option selected="selected" value="0">De acuerdo</option>
+                                <option value="1">Neutral</option>
+                                <option value="2">Desacuerdo</option>
+                            </select>
                             <span asp-validation-for="Votacion" class="text-danger"></span>
                         </div>
                         <div class="form-group">
