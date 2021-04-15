@@ -881,6 +881,11 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\R
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\IndexEmpleado.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutEmpleado.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
+<<<<<<< HEAD
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Index.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
 C:\Users\User\Documents\PAW-ProyectoU\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\HomeEmpleado\Index.cshtml.g.cs
+=======
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Create.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Update.cshtml.g.cs
+>>>>>>> bec865915389d59cdc67ec738d32b4460a2eec81
