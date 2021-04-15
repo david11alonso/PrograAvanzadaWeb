@@ -40,7 +40,15 @@ namespace FrontEnd.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("index", "home");
+
+                    }else if (User.IsInRole("Empleado"))
+                    {
+                        return RedirectToAction("index", "homeEmpleado");
+
+                    }
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
