@@ -1,4 +1,5 @@
 ﻿using FrontEnd.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -37,9 +38,9 @@ namespace FrontEnd.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(AspNetUsers user)
+        public async Task<IActionResult> Create(AspNetUsers user, FormCollection formValues)
         {
-
+            string role = formValues["rol"];
 
             if (ModelState.IsValid)
             {

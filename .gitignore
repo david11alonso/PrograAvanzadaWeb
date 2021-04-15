@@ -14,3 +14,12 @@ Solution.DAL.EF/obj/Debug/*
 Solution.DAL.Repository/obj/Debug/*
 Solution.DO/obj/Debug/*
 Solution.DAL/obj/Debug/*
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.Views.pdb
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.Views.dll
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.StaticWebAssets.xml
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.runtimeconfig.dev.json
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.pdb
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.exe
+FrontEnd/bin/Debug/netcoreapp3.1/FrontEnd.dll
+FrontEnd/.vs/FrontEnd/v16/.suo
+FrontEnd/.vs/FrontEnd/DesignTimeBuild/.dtbcache.v2
