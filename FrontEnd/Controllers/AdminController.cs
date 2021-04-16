@@ -26,6 +26,7 @@ namespace FrontEnd.Controllers
         public IActionResult Index()
         {
             ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
+            //ViewData["departamentos"] = new SelectList(new DepartamentosController().getAll());
             return View(userManager.Users);
         }
 

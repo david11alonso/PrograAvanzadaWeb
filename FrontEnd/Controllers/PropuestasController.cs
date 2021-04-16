@@ -6,11 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using data = FrontEnd.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace FrontEnd.Controllers
 {
     public class PropuestasController : Controller
     {
+
+        string baseurl = "http://localhost:57096/";
+
         private readonly PrograAvanzadaWebContext _context;
 
         public PropuestasController(PrograAvanzadaWebContext context)
@@ -21,14 +27,40 @@ namespace FrontEnd.Controllers
         // GET: Propuestas
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.Propuesta.Include(p => p.Usuario);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Propuesta");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         public async Task<IActionResult> IndexEmpleado()
         {
-            var prograAvanzadaWebContext = _context.Propuesta.Include(p => p.Usuario);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Propuesta");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
 
@@ -40,9 +72,8 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var propuesta = await _context.Propuesta
-                .Include(p => p.Usuario)
-                .FirstOrDefaultAsync(m => m.PropuestaId == id);
+            var propuesta = GetById(id);
+
             if (propuesta == null)
             {
                 return NotFound();
@@ -54,7 +85,7 @@ namespace FrontEnd.Controllers
         // GET: Propuestas/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -67,11 +98,22 @@ namespace FrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(propuesta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(propuesta);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Propuesta", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -83,12 +125,13 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var propuesta = await _context.Propuesta.FindAsync(id);
+            var propuesta = GetById(id);
+
             if (propuesta == null)
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -108,12 +151,25 @@ namespace FrontEnd.Controllers
             {
                 try
                 {
-                    _context.Update(propuesta);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(propuesta);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/Propuesta/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!PropuestaExists(propuesta.PropuestaId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -124,7 +180,7 @@ namespace FrontEnd.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -136,9 +192,8 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var propuesta = await _context.Propuesta
-                .Include(p => p.Usuario)
-                .FirstOrDefaultAsync(m => m.PropuestaId == id);
+            var propuesta = GetById(id);
+
             if (propuesta == null)
             {
                 return NotFound();
@@ -152,15 +207,44 @@ namespace FrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var propuesta = await _context.Propuesta.FindAsync(id);
-            _context.Propuesta.Remove(propuesta);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/Propuesta/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool PropuestaExists(int id)
         {
-            return _context.Propuesta.Any(e => e.PropuestaId == id);
+            return (GetById(id) != null);
+        }
+
+        private data.Propuesta GetById(int? id)
+        {
+            data.Propuesta aux = new data.Propuesta();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Propuesta/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.Propuesta>(auxres);
+                }
+            }
+            return aux;
         }
     }
 }
+

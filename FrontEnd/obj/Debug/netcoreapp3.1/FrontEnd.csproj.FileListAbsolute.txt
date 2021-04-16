@@ -395,7 +395,6 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\r
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.AssemblyInfoInputs.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.AssemblyInfo.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csproj.CoreCompileInputs.cache
@@ -487,3 +486,4 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\R
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUserRoles\Details.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUserRoles\Edit.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUserRoles\Index.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csprojAssemblyReference.cache
