@@ -133,9 +133,13 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            return View(departamento);
+            var departamentoRemove = await _context.Departamento.FindAsync(id);
+            _context.Departamento.Remove(departamentoRemove);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
+        // No es necesario, no vamos a usar la pagina de eliminar
         // POST: Departamentoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
