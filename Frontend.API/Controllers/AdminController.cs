@@ -1,4 +1,4 @@
-﻿using FrontEnd.Models;
+﻿using FrontEnd.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {

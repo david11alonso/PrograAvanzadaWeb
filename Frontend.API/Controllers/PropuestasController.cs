@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FrontEnd.Models;
-using data = FrontEnd.Models;
+using FrontEnd.API.Models;
+using data = FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 

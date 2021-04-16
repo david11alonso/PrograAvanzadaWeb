@@ -1,0 +1,62 @@
+﻿@model FrontEnd.API.Models.VotoPropuesta
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles Voto por Propuesta</h1>
+<hr />
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class="card col-md-6">
+                <br />
+                <div class="card-body p-0" style="overflow-x:auto;">
+                    <table class="table table-striped projects">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Votacion)</th>
+                                <td>@Html.DisplayFor(model => model.Votacion)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Comentario)</th>
+                                <td>@Html.DisplayFor(model => model.Comentario)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Propuesta)</th>
+                                <td>@Html.DisplayFor(model => model.Propuesta.Beneficios)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                                <td>@Html.DisplayFor(model => model.Usuario.Id)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+<br />
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.VotoPropuestaId">Editar Voto Propuesta</a> |
+            <a asp-action="Index">Volver a Votos Propuesta</a>
+
+        </div>
+    </div>
+</section>
