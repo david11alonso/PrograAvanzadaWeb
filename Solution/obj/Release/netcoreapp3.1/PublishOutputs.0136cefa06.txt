@@ -1,5 +1,10 @@
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/WEBAPI/web.config
 /Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/appsettings.Development.json
 /Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/appsettings.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/WEBAPI/appsettings.Development.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/WEBAPI/appsettings.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/WEBAPI/Solution.API.deps.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/WEBAPI/Solution.API.runtimeconfig.json
 /Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/Solution.API.dll
 /Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/Solution.API.runtimeconfig.json
 /Users/davidrodriguez/PrograAvanzadaWeb/Solution/WEBAPI/Solution.API.pdb

@@ -5750,7 +5750,7 @@
       "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+        "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

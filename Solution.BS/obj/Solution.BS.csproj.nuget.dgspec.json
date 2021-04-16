@@ -14,7 +14,7 @@
         "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.BS/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -91,7 +91,7 @@
         "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -169,7 +169,7 @@
         "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.Repository/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -243,7 +243,7 @@
         "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -323,7 +323,7 @@
         "outputPath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DO/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/davidrodriguez/.config/NuGet/NuGet.Config"
+          "/Users/davidrodriguez/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
