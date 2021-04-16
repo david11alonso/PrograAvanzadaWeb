@@ -47,7 +47,7 @@ namespace FrontEnd.Controllers
         // GET: Propuestas/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace FrontEnd.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -81,7 +81,7 @@ namespace FrontEnd.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -117,7 +117,7 @@ namespace FrontEnd.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", propuesta.UsuarioId);
             return View(propuesta);
         }
 
