@@ -29,7 +29,7 @@ namespace FrontEnd.API.Controllers
         // GET: Admin
         public async Task<IActionResult> Index()
         {
-            ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
+            ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
             ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
             return View(userManager.Users);
         }
@@ -37,10 +37,8 @@ namespace FrontEnd.API.Controllers
         public async Task<ViewResult> Create()
         {
 
-            ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
-            var controller = new DepartamentosController();
-            List<Departamento> departamentos = await controller.GetAll();
-            ViewData["departamentos"] = new SelectList(departamentos, "DepartamentoId", "Nombre");
+            ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
+            ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
             return View();
         }
 
@@ -55,8 +53,9 @@ namespace FrontEnd.API.Controllers
             {
                 IdentityUser appUser = new IdentityUser
                 {
-                    UserName = user.NormalizedUserName.Replace(" ", ""),
-                    NormalizedUserName = user.NormalizedUserName,
+                    UserName = user.Email,
+                    NormalizedUserName = user.Email,
+                    NormalizedEmail = user.Email,
                     Email = user.Email,
                     EmailConfirmed = true
 
@@ -66,7 +65,7 @@ namespace FrontEnd.API.Controllers
 
                 if (result.Succeeded)
                 {
-                    new AspNetUserRolesController(_context).CreateUserRole(id, role);
+                    new AspNetUserRolesController().Create(id, role);
                     var controller = new DepartamentosController();
 
 
@@ -88,7 +87,8 @@ namespace FrontEnd.API.Controllers
 
             if (user != null)
             {
-                ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name", new AspNetUserRolesController(_context).getRole(user.Id));
+                var currentRole = new AspNetUserRolesController().GetRoleByUserId(user.Id);
+                ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name", currentRole.FirstOrDefault().RoleId);
                 //ViewData["roleAsignado"] = new AspNetUserRolesController(_context).getRole(user.Id);
 
                 return View(user);
@@ -101,6 +101,7 @@ namespace FrontEnd.API.Controllers
         public async Task<IActionResult> Update(string id, string email, string password, IFormCollection formValues)
         {
             string role = formValues["rol"];
+            var currentRole = new AspNetUserRolesController().GetRoleByUserId(id).FirstOrDefault().RoleId;
 
             IdentityUser user = await userManager.FindByIdAsync(id);
             if (user != null)
@@ -120,9 +121,9 @@ namespace FrontEnd.API.Controllers
                     IdentityResult result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
-                        var aux = new AspNetUserRolesController(_context);
-                        aux.DeleteRole(id);
-                        aux.CreateUserRole(id, role);
+                        var aux = new AspNetUserRolesController();
+                        aux.DeleteRole(id, currentRole);
+                        aux.Create(id, role);
                         return RedirectToAction("Index");
                     }
                     else
@@ -174,6 +175,28 @@ namespace FrontEnd.API.Controllers
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
                     aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+        private List<data.AspNetRoles> getAllRoles()
+        {
+            List<data.AspNetRoles> aux = new List<data.AspNetRoles>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetRoles").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetRoles>>(auxres);
                 }
             }
 

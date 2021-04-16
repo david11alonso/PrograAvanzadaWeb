@@ -6,188 +6,142 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using data = FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace FrontEnd.API.Controllers
 {
     public class AspNetUserRolesController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
-
-        public AspNetUserRolesController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://localhost:57096/";
 
         // GET: AspNetUserRoles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetAllRoles()
         {
-            var prograAvanzadaWebContext = _context.AspNetUserRoles.Include(a => a.Role).Include(a => a.User);
-            return View(await prograAvanzadaWebContext.ToListAsync());
-        }
-
-        public string getRole(string userId)
-        {
-            var rol = _context.AspNetUserRoles.Where(m => m.UserId == userId).FirstOrDefault().RoleId;
-
-            return rol;
-        }
-
-        // GET: AspNetUserRoles/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
+            List<data.AspNetUserRoles> aux = new List<data.AspNetUserRoles>();
+            using (var cl = new HttpClient())
             {
-                return NotFound();
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/AspNetUserRoles");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUserRoles>>(auxres);
+                }
             }
-
-            var aspNetUserRoles = await _context.AspNetUserRoles
-                .Include(a => a.Role)
-                .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (aspNetUserRoles == null)
-            {
-                return NotFound();
-            }
-
-            return View(aspNetUserRoles);
+            return View(aux);
         }
 
-        // GET: AspNetUserRoles/Create
-
-        public void CreateUserRole(String userId, String roleId)
-        {
-            AspNetUserRoles userRole;
-
-            _context.AspNetUserRoles.Add(userRole = new AspNetUserRoles {
-                UserId = _context.AspNetUsers.Where(r => r.Id == userId).FirstOrDefault().Id,
-                RoleId = _context.AspNetRoles.Where(r => r.Id == roleId).FirstOrDefault().Id
-            });
-            _context.SaveChanges();
-        }
-
-        public IActionResult Create()
-        {
-            ViewData["RoleId"] = new SelectList(_context.AspNetRoles, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
-            return View();
-        }
 
         // POST: AspNetUserRoles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
+        public bool Create(string userId, string roleId)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(aspNetUserRoles);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RoleId"] = new SelectList(_context.AspNetRoles, "Id", "Id", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(_context.AspNetUsers, "Id", "Id", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
-        }
+            var user = GetUserById(userId);
+            var role = GetRoleById(roleId);
+            var userRole = new AspNetUserRoles { Role = role, User = user };
 
-        // GET: AspNetUserRoles/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
+            using (var cl = new HttpClient())
             {
-                return NotFound();
-            }
+                cl.BaseAddress = new Uri(baseurl);
+                var content = JsonConvert.SerializeObject(userRole);
+                var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                var byteContent = new ByteArrayContent(buffer);
+                byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                var postTask = cl.PostAsync("api/AspNetUserRoles", byteContent).Result;
 
-            var aspNetUserRoles = await _context.AspNetUserRoles.FindAsync(id);
-            if (aspNetUserRoles == null)
-            {
-                return NotFound();
-            }
-            ViewData["RoleId"] = new SelectList(_context.AspNetRoles, "Id", "Id", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(_context.AspNetUsers, "Id", "Id", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
-        }
-
-        // POST: AspNetUserRoles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UserId,RoleId")] AspNetUserRoles aspNetUserRoles)
-        {
-            if (id != aspNetUserRoles.UserId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (postTask.IsSuccessStatusCode)
                 {
-                    _context.Update(aspNetUserRoles);
-                    await _context.SaveChangesAsync();
+                    return true;
                 }
-                catch (DbUpdateConcurrencyException)
+
+                return false;
+            }
+        }
+
+        public bool DeleteRole(string userId, string roleId)
+        {
+
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.DeleteAsync("api/AspNetUserRoles?userId=" + userId + "&roleId=" + roleId).Result;
+
+                if (res.IsSuccessStatusCode)
                 {
-                    if (!AspNetUserRolesExists(aspNetUserRoles.UserId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return true;
                 }
-                return RedirectToAction(nameof(Index));
+                return false;
             }
-            ViewData["RoleId"] = new SelectList(_context.AspNetRoles, "Id", "Id", aspNetUserRoles.RoleId);
-            ViewData["UserId"] = new SelectList(_context.AspNetUsers, "Id", "Id", aspNetUserRoles.UserId);
-            return View(aspNetUserRoles);
-        }
-
-        // GET: AspNetUserRoles/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var aspNetUserRoles = await _context.AspNetUserRoles
-                .Include(a => a.Role)
-                .Include(a => a.User)
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (aspNetUserRoles == null)
-            {
-                return NotFound();
-            }
-
-            return View(aspNetUserRoles);
-        }
-
-        public void DeleteRole(String userId)
-        {
-            var aspNetUserRoles = _context.AspNetUserRoles.Where(m => m.UserId == userId).FirstOrDefault();
-
-            _context.AspNetUserRoles.Remove(aspNetUserRoles);
-
-            _context.SaveChanges();
-        }
-
-        // POST: AspNetUserRoles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var aspNetUserRoles = await _context.AspNetUserRoles.FindAsync(id);
-            _context.AspNetUserRoles.Remove(aspNetUserRoles);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool AspNetUserRolesExists(string id)
         {
-            return _context.AspNetUserRoles.Any(e => e.UserId == id);
+             return (GetRoleByUserId(id) != null);
+        }
+
+        public List<AspNetUserRoles> GetRoleByUserId(string id)
+        {
+            List<AspNetUserRoles> aux = new List<AspNetUserRoles>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUserRoles/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<AspNetUserRoles>>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        public AspNetRoles GetRoleById(string id)
+        {
+            AspNetRoles aux = new AspNetRoles();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetRoles/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<AspNetRoles>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        public AspNetUsers GetUserById(string id)
+        {
+            AspNetUsers aux = new AspNetUsers();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<AspNetUsers>(auxres);
+                }
+            }
+            return aux;
         }
     }
 }
