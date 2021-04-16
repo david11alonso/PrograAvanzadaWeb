@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using data = FrontEnd.Models;
 
 namespace FrontEnd.Controllers
 {
@@ -15,6 +18,7 @@ namespace FrontEnd.Controllers
         private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
         private IPasswordHasher<IdentityUser> passwordHasher;
+        string baseurl = "http://localhost:57096/";
 
         public AdminController(UserManager<IdentityUser> usrMgr, IPasswordHasher<IdentityUser> passwordHash)
         {
@@ -23,18 +27,19 @@ namespace FrontEnd.Controllers
         }
 
         // GET: Admin
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
-            //ViewData["departamentos"] = new SelectList(new DepartamentosController().getAll());
+            ViewData["departamentos"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre");
             return View(userManager.Users);
         }
 
-        public ViewResult Create()
+        public async Task<ViewResult> Create()
         {
 
             ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
 
+            ViewData["departamentos"] = new SelectList(_context.Departamento, "DepartamentoId","Nombre");
             return View();
         }
 
@@ -60,6 +65,7 @@ namespace FrontEnd.Controllers
 
                 if (result.Succeeded) { 
                     new AspNetUserRolesController(_context).CreateUserRole(id, role);
+
 
                     return RedirectToAction("Index");
                 }
@@ -147,6 +153,28 @@ namespace FrontEnd.Controllers
             else
                 ModelState.AddModelError("", "Usuario no encontrado");
             return View("Index", userManager.Users);
+        }
+
+        private List<data.Departamento> getAllDepartamentos()
+        {
+            List<data.Departamento> aux = new List<data.Departamento>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Departamentos").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
+                }
+            }
+
+            return aux;
         }
     }
 }

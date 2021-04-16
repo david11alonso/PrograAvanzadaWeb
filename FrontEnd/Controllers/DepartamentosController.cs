@@ -14,27 +14,17 @@ namespace FrontEnd.Controllers
 {
     public class DepartamentosController : Controller
     {
-        string baseurl = "http://localhost:57096/";
+        private readonly PrograAvanzadaWebContext _context;
 
+        public DepartamentosController(PrograAvanzadaWebContext context)
+        {
+            _context = context;
+        }
 
         // GET: Departamentoes
         public async Task<IActionResult> Index()
         {
-            List<data.Departamento> aux = new List<data.Departamento>();
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/Departamentos");
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
-                }
-            }
-            return View(aux);
+            return View(await _context.Departamento.ToListAsync());
         }
 
         // GET: Departamentoes/Details/5
@@ -45,8 +35,8 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var departamento = GetById(id);
-
+            var departamento = await _context.Departamento
+                .FirstOrDefaultAsync(m => m.DepartamentoId == id);
             if (departamento == null)
             {
                 return NotFound();
@@ -70,20 +60,9 @@ namespace FrontEnd.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var cl = new HttpClient())
-                {
-                    cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(departamento);
-                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-                    var byteContent = new ByteArrayContent(buffer);
-                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    var postTask = cl.PostAsync("api/Departamentos", byteContent).Result;
-
-                    if (postTask.IsSuccessStatusCode)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
-                }
+                _context.Add(departamento);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(departamento);
         }
@@ -96,8 +75,7 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var departamento = GetById(id);
-
+            var departamento = await _context.Departamento.FindAsync(id);
             if (departamento == null)
             {
                 return NotFound();
@@ -121,25 +99,12 @@ namespace FrontEnd.Controllers
             {
                 try
                 {
-                    using (var cl = new HttpClient())
-                    {
-                        cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(departamento);
-                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-                        var byteContent = new ByteArrayContent(buffer);
-                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PutAsync("api/Departamentos/" + id, byteContent).Result;
-
-                        if (postTask.IsSuccessStatusCode)
-                        {
-                            return RedirectToAction("Index");
-                        }
-                    }
+                    _context.Update(departamento);
+                    await _context.SaveChangesAsync();
                 }
-                catch (Exception)
+                catch (DbUpdateConcurrencyException)
                 {
-                    var aux2 = GetById(id);
-                    if (aux2 == null)
+                    if (!DepartamentoExists(departamento.DepartamentoId))
                     {
                         return NotFound();
                     }
@@ -161,8 +126,8 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
 
-            var departamento = GetById(id);
-
+            var departamento = await _context.Departamento
+                .FirstOrDefaultAsync(m => m.DepartamentoId == id);
             if (departamento == null)
             {
                 return NotFound();
@@ -176,62 +141,15 @@ namespace FrontEnd.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.DeleteAsync("api/Departamentos/" + id);
-
-                if (res.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Index");
-                }
-            }
+            var departamento = await _context.Departamento.FindAsync(id);
+            _context.Departamento.Remove(departamento);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DepartamentoExists(int id)
         {
-            return (GetById(id) != null);
-        }
-
-        private data.Departamento GetById(int? id)
-        {
-            data.Departamento aux = new data.Departamento();
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/Departamentos/" + id).Result;
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<data.Departamento>(auxres);
-                }
-            }
-            return aux;
-        }
-
-        public async Task<List<Departamento>> getAll()
-        {
-            List<Departamento> aux = new List<Departamento>();
-            using (var cl = new HttpClient())
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/Departamentos");
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
-                }
-            }
-            return aux.ToList();
+            return _context.Departamento.Any(e => e.DepartamentoId == id);
         }
     }
 }
