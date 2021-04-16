@@ -6,23 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using data = FrontEnd.API.Models;
+using System.Collections;
 
 namespace FrontEnd.API.Controllers
 {
     public class ComentariosController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
-
-        public ComentariosController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: Comentarios
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.Comentario.Include(c => c.Foro).Include(c => c.Usuario);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.Comentario> aux = new List<data.Comentario>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Comentario");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Comentario>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         // GET: Comentarios/Details/5
@@ -33,10 +45,8 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentario
-                .Include(c => c.Foro)
-                .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.ComentarioId == id);
+            var comentario = GetById(id);
+
             if (comentario == null)
             {
                 return NotFound();
@@ -48,9 +58,53 @@ namespace FrontEnd.API.Controllers
         // GET: Comentarios/Create
         public IActionResult Create()
         {
-            ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId");
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["ForoId"] = new SelectList(GetAllForos(), "ForoId", "ForoId");
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Name");
             return View();
+        }
+
+        private List<data.Foro> GetAllForos()
+        {
+            List<data.Foro> aux = new List<data.Foro>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Foro").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Foro>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+        private List<data.AspNetUsers> GetAllUsers()
+        {
+            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
+                }
+            }
+
+            return aux;
         }
 
         // POST: Comentarios/Create
@@ -58,16 +112,25 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ForoId,UsuarioId,Comentario1,ComentarioId")] Comentario comentario)
+        public async Task<IActionResult> Create([Bind("ComentarioId,Nombre")] Comentario comentario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comentario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(comentario);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Comentario", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
             return View(comentario);
         }
 
@@ -79,13 +142,13 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentario.FindAsync(id);
+            var comentario = GetById(id);
             if (comentario == null)
             {
                 return NotFound();
             }
-            ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
+            ViewData["ForoId"] = new SelectList(GetAllForos(), "ForoId", "ForoId", comentario.ForoId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", comentario.UsuarioId);
             return View(comentario);
         }
 
@@ -94,7 +157,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ForoId,UsuarioId,Comentario1,ComentarioId")] Comentario comentario)
+        public async Task<IActionResult> Edit(int id, [Bind("DepartamentoId,Nombre")] Comentario comentario)
         {
             if (id != comentario.ComentarioId)
             {
@@ -105,12 +168,25 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    _context.Update(comentario);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(comentario);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/Comentario/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!ComentarioExists(comentario.ComentarioId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -121,8 +197,9 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
+
+            ViewData["ForoId"] = new SelectList(GetAllForos(), "ForoId", "ForoId", comentario.ForoId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", comentario.UsuarioId);
             return View(comentario);
         }
 
@@ -134,10 +211,8 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var comentario = await _context.Comentario
-                .Include(c => c.Foro)
-                .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.ComentarioId == id);
+            var comentario = GetById(id);
+
             if (comentario == null)
             {
                 return NotFound();
@@ -151,15 +226,43 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comentario = await _context.Comentario.FindAsync(id);
-            _context.Comentario.Remove(comentario);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/Comentario/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool ComentarioExists(int id)
         {
-            return _context.Comentario.Any(e => e.ComentarioId == id);
+            return (GetById(id) != null);
+        }
+
+        private data.Comentario GetById(int? id)
+        {
+            data.Comentario aux = new data.Comentario();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Comentario/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.Comentario>(auxres);
+                }
+            }
+            return aux;
         }
     }
 }

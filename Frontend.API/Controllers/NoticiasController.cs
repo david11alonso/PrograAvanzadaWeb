@@ -6,23 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
     public class NoticiasController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
-
-        public NoticiasController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: Noticias
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.Noticia.Include(n => n.Usuario);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.Noticia> aux = new List<data.Noticia>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Noticia");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Noticia>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         // GET: Noticias/Details/5
@@ -33,9 +44,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var noticia = await _context.Noticia
-                .Include(n => n.Usuario)
-                .FirstOrDefaultAsync(m => m.NoticiaId == id);
+            var noticia = GetById(id);
             if (noticia == null)
             {
                 return NotFound();
@@ -47,8 +56,30 @@ namespace FrontEnd.API.Controllers
         // GET: Noticias/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Name");
             return View();
+        }
+
+        private List<data.AspNetUsers> GetAllUsers()
+        {
+            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
+                }
+            }
+
+            return aux;
         }
 
         // POST: Noticias/Create
@@ -60,11 +91,22 @@ namespace FrontEnd.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(noticia);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(noticia);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Noticia", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -76,12 +118,12 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var noticia = await _context.Noticia.FindAsync(id);
+            var noticia = GetById(id);
             if (noticia == null)
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -101,12 +143,25 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    _context.Update(noticia);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(noticia);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/Noticia/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!NoticiaExists(noticia.NoticiaId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -117,7 +172,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -129,9 +184,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var noticia = await _context.Noticia
-                .Include(n => n.Usuario)
-                .FirstOrDefaultAsync(m => m.NoticiaId == id);
+            var noticia = GetById(id);
             if (noticia == null)
             {
                 return NotFound();
@@ -145,15 +198,43 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var noticia = await _context.Noticia.FindAsync(id);
-            _context.Noticia.Remove(noticia);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/Noticia/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool NoticiaExists(int id)
         {
-            return _context.Noticia.Any(e => e.NoticiaId == id);
+            return (GetById(id) != null);
+        }
+
+        private data.Noticia GetById(int? id)
+        {
+            data.Noticia aux = new data.Noticia();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Noticia/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.Noticia>(auxres);
+                }
+            }
+            return aux;
         }
     }
 }

@@ -90,7 +90,8 @@ namespace FrontEnd.API.Controllers
             {
                 var currentRole = GetRoleByUserId(user.Id);
                 ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name", currentRole.FirstOrDefault().RoleId);
-                ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+                var currentDept = getAllUserDept().Where(m => m.UsuarioId == id).FirstOrDefault().DepartamentoId;
+                ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", currentDept);
 
                 return View(user);
             }
@@ -138,7 +139,7 @@ namespace FrontEnd.API.Controllers
                 ModelState.AddModelError("", "Usuario no encontrado");
 
             ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name", currentRole);
-            ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+            ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", userDeptObj.DepartamentoId);
 
             return View(user);
         }

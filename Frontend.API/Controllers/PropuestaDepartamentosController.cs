@@ -6,23 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
     public class PropuestaDepartamentosController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
-
-        public PropuestaDepartamentosController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: PropuestaDepartamentoes
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.PropuestaDepartamento.Include(p => p.Departamento).Include(p => p.Propuesta);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.PropuestaDepartamento> aux = new List<data.PropuestaDepartamento>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/PropuestaDepartamento");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.PropuestaDepartamento>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         // GET: PropuestaDepartamentoes/Details/5
@@ -33,10 +44,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var propuestaDepartamento = await _context.PropuestaDepartamento
-                .Include(p => p.Departamento)
-                .Include(p => p.Propuesta)
-                .FirstOrDefaultAsync(m => m.PropuestaDepartamentoId == id);
+            var propuestaDepartamento = GetById(id);
             if (propuestaDepartamento == null)
             {
                 return NotFound();
@@ -48,8 +56,8 @@ namespace FrontEnd.API.Controllers
         // GET: PropuestaDepartamentoes/Create
         public IActionResult Create()
         {
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre");
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo");
+            ViewData["DepartamentoId"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo");
             return View();
         }
 
@@ -62,12 +70,23 @@ namespace FrontEnd.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(propuestaDepartamento);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(propuestaDepartamento);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/PropuestaDepartamento", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
+            ViewData["DepartamentoId"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 
@@ -79,13 +98,13 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var propuestaDepartamento = await _context.PropuestaDepartamento.FindAsync(id);
+            var propuestaDepartamento = GetById(id);
             if (propuestaDepartamento == null)
             {
                 return NotFound();
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
+            ViewData["DepartamentoId"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 
@@ -105,12 +124,25 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    _context.Update(propuestaDepartamento);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(propuestaDepartamento);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/PropuestaDepartamento/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!PropuestaDepartamentoExists(propuestaDepartamento.PropuestaDepartamentoId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -121,8 +153,8 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
+            ViewData["DepartamentoId"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", propuestaDepartamento.DepartamentoId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", propuestaDepartamento.PropuestaId);
             return View(propuestaDepartamento);
         }
 
@@ -134,10 +166,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var propuestaDepartamento = await _context.PropuestaDepartamento
-                .Include(p => p.Departamento)
-                .Include(p => p.Propuesta)
-                .FirstOrDefaultAsync(m => m.PropuestaDepartamentoId == id);
+            var propuestaDepartamento = GetById(id);
             if (propuestaDepartamento == null)
             {
                 return NotFound();
@@ -151,15 +180,87 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var propuestaDepartamento = await _context.PropuestaDepartamento.FindAsync(id);
-            _context.PropuestaDepartamento.Remove(propuestaDepartamento);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/PropuestaDepartamento/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool PropuestaDepartamentoExists(int id)
         {
-            return _context.PropuestaDepartamento.Any(e => e.PropuestaDepartamentoId == id);
+            return (GetById(id) != null);
+        }
+
+        private data.PropuestaDepartamento GetById(int? id)
+        {
+            data.PropuestaDepartamento aux = new data.PropuestaDepartamento();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/PropuestaDepartamento/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.PropuestaDepartamento>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        private List<data.Propuesta> GetAllPropuestas()
+        {
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Propuesta").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+        private List<data.Departamento> getAllDepartamentos()
+        {
+            List<data.Departamento> aux = new List<data.Departamento>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Departamentos").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
+                }
+            }
+
+            return aux;
         }
     }
 }

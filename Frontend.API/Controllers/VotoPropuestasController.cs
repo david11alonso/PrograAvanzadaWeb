@@ -6,23 +6,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
     public class VotoPropuestasController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
 
-        public VotoPropuestasController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: VotoPropuestas
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.VotoPropuesta.Include(v => v.Propuesta).Include(v => v.Usuario);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.VotoPropuesta> aux = new List<data.VotoPropuesta>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/VotoPropuesta");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.VotoPropuesta>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         // GET: VotoPropuestas/Details/5
@@ -33,10 +45,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var votoPropuesta = await _context.VotoPropuesta
-                .Include(v => v.Propuesta)
-                .Include(v => v.Usuario)
-                .FirstOrDefaultAsync(m => m.VotoPropuestaId == id);
+            var votoPropuesta = GetById(id);
             if (votoPropuesta == null)
             {
                 return NotFound();
@@ -48,8 +57,8 @@ namespace FrontEnd.API.Controllers
         // GET: VotoPropuestas/Create
         public IActionResult Create()
         {
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios");
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Beneficios");
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id");
             return View();
         }
 
@@ -58,16 +67,27 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,Comentario")] VotoPropuesta votoPropuesta)
+        public async Task<IActionResult> Create([Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,VotoPropuesta")] VotoPropuesta votoPropuesta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(votoPropuesta);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(votoPropuesta);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/VotoPropuesta", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -79,13 +99,13 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var votoPropuesta = await _context.VotoPropuesta.FindAsync(id);
+            var votoPropuesta = GetById(id);
             if (votoPropuesta == null)
             {
                 return NotFound();
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -94,7 +114,7 @@ namespace FrontEnd.API.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,Comentario")] VotoPropuesta votoPropuesta)
+        public async Task<IActionResult> Edit(int id, [Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,VotoPropuesta")] VotoPropuesta votoPropuesta)
         {
             if (id != votoPropuesta.VotoPropuestaId)
             {
@@ -105,12 +125,25 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    _context.Update(votoPropuesta);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(votoPropuesta);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/VotoPropuesta/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!VotoPropuestaExists(votoPropuesta.VotoPropuestaId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -121,8 +154,8 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -134,10 +167,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var votoPropuesta = await _context.VotoPropuesta
-                .Include(v => v.Propuesta)
-                .Include(v => v.Usuario)
-                .FirstOrDefaultAsync(m => m.VotoPropuestaId == id);
+            var votoPropuesta = GetById(id);
             if (votoPropuesta == null)
             {
                 return NotFound();
@@ -151,15 +181,89 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var votoPropuesta = await _context.VotoPropuesta.FindAsync(id);
-            _context.VotoPropuesta.Remove(votoPropuesta);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/VotoPropuesta/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool VotoPropuestaExists(int id)
         {
-            return _context.VotoPropuesta.Any(e => e.VotoPropuestaId == id);
+            return (GetById(id) != null);
         }
+
+        private data.VotoPropuesta GetById(int? id)
+        {
+            data.VotoPropuesta aux = new data.VotoPropuesta();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/VotoPropuesta/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.VotoPropuesta>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        private List<data.Propuesta> GetAllPropuestas()
+        {
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Propuesta").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+        private List<data.AspNetUsers> GetAllUsers()
+        {
+            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+
     }
 }

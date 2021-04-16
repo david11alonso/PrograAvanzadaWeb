@@ -6,23 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
     public class ForosController : Controller
     {
-        private readonly PrograAvanzadaWebContext _context;
-
-        public ForosController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: Foroes
         public async Task<IActionResult> Index()
         {
-            var prograAvanzadaWebContext = _context.Foro.Include(f => f.Propuesta);
-            return View(await prograAvanzadaWebContext.ToListAsync());
+            List<data.Foro> aux = new List<data.Foro>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Foro");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Foro>>(auxres);
+                }
+            }
+            return View(aux);
         }
 
         // GET: Foroes/Details/5
@@ -33,9 +44,8 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var foro = await _context.Foro
-                .Include(f => f.Propuesta)
-                .FirstOrDefaultAsync(m => m.ForoId == id);
+            var foro = GetById(id);
+
             if (foro == null)
             {
                 return NotFound();
@@ -47,7 +57,7 @@ namespace FrontEnd.API.Controllers
         // GET: Foroes/Create
         public IActionResult Create()
         {
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo");
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo");
             return View();
         }
 
@@ -60,11 +70,21 @@ namespace FrontEnd.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(foro);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                using(var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(foro);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Foro", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 
@@ -76,12 +96,12 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var foro = await _context.Foro.FindAsync(id);
+            var foro = GetById(id);
             if (foro == null)
             {
                 return NotFound();
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 
@@ -101,12 +121,25 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    _context.Update(foro);
-                    await _context.SaveChangesAsync();
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        var content = JsonConvert.SerializeObject(foro);
+                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                        var byteContent = new ByteArrayContent(buffer);
+                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                        var postTask = cl.PutAsync("api/Foro/" + id, byteContent).Result;
+
+                        if (postTask.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Index");
+                        }
+                    }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!ForoExists(foro.ForoId))
+                    var aux2 = GetById(id);
+                    if (aux2 == null)
                     {
                         return NotFound();
                     }
@@ -117,7 +150,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", foro.PropuestaId);
+            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
 
@@ -129,9 +162,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var foro = await _context.Foro
-                .Include(f => f.Propuesta)
-                .FirstOrDefaultAsync(m => m.ForoId == id);
+            var foro = GetById(id);
             if (foro == null)
             {
                 return NotFound();
@@ -145,15 +176,66 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var foro = await _context.Foro.FindAsync(id);
-            _context.Foro.Remove(foro);
-            await _context.SaveChangesAsync();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.DeleteAsync("api/Foro/" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
         private bool ForoExists(int id)
         {
-            return _context.Foro.Any(e => e.ForoId == id);
+            return (GetById(id) != null);
         }
+
+        private data.Foro GetById(int? id)
+        {
+            data.Foro aux = new data.Foro();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Foro/" + id).Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<data.Foro>(auxres);
+                }
+            }
+            return aux;
+        }
+
+        public List<data.Propuesta> GetAllPropuestas()
+        {
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/Propuesta").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
     }
 }
