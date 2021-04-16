@@ -15,7 +15,7 @@ namespace FrontEnd.API.Controllers
     public class PropuestasController : Controller
     {
 
-        string baseurl = "http://localhost:57096/";
+        string baseurl = "http://45.79.241.73/";
 
         private readonly PrograAvanzadaWebContext _context;
 
