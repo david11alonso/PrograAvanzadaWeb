@@ -1,0 +1,76 @@
+﻿@model FrontEnd.API.Models.Comentario
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edición Comentario</h1>
+
+<hr />
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+
+            <!-- SECTION TITLE  -->
+            <div class="card card-default col-md-6">
+
+                <!-- /.card-header -->
+
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="ForoId" class="control-label"></label>
+                                    <select asp-for="ForoId" class="form-control" asp-items="ViewBag.ForoId"></select>
+                                    <span asp-validation-for="ForoId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="UsuarioId" class="control-label"></label>
+                                    <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                                    <span asp-validation-for="UsuarioId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Comentario1" class="control-label"></label>
+                                    <input asp-for="Comentario1" class="form-control" />
+                                    <span asp-validation-for="Comentario1" class="text-danger"></span>
+                                </div>
+                                <input type="hidden" asp-for="ComentarioId" />
+                                <div class="form-group">
+                                    <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </form>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.card-default -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+<br />
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="Index">Volver a Comentarios</a>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

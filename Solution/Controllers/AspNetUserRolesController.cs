@@ -44,7 +44,7 @@ namespace Solution.API.Controllers
 
         // GET: api/AspNetUserRoles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<datamodels.AspNetUserRoles>>> GetAllRolesByUser(String id)
+        public async Task<ActionResult<IEnumerable<datamodels.AspNetUserRoles>>> GetAllRolesByUser(string id)
         {
             //var userRole = await _context.AspNetUserRoles.FindAsync(id);
 

@@ -3,13 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using data = FrontEnd.Models;
 
 namespace FrontEnd.Controllers
 {
@@ -18,7 +15,6 @@ namespace FrontEnd.Controllers
         private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
         private IPasswordHasher<IdentityUser> passwordHasher;
-        string baseurl = "http://localhost:57096/";
 
         public AdminController(UserManager<IdentityUser> usrMgr, IPasswordHasher<IdentityUser> passwordHash)
         {
@@ -27,19 +23,17 @@ namespace FrontEnd.Controllers
         }
 
         // GET: Admin
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
-            ViewData["departamentos"] = new SelectList(_context.Departamento, "DepartamentoId", "Nombre");
             return View(userManager.Users);
         }
 
-        public async Task<ViewResult> Create()
+        public ViewResult Create()
         {
 
             ViewData["roles"] = new SelectList(_context.AspNetRoles, "Id", "Name");
 
-            ViewData["departamentos"] = new SelectList(_context.Departamento, "DepartamentoId","Nombre");
             return View();
         }
 
@@ -48,14 +42,15 @@ namespace FrontEnd.Controllers
         public async Task<IActionResult> Create(AspNetUsers user, IFormCollection formValues)
         {
             string role = formValues["rol"];
-            
+
 
             if (ModelState.IsValid)
             {
                 IdentityUser appUser = new IdentityUser
                 {
-                    UserName = user.NormalizedUserName.Replace(" ", ""),
-                    NormalizedUserName = user.NormalizedUserName,
+                    UserName = user.Email,
+                    NormalizedUserName = user.Email,
+                    NormalizedEmail = user.Email,
                     Email = user.Email,
                     EmailConfirmed = true
 
@@ -63,9 +58,9 @@ namespace FrontEnd.Controllers
                 string id = appUser.Id;
                 IdentityResult result = await userManager.CreateAsync(appUser, user.PasswordHash);
 
-                if (result.Succeeded) { 
+                if (result.Succeeded)
+                {
                     new AspNetUserRolesController(_context).CreateUserRole(id, role);
-
 
                     return RedirectToAction("Index");
                 }
@@ -74,9 +69,9 @@ namespace FrontEnd.Controllers
                     foreach (IdentityError error in result.Errors)
                         ModelState.AddModelError("", error.Description);
                 }
-                }
-                return View(user);
             }
+            return View(user);
+        }
 
         public async Task<IActionResult> Update(string id)
         {
@@ -95,7 +90,7 @@ namespace FrontEnd.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(string id, string email, string password, IFormCollection formValues)
+        public async Task<IActionResult> Update(string id, string email, string password, string normalizeduserName, IFormCollection formValues)
         {
             string role = formValues["rol"];
 
@@ -111,7 +106,10 @@ namespace FrontEnd.Controllers
                     user.PasswordHash = passwordHasher.HashPassword(user, password);
                 else
                     ModelState.AddModelError("", "La contraseña no puede estar vacía");
-             
+                if (!string.IsNullOrEmpty(email))
+                    user.NormalizedUserName = normalizeduserName;
+                else
+                    ModelState.AddModelError("", "El nombre no puede estar vacío");
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
                     IdentityResult result = await userManager.UpdateAsync(user);
@@ -153,28 +151,6 @@ namespace FrontEnd.Controllers
             else
                 ModelState.AddModelError("", "Usuario no encontrado");
             return View("Index", userManager.Users);
-        }
-
-        private List<data.Departamento> getAllDepartamentos()
-        {
-            List<data.Departamento> aux = new List<data.Departamento>();
-
-            using (var cl = new HttpClient())
-
-            {
-                cl.BaseAddress = new Uri(baseurl);
-                cl.DefaultRequestHeaders.Clear();
-                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = cl.GetAsync("api/Departamentos").Result;
-
-                if (res.IsSuccessStatusCode)
-                {
-                    var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
-                }
-            }
-
-            return aux;
         }
     }
 }

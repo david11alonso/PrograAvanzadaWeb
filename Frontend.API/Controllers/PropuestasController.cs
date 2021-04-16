@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FrontEnd.Models;
-using data = FrontEnd.Models;
+using FrontEnd.API.Models;
+using data = FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -15,14 +15,7 @@ namespace FrontEnd.API.Controllers
     public class PropuestasController : Controller
     {
 
-        string baseurl = "http://localhost:57096/";
-
-        private readonly PrograAvanzadaWebContext _context;
-
-        public PropuestasController(PrograAvanzadaWebContext context)
-        {
-            _context = context;
-        }
+        string baseurl = "http://45.79.241.73/";
 
         // GET: Propuestas
         public async Task<IActionResult> Index()
@@ -85,7 +78,7 @@ namespace FrontEnd.API.Controllers
         // GET: Propuestas/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email");
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email");
             return View();
         }
 
@@ -113,7 +106,7 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -131,7 +124,7 @@ namespace FrontEnd.API.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -180,7 +173,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Email", propuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
         }
 
@@ -243,6 +236,28 @@ namespace FrontEnd.API.Controllers
                     aux = JsonConvert.DeserializeObject<data.Propuesta>(auxres);
                 }
             }
+            return aux;
+        }
+
+        public List<data.AspNetUsers> GetAllUsers()
+        {
+            List<data.AspNetUsers> aux = new List<data.AspNetUsers>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUsers").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUsers>>(auxres);
+                }
+            }
+
             return aux;
         }
     }

@@ -1,0 +1,54 @@
+﻿@model FrontEnd.API.Models.Comentario
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles Comentario</h1>
+<hr />
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class="card col-md-6">
+                <br />
+                <div class="card-body p-0" style="overflow-x:auto;">
+                    <table class="table table-striped projects">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Comentario1)</th>
+                                <td>@Html.DisplayFor(model => model.Comentario1)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Foro)</th>
+                                <td>@Html.DisplayFor(model => model.Foro.ForoId)</td>
+                            </tr>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Usuario)</th>
+                                <td>@Html.DisplayFor(model => model.Usuario.UserName)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+<br />
+
+<section class="content">
+    <div class="container-fluid">
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.ComentarioId">Editar Comentario</a> |
+            <a asp-action="Index">Volver a Votos Propuesta</a>
+        </div>
+    </div>
+</section>

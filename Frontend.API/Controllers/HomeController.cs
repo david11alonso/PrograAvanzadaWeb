@@ -1,4 +1,4 @@
-﻿using Frontend.API.Models;
+﻿using FrontEnd.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Frontend.API.Controllers
+namespace FrontEnd.API.Controllers
 {
     public class HomeController : Controller
     {
