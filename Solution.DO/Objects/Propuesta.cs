@@ -17,7 +17,6 @@ namespace Solution.DO.Objects
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
         public bool Pendiente { get; set; }
-        public int Tipo { get; set; }
         public string UsuarioId { get; set; }
         public DateTime FechaPublicacion { get; set; }
         public DateTime FechaFinalizacion { get; set; }

@@ -48,8 +48,8 @@ namespace FrontEnd.Controllers
         // GET: VotoPropuestas/Create
         public IActionResult Create()
         {
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios");
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo");
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace FrontEnd.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -84,8 +84,8 @@ namespace FrontEnd.Controllers
             {
                 return NotFound();
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -121,8 +121,8 @@ namespace FrontEnd.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", votoPropuesta.UsuarioId);
+            ViewData["PropuestaId"] = new SelectList(_context.Propuesta, "PropuestaId", "Titulo", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 

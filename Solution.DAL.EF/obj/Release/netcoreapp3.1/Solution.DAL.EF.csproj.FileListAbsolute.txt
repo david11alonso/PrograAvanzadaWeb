@@ -1,0 +1,15 @@
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DAL.EF.deps.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DAL.EF.runtimeconfig.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DAL.EF.runtimeconfig.dev.json
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DAL.EF.dll
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DAL.EF.pdb
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DO.dll
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/bin/Release/netcoreapp3.1/Solution.DO.pdb
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.csprojAssemblyReference.cache
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.AssemblyInfoInputs.cache
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.AssemblyInfo.cs
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.csproj.CoreCompileInputs.cache
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.csproj.CopyComplete
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.dll
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.pdb
+/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DAL.EF/obj/Release/netcoreapp3.1/Solution.DAL.EF.genruntimeconfig.cache

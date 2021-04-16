@@ -49,7 +49,7 @@ namespace FrontEnd.Controllers
         public IActionResult Create()
         {
             ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId");
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace FrontEnd.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", comentario.UsuarioId);
             return View(comentario);
         }
 
@@ -85,7 +85,7 @@ namespace FrontEnd.Controllers
                 return NotFound();
             }
             ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", comentario.UsuarioId);
             return View(comentario);
         }
 
@@ -122,7 +122,7 @@ namespace FrontEnd.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ForoId"] = new SelectList(_context.Foro, "ForoId", "ForoId", comentario.ForoId);
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", comentario.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", comentario.UsuarioId);
             return View(comentario);
         }
 
