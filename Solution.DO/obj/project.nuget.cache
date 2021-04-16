@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "fYdIcSqLx3n+YbjPUwbW+5iKap3CB4bj+QuxhmEqHjhitKVP7P9tbJKvwsXSIfl08T8uPCqK3m5AOi6SwUZmVw==",
+  "dgSpecHash": "qdHUZaxMpbB+vDQMK0Q4+bhbyRuVr5zl0ehKLkoYnjPEBCAZhAARU1HzR0XrVnUEnWri5oSkId23uI4gYtJBQw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Familia\\Documents\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/davidrodriguez/PrograAvanzadaWeb/Solution.DO/Solution.DO.csproj",
+  "expectedPackageFiles": [
+    "/Users/davidrodriguez/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.8/microsoft.aspnetcore.app.ref.3.1.8.nupkg.sha512"
+  ],
   "logs": []
 }
