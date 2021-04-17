@@ -87,7 +87,8 @@ namespace FrontEnd.API.Controllers
                     departamento.Add(dep);
                 }
             }
-            ViewData["DepartamentoId"] = new SelectList(departamento, "DepartamentoId", "Nombre");
+            ViewData["Departamento_Id"] = id;
+           ViewData["DepartamentoId"] = new SelectList(departamento, "DepartamentoId", "Nombre");
             ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo");
             return View();
         }
@@ -112,7 +113,7 @@ namespace FrontEnd.API.Controllers
 
                     if (postTask.IsSuccessStatusCode)
                     {
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(IndexPropuesta)+"/"+propuestaDepartamento.DepartamentoId);
                     }
                 }
             }
