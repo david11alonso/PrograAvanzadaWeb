@@ -19,21 +19,43 @@ namespace FrontEnd.API.Controllers
         // GET: PropuestaDepartamentoes
         public async Task<IActionResult> Index()
         {
-            List<data.PropuestaDepartamento> aux = new List<data.PropuestaDepartamento>();
+            List<data.Departamento> aux = new List<data.Departamento>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/PropuestaDepartamento");
+                HttpResponseMessage res = await cl.GetAsync("api/Departamentos");
 
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<List<data.PropuestaDepartamento>>(auxres);
+                    aux = JsonConvert.DeserializeObject<List<data.Departamento>>(auxres);
                 }
             }
             return View(aux);
+        }
+
+        // Carga el index con las propuestas para un Departamento
+        public ActionResult IndexPropuesta(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["DepartamentoId"] = id;
+
+            var propuestaDepartamento = GetById(id);
+
+            if (propuestaDepartamento == null)
+            {
+                return NotFound();
+            }
+            ViewData["DepartamentoId"] = id;
+            ViewData["DepartamentoName"] = propuestaDepartamento.FirstOrDefault().Departamento.Nombre;
+
+
+            return View(propuestaDepartamento);
         }
 
         // GET: PropuestaDepartamentoes/Details/5
@@ -54,9 +76,18 @@ namespace FrontEnd.API.Controllers
         }
 
         // GET: PropuestaDepartamentoes/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-            ViewData["DepartamentoId"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+            var aux = getAllDepartamentos();
+            List<Departamento> departamento = new List<Departamento>();
+            foreach(Departamento dep in aux)
+            {
+                if(dep.DepartamentoId == id)
+                {
+                    departamento.Add(dep);
+                }
+            }
+            ViewData["DepartamentoId"] = new SelectList(departamento, "DepartamentoId", "Nombre");
             ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo");
             return View();
         }
@@ -98,7 +129,7 @@ namespace FrontEnd.API.Controllers
                 return NotFound();
             }
 
-            var propuestaDepartamento = GetById(id);
+            var propuestaDepartamento = GetById(id).FirstOrDefault();
             if (propuestaDepartamento == null)
             {
                 return NotFound();
@@ -200,9 +231,9 @@ namespace FrontEnd.API.Controllers
             return (GetById(id) != null);
         }
 
-        private data.PropuestaDepartamento GetById(int? id)
+        private List<data.PropuestaDepartamento> GetById(int? id)
         {
-            data.PropuestaDepartamento aux = new data.PropuestaDepartamento();
+            List <data.PropuestaDepartamento> aux = new List<data.PropuestaDepartamento>();
             using (var cl = new HttpClient())
             {
                 cl.BaseAddress = new Uri(baseurl);
@@ -213,7 +244,7 @@ namespace FrontEnd.API.Controllers
                 if (res.IsSuccessStatusCode)
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
-                    aux = JsonConvert.DeserializeObject<data.PropuestaDepartamento>(auxres);
+                    aux = JsonConvert.DeserializeObject< List<data.PropuestaDepartamento>>(auxres);
                 }
             }
             return aux;

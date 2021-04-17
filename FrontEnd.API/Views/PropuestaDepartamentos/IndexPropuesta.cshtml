@@ -1,9 +1,10 @@
-﻿@model IEnumerable<FrontEnd.API.Models.Departamento>
+﻿@model IEnumerable<FrontEnd.API.Models.PropuestaDepartamento>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index Propuesta-Departamentos";
 }
-<h1>Propuestas por departamentos</h1>
+
+<h1>Gestión Propuestas Departamento @ViewBag.DepartamentoName</h1>
 <hr />
 
 <!-- Main content -->
@@ -16,12 +17,21 @@
             <div class="card" style="height:70%">
 
                 <div class="card-body p-0 container-fluid3">
+                    <div class="col-md-12">
+                        <br />
+                        <a class="btn btn-primary btn-sm" asp-action="Create" asp-route-id="@ViewBag.DepartamentoId">
+                            <i class="fas fa-plus">
+                            </i>
+                            Agregar nuevo
+                        </a>
+                    </div>
                     <br />
                     <table class="table table-striped projects">
                         <thead>
                             <tr>
+                                
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Nombre)
+                                    @Html.DisplayNameFor(model => model.Propuesta)
                                 </th>
                                 <th></th>
                             </tr>
@@ -31,15 +41,14 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                        @Html.DisplayFor(modelItem => item.Propuesta.Titulo)
                                     </td>
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm" asp-action="IndexPropuesta" asp-route-id="@item.DepartamentoId">
-                                            <i class="fas fa-pencil-alt">
+                                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.PropuestaDepartamentoId">
+                                            <i class="fas fa-trash">
                                             </i>
-                                            Asignar Propuestas
+                                            Eliminar
                                         </a>
-
                                     </td>
                                 </tr>
                             }
