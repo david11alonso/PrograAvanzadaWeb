@@ -39,23 +39,7 @@ namespace FrontEnd.API.Controllers
             return View(aux);
         }
 
-        // GET: Foroes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var foro = GetById(id);
-
-            if (foro == null)
-            {
-                return NotFound();
-            }
-
-            return View(foro);
-        }
+      
 
         // GET: Foroes/Create
         public IActionResult Create()
@@ -84,78 +68,21 @@ namespace FrontEnd.API.Controllers
 
                     if (postTask.IsSuccessStatusCode)
                     {
+                        NotifyDelete("El registro se ha agregado correctamente");
                         return RedirectToAction(nameof(Index));
-                    }
-                }
-            }
-            return View(foro);
-        }
-
-        // GET: Foroes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var foro = GetById(id);
-            if (foro == null)
-            {
-                return NotFound();
-            }
-            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", foro.PropuestaId);
-            return View(foro);
-        }
-
-        // POST: Foroes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ForoId,PropuestaId")] Foro foro)
-        {
-            if (id != foro.ForoId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    using (var cl = new HttpClient())
-                    {
-                        cl.BaseAddress = new Uri(baseurl);
-                        var content = JsonConvert.SerializeObject(foro);
-                        var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-                        var byteContent = new ByteArrayContent(buffer);
-                        byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                        var postTask = cl.PutAsync("api/Foro/" + id, byteContent).Result;
-
-                        if (postTask.IsSuccessStatusCode)
-                        {
-                            return RedirectToAction("Index");
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    var aux2 = GetById(id);
-                    if (aux2 == null)
-                    {
-                        return NotFound();
                     }
                     else
                     {
-                        throw;
+                        NotifyError("El registro no puede ser creado ya que ya existe.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Index));
+
+
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["PropuestaId"] = new SelectList(GetAllPropuestas(), "PropuestaId", "Titulo", foro.PropuestaId);
             return View(foro);
         }
+
 
         // GET: Foroes/Delete/5
         public async Task<IActionResult> Delete(int? id)
