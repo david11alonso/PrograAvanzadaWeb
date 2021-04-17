@@ -1,0 +1,49 @@
+﻿@model FrontEnd.API.Models.Foro
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles Foro</h1>
+<hr />
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class="card col-md-6">
+                <br />
+                <div class="card-body p-0" style="overflow-x:auto;">
+                    <table class="table table-striped projects">
+                        <tbody>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Propuesta)</th>
+                                <td>@Html.DisplayFor(model => model.Propuesta.Titulo)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+<br />
+
+<section class="content">
+    <div class="container-fluid">
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.ForoId">Editar Foro</a> |
+            <a asp-action="Index">Volver a Foros</a>
+
+        </div>
+    </div>
+</section>
+<

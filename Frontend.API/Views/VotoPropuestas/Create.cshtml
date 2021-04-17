@@ -1,0 +1,72 @@
+﻿@model FrontEnd.API.Models.VotoPropuesta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Agregar Voto a Propuesta</h1>
+<hr />
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class=" card card-default col-md-6">
+
+                <!-- /.card-header -->
+
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="PropuestaId" class="control-label"></label>
+                            <select asp-for="PropuestaId" class="form-control" asp-items="ViewBag.PropuestaId"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Votacion" class="control-label"></label>
+                            <select asp-for="Votacion" class="form-control">
+                                <option selected="selected" value="0">De acuerdo</option>
+                                <option value="1">Neutral</option>
+                                <option value="2">Desacuerdo</option>
+                            </select>
+                            <span asp-validation-for="Votacion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UsuarioId" class="control-label"></label>
+                            <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Comentario" class="control-label"></label>
+                            <input asp-for="Comentario" class="form-control" />
+                            <span asp-validation-for="Comentario" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Agregar voto" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+<br />
+
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="Index">Volver a Votos</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

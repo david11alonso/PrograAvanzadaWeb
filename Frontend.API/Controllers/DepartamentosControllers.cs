@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FrontEnd.Models;
+using FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
-using data = FrontEnd.Models;
+using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
     public class DepartamentosController : Controller
     {
-        string baseurl = "http://localhost:57096/";
+        string baseurl = "http://45.79.241.73/";
 
 
         // GET: Departamentoes
