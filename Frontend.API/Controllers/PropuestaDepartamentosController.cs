@@ -9,10 +9,13 @@ using FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
+using Frontend.API.Controllers;
+using static Frontend.API.Enums.Enums;
+
 
 namespace FrontEnd.API.Controllers
 {
-    public class PropuestaDepartamentosController : Controller
+    public class PropuestaDepartamentosController : BaseController
     {
         string baseurl = "http://45.79.241.73/";
 
@@ -193,18 +196,44 @@ namespace FrontEnd.API.Controllers
         // GET: PropuestaDepartamentoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var propuestaDepartamento = GetById(id);
+                if (propuestaDepartamento == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/PropuestaDepartamento/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha eliminado correctamente");
+
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var propuestaDepartamento = GetById(id);
-            if (propuestaDepartamento == null)
-            {
-                return NotFound();
-            }
-
-            return View(propuestaDepartamento);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: PropuestaDepartamentoes/Delete/5
