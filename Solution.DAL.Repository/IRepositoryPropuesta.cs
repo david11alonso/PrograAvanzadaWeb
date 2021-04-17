@@ -11,5 +11,7 @@ namespace Solution.DAL.Repository
         Task<IEnumerable<data.Propuesta>> GetAllWithAsync();
         // Aca le quitamos el IEnumerable xq solo estramos trayendo un dato
         Task<data.Propuesta> GetOneWithAsync(int id);
+        Task<IEnumerable<data.Propuesta>> GetAllWithAsyncPendiente();
+
     }
 }

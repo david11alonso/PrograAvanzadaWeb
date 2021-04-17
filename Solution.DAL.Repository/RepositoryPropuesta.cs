@@ -6,6 +6,7 @@ using data = Solution.DO.Objects;
 using Microsoft.EntityFrameworkCore;
 using Solution.DAL.EF;
 using Solution.DO.Objects;
+using System.Linq;
 
 namespace Solution.DAL.Repository
 {
@@ -25,6 +26,14 @@ namespace Solution.DAL.Repository
         {
             return await _db.Propuesta
                 .Include(m => m.Usuario)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Propuesta>> GetAllWithAsyncPendiente()
+        {
+            return await _db.Propuesta
+                .Include(m => m.Usuario)
+                .Where(m => m.Pendiente == true)
                 .ToListAsync();
         }
 

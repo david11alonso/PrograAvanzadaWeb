@@ -40,6 +40,52 @@ namespace Solution.API.Controllers
             var mapaux = _mapper.Map<IEnumerable<data.Propuesta>, IEnumerable<datamodels.Propuesta>>(aux).ToList();
             return mapaux;
         }
+        [HttpGet("Pendiente")]
+        public async Task<ActionResult<IEnumerable<datamodels.Propuesta>>> GetAllWithAsyncPendiente()
+        {
+            //Declaramos una variable para traer la informacion
+            var aux = await new Solution.BS.Propuesta(_context).GetAllWithAsyncPendiente();
+
+            // Casting
+
+            var mapaux = _mapper.Map<IEnumerable<data.Propuesta>, IEnumerable<datamodels.Propuesta>>(aux).ToList();
+            return mapaux;
+        }
+        [HttpGet("Aprobacion/{id}")]
+        public async Task<ActionResult<IEnumerable<datamodels.Propuesta>>> Aprobar(int id)
+        {
+            var solution = new Solution.BS.Propuesta(_context);
+            var propuesta =  solution.GetOneById(id);
+
+            if(propuesta != null)
+            {
+                try
+                {
+                    propuesta.Pendiente = false;
+                     solution.Update(propuesta);
+                }
+                catch (Exception ex)
+                {
+                    if (!PropuestaExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
+            
+
+        }
+
 
         // GET: api/Propuesta/5
         [HttpGet("{id}")]

@@ -54,5 +54,10 @@ namespace Solution.BS
         {
             return await new DAL.Propuesta(_repo).GetOneWithAsync(id);
         }
+        public async Task<IEnumerable<data.Propuesta>> GetAllWithAsyncPendiente()
+        {
+            return await new DAL.Propuesta(_repo).GetAllWithAsyncPendiente();
+        }
+        
     }
 }
