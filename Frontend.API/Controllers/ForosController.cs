@@ -9,10 +9,13 @@ using FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
+using Frontend.API.Controllers;
+using static Frontend.API.Enums.Enums;
+
 
 namespace FrontEnd.API.Controllers
 {
-    public class ForosController : Controller
+    public class ForosController : BaseController
     {
         string baseurl = "http://45.79.241.73/";
 
@@ -157,18 +160,43 @@ namespace FrontEnd.API.Controllers
         // GET: Foroes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var foro = GetById(id);
+                if (foro == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/Foro/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha eliminado correctamente");
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var foro = GetById(id);
-            if (foro == null)
-            {
-                return NotFound();
-            }
-
-            return View(foro);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Foroes/Delete/5

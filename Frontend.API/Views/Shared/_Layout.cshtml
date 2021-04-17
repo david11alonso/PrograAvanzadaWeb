@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="~/css/adminlte.min.css">
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
@@ -56,16 +57,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>
                     </li>
                     @*<li class="nav-item">
-                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                        </form>
-                    </li>*@
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>*@
                 }
                 else
                 {
                     @*<li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
-                    </li>*@
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
+                        </li>*@
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Login")" class="nav-link">
                             <i class="fas fa-sign-in-alt"></i>
@@ -79,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="/" class="brand-link">
+            <a href="@Url.Action("Index", "Home")" class="brand-link">
                 <img src="~/img/propospad-2.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Propospad</span>
             </a>
@@ -213,8 +214,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/adminlte.min.js"></script>
+    @await Html.PartialAsync("_notificationPartial")
     @RenderSection("Scripts", required: false)
 </body>
 

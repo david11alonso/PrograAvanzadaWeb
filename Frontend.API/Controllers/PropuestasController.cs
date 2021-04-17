@@ -9,10 +9,12 @@ using FrontEnd.API.Models;
 using data = FrontEnd.API.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Frontend.API.Controllers;
+using static Frontend.API.Enums.Enums;
 
 namespace FrontEnd.API.Controllers
 {
-    public class PropuestasController : Controller
+    public class PropuestasController : BaseController
     {
 
         string baseurl = "http://45.79.241.73/";
@@ -180,19 +182,45 @@ namespace FrontEnd.API.Controllers
         // GET: Propuestas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var propuesta = GetById(id);
+
+                if (propuesta == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/Propuesta/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha eliminado correctamente");
+
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var propuesta = GetById(id);
-
-            if (propuesta == null)
-            {
-                return NotFound();
-            }
-
-            return View(propuesta);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Propuestas/Delete/5

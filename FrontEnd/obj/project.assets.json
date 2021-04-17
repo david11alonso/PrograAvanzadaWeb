@@ -9190,19 +9190,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Visual\\PrograAvanzadaWeb\\FrontEnd\\FrontEnd.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\FrontEnd\\FrontEnd.csproj",
       "projectName": "FrontEnd",
-      "projectPath": "E:\\Visual\\PrograAvanzadaWeb\\FrontEnd\\FrontEnd.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\Visual\\PrograAvanzadaWeb\\FrontEnd\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\FrontEnd\\FrontEnd.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\FrontEnd\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9281,7 +9281,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

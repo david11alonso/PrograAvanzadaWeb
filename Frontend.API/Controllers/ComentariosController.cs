@@ -10,10 +10,13 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 using System.Collections;
+using Frontend.API.Controllers;
+using static Frontend.API.Enums.Enums;
+
 
 namespace FrontEnd.API.Controllers
 {
-    public class ComentariosController : Controller
+    public class ComentariosController : BaseController
     {
         string baseurl = "http://45.79.241.73/";
 
@@ -206,19 +209,45 @@ namespace FrontEnd.API.Controllers
         // GET: Comentarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var comentario = GetById(id);
+
+                if (comentario == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/Comentario/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha eliminado correctamente");
+                            return RedirectToAction("Index");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var comentario = GetById(id);
 
-            if (comentario == null)
-            {
-                return NotFound();
-            }
-
-            return View(comentario);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Comentarios/Delete/5
