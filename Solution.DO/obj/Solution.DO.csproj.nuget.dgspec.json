@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj": {}
+    "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj": {
+    "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj",
+        "projectUniqueName": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
         "projectName": "Solution.DO",
-        "projectPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\obj\\",
+        "projectPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

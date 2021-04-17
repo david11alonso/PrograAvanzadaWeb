@@ -60,5 +60,10 @@ namespace Solution.DAL
         {
             return await _repository.GetOneWithAsAsync(id);
         }
+        public async Task<data.Foro> GetOneWithAsAsyncPropuesta(int id)
+        {
+            return await _repository.GetOneWithAsAsyncPropuesta(id);
+        }
+        
     }
 }
