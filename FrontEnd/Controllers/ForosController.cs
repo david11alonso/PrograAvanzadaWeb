@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
 
 namespace FrontEnd.Controllers
 {
-    public class ForosController : Controller
+    public class ForosController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -124,32 +125,50 @@ namespace FrontEnd.Controllers
         // GET: Foroes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var foro = await _context.Foro
+                    .Include(f => f.Propuesta)
+                    .FirstOrDefaultAsync(m => m.ForoId == id);
+                if (foro == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var foroRemove = await _context.Foro.FindAsync(id);
+                    _context.Foro.Remove(foroRemove);
+                    await _context.SaveChangesAsync();
+                    //try save data into database
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var foro = await _context.Foro
-                .Include(f => f.Propuesta)
-                .FirstOrDefaultAsync(m => m.ForoId == id);
-            if (foro == null)
-            {
-                return NotFound();
-            }
-
-            return View(foro);
-        }
-
-        // POST: Foroes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var foro = await _context.Foro.FindAsync(id);
-            _context.Foro.Remove(foro);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        //// POST: Foroes/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var foro = await _context.Foro.FindAsync(id);
+        //    _context.Foro.Remove(foro);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool ForoExists(int id)
         {

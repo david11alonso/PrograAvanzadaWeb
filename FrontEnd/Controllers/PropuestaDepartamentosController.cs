@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
+
 
 namespace FrontEnd.Controllers
 {
-    public class PropuestaDepartamentosController : Controller
+    public class PropuestaDepartamentosController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -129,33 +131,53 @@ namespace FrontEnd.Controllers
         // GET: PropuestaDepartamentoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var propuestaDepartamento = await _context.PropuestaDepartamento
+                    .Include(p => p.Departamento)
+                    .Include(p => p.Propuesta)
+                    .FirstOrDefaultAsync(m => m.PropuestaDepartamentoId == id);
+                if (propuestaDepartamento == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var propuestaDepartamentoRemove = await _context.PropuestaDepartamento.FindAsync(id);
+                    _context.PropuestaDepartamento.Remove(propuestaDepartamentoRemove);
+                    await _context.SaveChangesAsync();
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var propuestaDepartamento = await _context.PropuestaDepartamento
-                .Include(p => p.Departamento)
-                .Include(p => p.Propuesta)
-                .FirstOrDefaultAsync(m => m.PropuestaDepartamentoId == id);
-            if (propuestaDepartamento == null)
-            {
-                return NotFound();
-            }
 
-            return View(propuestaDepartamento);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: PropuestaDepartamentoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var propuestaDepartamento = await _context.PropuestaDepartamento.FindAsync(id);
-            _context.PropuestaDepartamento.Remove(propuestaDepartamento);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var propuestaDepartamento = await _context.PropuestaDepartamento.FindAsync(id);
+        //    _context.PropuestaDepartamento.Remove(propuestaDepartamento);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool PropuestaDepartamentoExists(int id)
         {

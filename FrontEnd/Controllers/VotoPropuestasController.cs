@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
+
 
 namespace FrontEnd.Controllers
 {
-    public class VotoPropuestasController : Controller
+    public class VotoPropuestasController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -129,33 +131,53 @@ namespace FrontEnd.Controllers
         // GET: VotoPropuestas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var votoPropuesta = await _context.VotoPropuesta
+                    .Include(v => v.Propuesta)
+                    .Include(v => v.Usuario)
+                    .FirstOrDefaultAsync(m => m.VotoPropuestaId == id);
+                if (votoPropuesta == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var votoPropuestaRemove = await _context.VotoPropuesta.FindAsync(id);
+                    _context.VotoPropuesta.Remove(votoPropuestaRemove);
+                    await _context.SaveChangesAsync();
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var votoPropuesta = await _context.VotoPropuesta
-                .Include(v => v.Propuesta)
-                .Include(v => v.Usuario)
-                .FirstOrDefaultAsync(m => m.VotoPropuestaId == id);
-            if (votoPropuesta == null)
-            {
-                return NotFound();
-            }
 
-            return View(votoPropuesta);
-        }
 
-        // POST: VotoPropuestas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var votoPropuesta = await _context.VotoPropuesta.FindAsync(id);
-            _context.VotoPropuesta.Remove(votoPropuesta);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        //// POST: VotoPropuestas/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var votoPropuesta = await _context.VotoPropuesta.FindAsync(id);
+        //    _context.VotoPropuesta.Remove(votoPropuesta);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool VotoPropuestaExists(int id)
         {

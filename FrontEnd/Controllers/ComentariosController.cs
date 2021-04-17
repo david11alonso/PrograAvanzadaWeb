@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
+
 
 namespace FrontEnd.Controllers
 {
-    public class ComentariosController : Controller
+    public class ComentariosController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -129,33 +131,52 @@ namespace FrontEnd.Controllers
         // GET: Comentarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var comentario = await _context.Comentario
+                    .Include(c => c.Foro)
+                    .Include(c => c.Usuario)
+                    .FirstOrDefaultAsync(m => m.ComentarioId == id);
+
+                if (comentario == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var comentarioRemove = await _context.Comentario.FindAsync(id);
+                    _context.Comentario.Remove(comentarioRemove);
+                    await _context.SaveChangesAsync();
+                    //try save data into database
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+            }
+            catch (Exception)
+            {
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
+
             }
 
-            var comentario = await _context.Comentario
-                .Include(c => c.Foro)
-                .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.ComentarioId == id);
-            if (comentario == null)
-            {
-                return NotFound();
-            }
 
-            return View(comentario);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Comentarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var comentario = await _context.Comentario.FindAsync(id);
-            _context.Comentario.Remove(comentario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var comentario = await _context.Comentario.FindAsync(id);
+        //    _context.Comentario.Remove(comentario);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool ComentarioExists(int id)
         {

@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
+
 
 namespace FrontEnd.Controllers
 {
-    public class UsuarioDepartamentoesController : Controller
+    public class UsuarioDepartamentoesController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -129,33 +131,50 @@ namespace FrontEnd.Controllers
         // GET: UsuarioDepartamentoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var usuarioDepartamento = await _context.UsuarioDepartamento
+                    .Include(u => u.Departamento)
+                    .Include(u => u.Usuario)
+                    .FirstOrDefaultAsync(m => m.UsuarioDepartamentoId == id);
+                if (usuarioDepartamento == null)
+                {
+                    return NotFound();
+                }
+                else {
+                    var usuarioDepartamentoRemove = await _context.UsuarioDepartamento.FindAsync(id);
+                    _context.UsuarioDepartamento.Remove(usuarioDepartamentoRemove);
+                    await _context.SaveChangesAsync();
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var usuarioDepartamento = await _context.UsuarioDepartamento
-                .Include(u => u.Departamento)
-                .Include(u => u.Usuario)
-                .FirstOrDefaultAsync(m => m.UsuarioDepartamentoId == id);
-            if (usuarioDepartamento == null)
-            {
-                return NotFound();
-            }
 
-            return View(usuarioDepartamento);
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: UsuarioDepartamentoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var usuarioDepartamento = await _context.UsuarioDepartamento.FindAsync(id);
-            _context.UsuarioDepartamento.Remove(usuarioDepartamento);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var usuarioDepartamento = await _context.UsuarioDepartamento.FindAsync(id);
+        //    _context.UsuarioDepartamento.Remove(usuarioDepartamento);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool UsuarioDepartamentoExists(int id)
         {

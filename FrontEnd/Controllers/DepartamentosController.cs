@@ -9,10 +9,11 @@ using FrontEnd.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
 using data = FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
 
 namespace FrontEnd.Controllers
 {
-    public class DepartamentosController : Controller
+    public class DepartamentosController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -121,35 +122,51 @@ namespace FrontEnd.Controllers
         // GET: Departamentoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+
+            try
             {
-                return NotFound();
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var departamento = await _context.Departamento
+                    .FirstOrDefaultAsync(m => m.DepartamentoId == id);
+                if (departamento == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var departamentoRemove = await _context.Departamento.FindAsync(id);
+                    _context.Departamento.Remove(departamentoRemove);
+                    await _context.SaveChangesAsync();
+                    //try save data into database
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                }
+
+            }
+            catch (Exception)
+            {
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
+
             }
 
-            var departamento = await _context.Departamento
-                .FirstOrDefaultAsync(m => m.DepartamentoId == id);
-            if (departamento == null)
-            {
-                return NotFound();
-            }
-
-            var departamentoRemove = await _context.Departamento.FindAsync(id);
-            _context.Departamento.Remove(departamentoRemove);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         // No es necesario, no vamos a usar la pagina de eliminar
         // POST: Departamentoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var departamento = await _context.Departamento.FindAsync(id);
-            _context.Departamento.Remove(departamento);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var departamento = await _context.Departamento.FindAsync(id);
+        //    _context.Departamento.Remove(departamento);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool DepartamentoExists(int id)
         {

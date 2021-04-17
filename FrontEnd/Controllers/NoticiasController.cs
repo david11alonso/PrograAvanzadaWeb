@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.Models;
+using static FrontEnd.Enums.Enums;
 
 namespace FrontEnd.Controllers
 {
-    public class NoticiasController : Controller
+    public class NoticiasController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context;
 
@@ -47,7 +48,7 @@ namespace FrontEnd.Controllers
         // GET: Noticias/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id");
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName");
             return View();
         }
 
@@ -64,7 +65,7 @@ namespace FrontEnd.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -81,7 +82,7 @@ namespace FrontEnd.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -117,39 +118,59 @@ namespace FrontEnd.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.AspNetUsers, "Id", "UserName", noticia.UsuarioId);
             return View(noticia);
         }
 
         // GET: Noticias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var noticia = await _context.Noticia
+                    .Include(n => n.Usuario)
+                    .FirstOrDefaultAsync(m => m.NoticiaId == id);
+                if (noticia == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    var noticiaRemove = await _context.Noticia.FindAsync(id);
+                    _context.Noticia.Remove(noticiaRemove);
+                    await _context.SaveChangesAsync();
+                    NotifyDelete("El registro se ha eliminado correctamente");
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser eliminado. Contacte a su administrador", notificationType: NotificationType.error);
             }
 
-            var noticia = await _context.Noticia
-                .Include(n => n.Usuario)
-                .FirstOrDefaultAsync(m => m.NoticiaId == id);
-            if (noticia == null)
-            {
-                return NotFound();
-            }
 
-            return View(noticia);
-        }
 
-        // POST: Noticias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var noticia = await _context.Noticia.FindAsync(id);
-            _context.Noticia.Remove(noticia);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        //// POST: Noticias/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var noticia = await _context.Noticia.FindAsync(id);
+        //    _context.Noticia.Remove(noticia);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool NoticiaExists(int id)
         {
