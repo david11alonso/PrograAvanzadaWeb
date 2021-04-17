@@ -742,3 +742,4 @@ C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\obj\Debug\netcoreapp3.1\
 C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.genruntimeconfig.cache
 C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs
+E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\IndexAprobacion.cshtml.g.cs

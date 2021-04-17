@@ -38,6 +38,57 @@ namespace FrontEnd.API.Controllers
             }
             return View(aux);
         }
+        // GET: Propuestas
+        public async Task<IActionResult> IndexAprobacion()
+        {
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Propuesta/Pendiente");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+            return View(aux);
+        }
+        public async Task<IActionResult> Aprobar(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    cl.DefaultRequestHeaders.Clear();
+                    cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage res = await cl.GetAsync("api/Propuesta/Aprobacion/" + id);
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        NotifyDelete("El registro se ha aprobado correctamente");
+                        return RedirectToAction("IndexAprobacion");
+                    }
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser aprobado. Contacte a su administrador", notificationType: NotificationType.error);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
 
         public async Task<IActionResult> IndexEmpleado()
         {
@@ -222,6 +273,50 @@ namespace FrontEnd.API.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> DeleteAprobacion(int? id)
+        {
+            try
+            {
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var propuesta = GetById(id);
+
+                if (propuesta == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/Propuesta/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha rechazado correctamente");
+
+                            return RedirectToAction("IndexAprobacion");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser rechazado. Contacte a su administrador", notificationType: NotificationType.error);
+            }
+
+            return RedirectToAction(nameof(IndexAprobacion));
+        }
+
 
         // POST: Propuestas/Delete/5
         [HttpPost, ActionName("Delete")]
