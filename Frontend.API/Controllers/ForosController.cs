@@ -56,6 +56,24 @@ namespace FrontEnd.API.Controllers
             }
             return View(aux);
         }
+        public async Task<IActionResult> IndexComentarios(int? id)
+        {
+            List<data.Comentario> aux = new List<data.Comentario>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Comentario/"+id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Comentario>>(auxres);
+                }
+            }
+            return View(aux);
+        }
 
 
 

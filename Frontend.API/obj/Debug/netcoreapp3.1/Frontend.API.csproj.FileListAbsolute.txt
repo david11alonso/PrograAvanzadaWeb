@@ -749,3 +749,4 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Not
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\Votar.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\Proponer.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexEmpleado.cshtml.g.cs
+E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexComentarios.cshtml.g.cs
