@@ -115,6 +115,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("IndexEmpleado", "Foros")" class="nav-link">
+                                <i class="fab fa-forumbee nav-icon"></i>
+                                <p>
+                                    Foros
+                                </p>
+                            </a>
+                        </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">

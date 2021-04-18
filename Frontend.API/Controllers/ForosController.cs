@@ -38,8 +38,26 @@ namespace FrontEnd.API.Controllers
             }
             return View(aux);
         }
+        public async Task<IActionResult> IndexEmpleado()
+        {
+            List<data.Foro> aux = new List<data.Foro>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Foro");
 
-      
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Foro>>(auxres);
+                }
+            }
+            return View(aux);
+        }
+
+
 
         // GET: Foroes/Create
         public IActionResult Create()
