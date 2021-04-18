@@ -22,12 +22,12 @@ namespace Solution.DAL.Repository
             get { return dbContext as SolutionDbContext; }
         }
 
-        public async Task<IEnumerable<UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
+        public async Task<IEnumerable<UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(string id)
         {
             return await _db.UsuarioDepartamento
                 .Include(m => m.Usuario)
                 .Include(m => m.Departamento)
-                .Where(m => m.DepartamentoId == id).ToListAsync();
+                .Where(m => m.UsuarioId == id).ToListAsync();
         }
 
         public async Task<IEnumerable<UsuarioDepartamento>> GetAllWithAsAsync()
