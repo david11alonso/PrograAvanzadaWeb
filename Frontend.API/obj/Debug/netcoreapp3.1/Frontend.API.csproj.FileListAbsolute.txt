@@ -745,3 +745,4 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.dl
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.pdb
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.genruntimeconfig.cache
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\ReporteVotos\IndexComentarios.cshtml.g.cs
+E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Noticias\IndexEmpleado.cshtml.g.cs

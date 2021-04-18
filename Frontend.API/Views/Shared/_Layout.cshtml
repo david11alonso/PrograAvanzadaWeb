@@ -91,7 +91,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+                        <li class="nav-item">
+                            <a href="@Url.Action("IndexEmpleado", "Noticias")" class="nav-link">
+                                <i class="far fa-newspaper nav-icon"></i>
+                                <p>
+                                    Ver Noticias
+                                </p>
+                            </a>
+                        </li>
+                        @if (User.IsInRole("Admin")) { 
                         <li class="nav-item">
                             <a href="@Url.Action("Index", "Departamentos")" class="nav-link">
                                 <i class="fa fa-home nav-icon"></i>
@@ -141,19 +149,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <!--
-    <li class="nav-item">
-        <a href="@Url.Action("Index", "Comentarios")" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>ComentariosPropuesta</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="@Url.Action("Index", "VotoPropuestas")" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>VotoPropuesta</p>
-        </a>
-    </li>
-        -->
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "Comentarios")" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>ComentariosPropuesta</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="@Url.Action("Index", "VotoPropuestas")" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>VotoPropuesta</p>
+                </a>
+            </li>
+                -->
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -172,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
-
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
