@@ -190,7 +190,7 @@ namespace FrontEnd.API.Controllers
             List<Propuesta> listPropuesta = new List<Propuesta>();
             listPropuesta.Add(GetById(votoPropuesta.PropuestaId));
             ViewData["PropuestaId"] = new SelectList(listPropuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Name", votoPropuesta.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", votoPropuesta.UsuarioId);
             return View(votoPropuesta);
         }
 
@@ -215,9 +215,12 @@ namespace FrontEnd.API.Controllers
         }
 
         // GET: Propuestas/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email");
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email");
             return View();
         }
 
@@ -245,8 +248,60 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", propuesta.UsuarioId);
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
+        }
+
+
+        // GET: Propuestas/Create
+        public async Task<IActionResult> ProponerAsync()
+        {
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email");
+            return View();
+        }
+
+        // POST: Propuestas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Proponer([Bind("PropuestaId,Titulo,Descripcion,Tipo,UsuarioId,FechaPublicacion,FechaFinalizacion,Problema,ResultadoEsperado,Riesgos,Beneficios")] Propuesta propuesta)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var cl = new HttpClient())
+                {
+                    propuesta.Pendiente = true;
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(propuesta);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Propuesta", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        NotifyDelete("El registro se ha agregado correctamente");
+                        return RedirectToAction(nameof(Proponer));
+                    }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que no se completaron todos los datos.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Proponer));
+                    }
+                }
+            }
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", propuesta.UsuarioId);
+            return RedirectToAction(nameof(Proponer));
         }
 
         // GET: Propuestas/Edit/5
@@ -294,6 +349,7 @@ namespace FrontEnd.API.Controllers
 
                         if (postTask.IsSuccessStatusCode)
                         {
+                            
                             return RedirectToAction("Index");
                         }
                     }

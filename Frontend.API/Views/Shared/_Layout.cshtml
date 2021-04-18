@@ -107,6 +107,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Proponer", "Propuestas")" class="nav-link">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>
+                                    Crear Propuestas
+                                </p>
+                            </a>
+                        </li>
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
