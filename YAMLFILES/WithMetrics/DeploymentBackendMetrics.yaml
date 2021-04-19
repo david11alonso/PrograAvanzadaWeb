@@ -17,6 +17,7 @@ spec:
       containers:
       - name: private-reg-container
         image:  david11alonso/prograavanzadaweb:backend
+        imagePullPolicy: "Always"
       imagePullSecrets:
       - name: regcred
 ---
