@@ -29,8 +29,10 @@ namespace FrontEnd.API.Controllers
         // GET: Admin
         public async Task<IActionResult> Index()
         {
-            ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
-            ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+            ViewData["roles"] = getAllRoles();
+            ViewData["departamentos"] = getAllDepartamentos();
+            ViewData["usuarioDepartamentos"] = getAllUserDept();
+            ViewData["UserRoles"] = getAllUserRoles();
             return View(userManager.Users);
         }
 
@@ -210,6 +212,28 @@ namespace FrontEnd.API.Controllers
                 {
                     var auxres = res.Content.ReadAsStringAsync().Result;
                     aux = JsonConvert.DeserializeObject<List<data.UsuarioDepartamento>>(auxres);
+                }
+            }
+
+            return aux;
+        }
+
+        private List<data.AspNetUserRoles> getAllUserRoles()
+        {
+            List<data.AspNetUserRoles> aux = new List<data.AspNetUserRoles>();
+
+            using (var cl = new HttpClient())
+
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = cl.GetAsync("api/AspNetUserRoles").Result;
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.AspNetUserRoles>>(auxres);
                 }
             }
 

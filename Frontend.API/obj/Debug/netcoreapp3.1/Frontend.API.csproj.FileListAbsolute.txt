@@ -751,3 +751,14 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Pro
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexEmpleado.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexComentarios.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\CreateComentario.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\CreateComentario.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexComentarios.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Foros\IndexEmpleado.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Noticias\IndexEmpleado.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\PropuestaDepartamentos\IndexPropuesta.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\IndexAprobacion.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\Proponer.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Propuestas\Votar.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\ReporteVotos\Index.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\ReporteVotos\IndexComentarios.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs

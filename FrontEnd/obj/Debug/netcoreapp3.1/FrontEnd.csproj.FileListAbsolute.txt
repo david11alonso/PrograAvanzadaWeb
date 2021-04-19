@@ -982,3 +982,4 @@ E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csproj.Cop
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.dll
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.pdb
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.genruntimeconfig.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs

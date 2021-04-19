@@ -5,6 +5,13 @@
 }
 <h1>Gestión Propuestas</h1>
 <hr />
+
+@{ 
+    var roles = (List<AspNetRoles>)ViewBag.Roles;
+    var depts = (List<Departamento>)ViewBag.Departamentos;
+    var userRoles = (List<AspNetUserRoles>)ViewBag.UserRoles;
+    var userDepts = (List<UsuarioDepartamento>)ViewBag.UsuarioDepartamentos;
+}
 <!-- Main content -->
 <section class="content">
     <div class="container-index">
@@ -32,10 +39,10 @@
                                 <th>
                                     @Html.DisplayName("Rol")
                                 </th>
-                                @*<th>
-                                    @Html.DisplayNameFor(model => model.)
-                                </th>
                                 <th>
+                                    @Html.DisplayName("Departamento")
+                                </th>
+                                @*<th>
                                     @Html.DisplayNameFor(model => model.Tipo)
                                 </th>
                                 <th>
@@ -55,12 +62,20 @@
                                         @Html.DisplayFor(modelItem => item.Email)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NormalizedUserName)
-                                    </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Pendiente)
+                                        @{
+                                            var userRole = userRoles.Where(u => u.UserId == item.Id).FirstOrDefault();
+                                            var role = roles.Where(r => r.Id == userRole.RoleId).FirstOrDefault().Name;
+                                            @role
+                                        }
                                     </td>
                                     <td>
+                                        @{
+                                            var userDept = userDepts.Where(d => d.UsuarioId == item.Id).FirstOrDefault();
+                                            var dept = depts.Where(d => d.DepartamentoId == userDept.DepartamentoId).FirstOrDefault().Nombre;
+                                            @dept
+                                        }
+                                    </td>
+                                    @*<td>
                                         @Html.DisplayFor(modelItem => item.Tipo)
                                     </td>
                                     <td>
