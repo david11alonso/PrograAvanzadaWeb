@@ -42,15 +42,7 @@
                                 <th>
                                     @Html.DisplayName("Departamento")
                                 </th>
-                                @*<th>
-                                    @Html.DisplayNameFor(model => model.Tipo)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.FechaPublicacion)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.FechaFinalizacion)
-                                </th>*@
+
                                 <th></th>
                             </tr>
                         </thead>
@@ -75,26 +67,12 @@
                                             @dept
                                         }
                                     </td>
-                                    @*<td>
-                                        @Html.DisplayFor(modelItem => item.Tipo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaPublicacion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaFinalizacion)*@
-                                    @*</td>*@
                                     <td class="project-actions text-right">
 
                                         <a class="btn btn-info btn-sm" asp-action="Update" asp-route-id="@item.Id">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Editar
-                                        </a>
-                                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">
-                                            <i class="fas fa-folder">
-                                            </i>
-                                            Ver detalles
                                         </a>
                                         <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">
                                             <i class="fas fa-trash">
