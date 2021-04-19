@@ -762,3 +762,4 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\ReporteVotos\Index.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\ReporteVotos\IndexComentarios.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Delete.cshtml.g.cs

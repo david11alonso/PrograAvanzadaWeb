@@ -1,4 +1,5 @@
-﻿using FrontEnd.API.Models;
+﻿using Frontend.API.Controllers;
+using FrontEnd.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,7 @@ using data = FrontEnd.API.Models;
 
 namespace FrontEnd.API.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
@@ -156,6 +157,7 @@ namespace FrontEnd.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
+
             IdentityUser user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
@@ -164,6 +166,7 @@ namespace FrontEnd.API.Controllers
                 {
                     var currentRole = GetRoleByUserId(id).FirstOrDefault().RoleId;
                     DeleteUserRole(id, currentRole);
+                    NotifyDelete("El registro se ha eliminado correctamente");
                     return RedirectToAction("Index");
                 }
                 else
@@ -172,6 +175,17 @@ namespace FrontEnd.API.Controllers
             else
                 ModelState.AddModelError("", "Usuario no encontrado");
             return View("Index", userManager.Users);
+        }
+
+        // POST: Departamentoes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+ 
+                    NotifyDelete("El registro se ha eliminado correctamente");
+                    return RedirectToAction("Index");
+
         }
 
         private List<data.Departamento> getAllDepartamentos()
