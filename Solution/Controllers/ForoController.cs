@@ -100,10 +100,16 @@ namespace Solution.API.Controllers
         public async Task<ActionResult<datamodels.Foro>> PostForo(datamodels.Foro foro)
         {
             var mapaux = _mapper.Map<datamodels.Foro, data.Foro>(foro);
-
+            var propuesta = await new Solution.BS.Foro(_context).GetOneWithAsAsyncPropuesta(mapaux.PropuestaId);
+            if ( propuesta == null) { 
             new Solution.BS.Foro(_context).Insert(mapaux);
 
             return CreatedAtAction("GetForo", new { id = foro.ForoId }, foro);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Foro/5

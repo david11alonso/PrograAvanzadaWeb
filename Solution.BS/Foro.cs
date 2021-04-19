@@ -56,6 +56,10 @@ namespace Solution.BS
         {
             return await new DAL.Foro(context).GetOneWithAsAsync(id);
         }
+        public async Task<data.Foro> GetOneWithAsAsyncPropuesta(int id)
+        {
+            return await new DAL.Foro(context).GetOneWithAsAsyncPropuesta(id);
+        }
 
     }
 }

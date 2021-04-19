@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FrontEnd.API.Models.Comentario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Comentarios Propuesta</h1>
+<hr />
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%; height:100%">
+        <div class="container-fluid2">
+
+            <!-- Default box -->
+            <div class="card" style="height:70%">
+
+                <div class="card-body p-0 container-fluid3">
+                    <div class="col-md-12">
+                        <br />
+                        <a class="btn btn-primary btn-sm" asp-action="CreateComentario" asp-route-id="@ViewData["titulo"]">
+                            <i class="fas fa-plus">
+                            </i>
+                            Agregar comentario nuevo
+                        </a>
+                    </div>
+                    <br />
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Comentario1)
+                                </th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Usuario.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Comentario1)
+                                </td>
+                                @if(User.Identity.Name == item.Usuario.UserName)
+                                { 
+                                
+                                <td class="project-actions text-right">
+                                    
+                                    <a class="btn btn-danger btn-sm" asp-action="DeleteComentario" asp-route-id="@item.ComentarioId">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Eliminar
+                                    </a>
+                                </td>
+                                }
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="IndexEmpleado">Volver a los foros</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<!-- /.content -->

@@ -12,7 +12,7 @@ namespace Solution.API.DataModels
         public string Comentario1 { get; set; }
         public int ComentarioId { get; set; }
 
-        //public virtual Foro Foro { get; set; }
-        //public virtual AspNetUsers Usuario { get; set; }
+        public virtual Foro Foro { get; set; }
+        public virtual AspNetUsers Usuario { get; set; }
     }
 }

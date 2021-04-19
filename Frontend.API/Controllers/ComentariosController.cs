@@ -18,6 +18,7 @@ namespace FrontEnd.API.Controllers
 {
     public class ComentariosController : BaseController
     {
+        /*
         string baseurl = "http://45.79.241.73/";
 
         // GET: Comentarios
@@ -293,5 +294,6 @@ namespace FrontEnd.API.Controllers
             }
             return aux;
         }
+        */
     }
 }

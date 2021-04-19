@@ -8,7 +8,7 @@ namespace Solution.DAL.Repository
 {
     public interface IRepositoryUsuarioDepartamento
     {
-        Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id);
+        Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(string id);
         Task<IEnumerable<data.UsuarioDepartamento>> GetAllWithAsAsync();
         Task<data.UsuarioDepartamento> GetOneByIDsAsync(string UsuarioId, int DepartamentoId);
     }

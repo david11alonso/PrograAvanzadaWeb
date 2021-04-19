@@ -27,6 +27,12 @@ namespace Solution.DO.Objects
 
         public virtual AspNetUsers Usuario { get; set; }
         public virtual ICollection<Foro> Foro { get; set; }
+
+        public object Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual ICollection<PropuestaDepartamento> PropuestaDepartamento { get; set; }
         public virtual ICollection<VotoPropuesta> VotoPropuesta { get; set; }
     }

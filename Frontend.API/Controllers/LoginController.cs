@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
+
 namespace FrontEnd.API.Controllers
 {
     public class LoginController : Controller
@@ -60,21 +61,7 @@ namespace FrontEnd.API.Controllers
                     model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    IdentityUser user = await userManager.FindByEmailAsync(model.Email);
-                    var currentRole = GetRoleByUserId(user.Id);
-                    foreach(AspNetUserRoles role in currentRole)
-                    {
-                        if (role.Role.Name =="Admin")
-                        {
-                            return RedirectToAction("index", "home");
-
-                        }
-                        else if (role.Role.Name == "Empleado")
-                        {
-                            return RedirectToAction("index", "homeEmpleado");
-
-                        }
-                    }
+                    return RedirectToAction("index", "home");
                     
                 }
 

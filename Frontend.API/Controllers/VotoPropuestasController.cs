@@ -14,7 +14,7 @@ namespace FrontEnd.API.Controllers
 {
     public class VotoPropuestasController : Controller
     {
-
+        /*
         string baseurl = "http://45.79.241.73/";
 
         // GET: VotoPropuestas
@@ -264,6 +264,6 @@ namespace FrontEnd.API.Controllers
             return aux;
         }
 
-
+        */
     }
 }

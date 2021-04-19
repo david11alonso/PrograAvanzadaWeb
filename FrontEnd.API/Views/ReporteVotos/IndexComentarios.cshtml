@@ -1,0 +1,79 @@
+﻿@model IEnumerable<FrontEnd.API.Models.VotoPropuesta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Comentarios Propuesta</h1>
+<hr />
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%; height:100%">
+        <div class="container-fluid2">
+
+            <!-- Default box -->
+            <div class="card" style="height:70%">
+
+                <div class="card-body p-0 container-fluid3">
+
+                    <br />
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Votacion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Comentario)
+                                </th>
+                                <th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (item.Votacion == 0)
+                                        {
+                                            <p>De acuerdo</p>
+                                        }
+                                        else if (item.Votacion == 1)
+                                        {
+                                            <p>Neutral</p>
+
+                                        }
+                                        else if (item.Votacion == 2)
+                                        {
+                                            <p>Desacuerdo</p>
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Comentario)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<br />
+
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="Index">Volver a Reportes</a>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

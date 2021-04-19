@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.API_W\\Solution.API_W.csproj": {}
+    "E:\\Visual\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.API_W\\Solution.API_W.csproj": {
+    "E:\\Visual\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.API_W\\Solution.API_W.csproj",
+        "projectUniqueName": "E:\\Visual\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
         "projectName": "Solution.API_W",
-        "projectPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.API_W\\Solution.API_W.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.API_W\\obj\\",
+        "projectPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.API_W\\Solution.API_W.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.API_W\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -81,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -38,7 +38,7 @@ namespace Solution.API.Controllers
         }
         // GET: api/UsuarioDepartamento
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<datamodels.UsuarioDepartamento>>> GetUsuariosByDepartamento(int id)
+        public async Task<ActionResult<IEnumerable<datamodels.UsuarioDepartamento>>> GetUsuariosByDepartamento(string id)
         {
 
             var aux = await new Solution.BS.UsuarioDepartamento(_context).GetAllUsuariosByDepartamentoAsync(id);

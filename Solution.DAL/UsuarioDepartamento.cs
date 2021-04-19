@@ -48,7 +48,7 @@ namespace Solution.DAL
             _repo.Commit();
         }
 
-        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(string id)
         {
             return await _repo.GetAllUsuariosByDepartamentoAsync(id);
 

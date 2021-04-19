@@ -11,13 +11,19 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Frontend.API.Controllers;
 using static Frontend.API.Enums.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace FrontEnd.API.Controllers
 {
     public class PropuestasController : BaseController
     {
+        private UserManager<IdentityUser> userManager;
 
         string baseurl = "http://45.79.241.73/";
+        public PropuestasController(UserManager<IdentityUser> usrmg)
+        {
+            userManager = usrmg;
+        }
 
         // GET: Propuestas
         public async Task<IActionResult> Index()
@@ -38,8 +44,8 @@ namespace FrontEnd.API.Controllers
             }
             return View(aux);
         }
-
-        public async Task<IActionResult> IndexEmpleado()
+        // GET: Propuestas
+        public async Task<IActionResult> IndexAprobacion()
         {
             List<data.Propuesta> aux = new List<data.Propuesta>();
             using (var cl = new HttpClient())
@@ -47,7 +53,7 @@ namespace FrontEnd.API.Controllers
                 cl.BaseAddress = new Uri(baseurl);
                 cl.DefaultRequestHeaders.Clear();
                 cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage res = await cl.GetAsync("api/Propuesta");
+                HttpResponseMessage res = await cl.GetAsync("api/Propuesta/Pendiente");
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -57,6 +63,137 @@ namespace FrontEnd.API.Controllers
             }
             return View(aux);
         }
+        public async Task<IActionResult> Aprobar(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    cl.DefaultRequestHeaders.Clear();
+                    cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage res = await cl.GetAsync("api/Propuesta/Aprobacion/" + id);
+
+                    if (res.IsSuccessStatusCode)
+                    {
+                        NotifyDelete("El registro se ha aprobado correctamente");
+                        return RedirectToAction("IndexAprobacion");
+                    }
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser aprobado. Contacte a su administrador", notificationType: NotificationType.error);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> IndexEmpleado()
+        {
+            List<data.PropuestaDepartamento> auxPD = new List<data.PropuestaDepartamento>();
+            List<data.PropuestaDepartamento> auxD = new List<data.PropuestaDepartamento>();
+            List<data.VotoPropuesta> auxVP = new List<data.VotoPropuesta>();
+            List<data.Propuesta> propuestas = new List<data.Propuesta>();
+            var user =await userManager.FindByNameAsync(User.Identity.Name);
+            Boolean b = true;
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/PropuestaDepartamento");
+                HttpResponseMessage res2 = await cl.GetAsync("api/UsuarioDepartamento/"+user.Id);
+                HttpResponseMessage res3 = await cl.GetAsync("api/VotoPropuesta");
+                if (res.IsSuccessStatusCode && res2.IsSuccessStatusCode)
+                {
+                    var auxresPD = res.Content.ReadAsStringAsync().Result;
+                    auxPD = JsonConvert.DeserializeObject<List<data.PropuestaDepartamento>>(auxresPD);
+                    var auxresD = res2.Content.ReadAsStringAsync().Result;
+                    auxD = JsonConvert.DeserializeObject<List<data.PropuestaDepartamento>>(auxresD);
+                    var auxresVP = res3.Content.ReadAsStringAsync().Result;
+                    auxVP = JsonConvert.DeserializeObject<List<data.VotoPropuesta>>(auxresVP);
+                    foreach (PropuestaDepartamento pd in auxPD)
+                    {
+                        if(pd.DepartamentoId == auxD.FirstOrDefault().DepartamentoId && pd.Propuesta.Pendiente == false)
+                        {
+                            b = true;
+                            foreach (VotoPropuesta vp in auxVP)
+                            {
+                                if(vp.UsuarioId == user.Id && vp.PropuestaId == pd.PropuestaId)
+                                {
+                                    b = false;
+                                }
+                            }
+                            if (b) { propuestas.Add(pd.Propuesta); }
+                            
+                        }
+                    }
+                }
+            }
+            return View(propuestas);
+        }
+
+        // GET: VotoPropuestas/Create
+        public async Task<IActionResult> VotarAsync(int id)
+        {
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            List<Propuesta> listPropuesta = new List<Propuesta>();
+            listPropuesta.Add(GetById(id));
+            ViewData["PropuestaId"] = new SelectList(listPropuesta, "PropuestaId", "Titulo");
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email");
+            return View();
+        }
+
+        // POST: VotoPropuestas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Votar([Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,VotoPropuesta,Comentario")] VotoPropuesta votoPropuesta)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var cl = new HttpClient())
+                {
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(votoPropuesta);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/VotoPropuesta", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        NotifyDelete("El registro se ha agregado correctamente");
+                        return RedirectToAction(nameof(IndexEmpleado));
+                    }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que falto informacion de digitar", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(IndexEmpleado));
+                    }
+                }
+            }
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            List<Propuesta> listPropuesta = new List<Propuesta>();
+            listPropuesta.Add(GetById(votoPropuesta.PropuestaId));
+            ViewData["PropuestaId"] = new SelectList(listPropuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", votoPropuesta.UsuarioId);
+            return View(votoPropuesta);
+        }
+
 
 
         // GET: Propuestas/Details/5
@@ -78,9 +215,12 @@ namespace FrontEnd.API.Controllers
         }
 
         // GET: Propuestas/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email");
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email");
             return View();
         }
 
@@ -108,8 +248,60 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", propuesta.UsuarioId);
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", propuesta.UsuarioId);
             return View(propuesta);
+        }
+
+
+        // GET: Propuestas/Create
+        public async Task<IActionResult> ProponerAsync()
+        {
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email");
+            return View();
+        }
+
+        // POST: Propuestas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Proponer([Bind("PropuestaId,Titulo,Descripcion,Tipo,UsuarioId,FechaPublicacion,FechaFinalizacion,Problema,ResultadoEsperado,Riesgos,Beneficios")] Propuesta propuesta)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var cl = new HttpClient())
+                {
+                    propuesta.Pendiente = true;
+                    cl.BaseAddress = new Uri(baseurl);
+                    var content = JsonConvert.SerializeObject(propuesta);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                    var byteContent = new ByteArrayContent(buffer);
+                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    var postTask = cl.PostAsync("api/Propuesta", byteContent).Result;
+
+                    if (postTask.IsSuccessStatusCode)
+                    {
+                        NotifyDelete("El registro se ha agregado correctamente");
+                        return RedirectToAction(nameof(Proponer));
+                    }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que no se completaron todos los datos.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Proponer));
+                    }
+                }
+            }
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", propuesta.UsuarioId);
+            return RedirectToAction(nameof(Proponer));
         }
 
         // GET: Propuestas/Edit/5
@@ -157,6 +349,7 @@ namespace FrontEnd.API.Controllers
 
                         if (postTask.IsSuccessStatusCode)
                         {
+                            
                             return RedirectToAction("Index");
                         }
                     }
@@ -222,6 +415,50 @@ namespace FrontEnd.API.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> DeleteAprobacion(int? id)
+        {
+            try
+            {
+
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var propuesta = GetById(id);
+
+                if (propuesta == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    using (var cl = new HttpClient())
+                    {
+                        cl.BaseAddress = new Uri(baseurl);
+                        cl.DefaultRequestHeaders.Clear();
+                        cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage res = await cl.DeleteAsync("api/Propuesta/" + id);
+
+                        if (res.IsSuccessStatusCode)
+                        {
+                            NotifyDelete("El registro se ha rechazado correctamente");
+
+                            return RedirectToAction("IndexAprobacion");
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                NotifyError("El registro no puede ser rechazado. Contacte a su administrador", notificationType: NotificationType.error);
+            }
+
+            return RedirectToAction(nameof(IndexAprobacion));
+        }
+
 
         // POST: Propuestas/Delete/5
         [HttpPost, ActionName("Delete")]

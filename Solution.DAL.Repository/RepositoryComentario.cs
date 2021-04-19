@@ -40,7 +40,7 @@ namespace Solution.DAL.Repository
         {
             return await _db.Comentario
                 .Include(m => m.Foro)
-                //.Include(m => m.Usuario)
+                .Include(m => m.Usuario)
                 .Where(m => m.ForoId == id).ToListAsync();
         }
 

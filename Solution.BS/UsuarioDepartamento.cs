@@ -46,7 +46,7 @@ namespace Solution.BS
         }
 
 
-        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(int id)
+        public async Task<IEnumerable<data.UsuarioDepartamento>> GetAllUsuariosByDepartamentoAsync(string id)
         {
             return await new DAL.UsuarioDepartamento(_repo).GetAllUsuariosByDepartamentoAsync(id);
 

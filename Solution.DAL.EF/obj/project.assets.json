@@ -5738,19 +5738,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+      "projectUniqueName": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
       "projectName": "Solution.DAL.EF",
-      "projectPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DAL.EF\\obj\\",
+      "projectPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DAL.EF\\Solution.DAL.EF.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DAL.EF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5764,8 +5764,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj": {
-              "projectPath": "C:\\Users\\User\\Documents\\PAW-Proyecto-Final\\Solution.DO\\Solution.DO.csproj"
+            "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj": {
+              "projectPath": "E:\\Visual\\PrograAvanzadaWeb\\Solution.DO\\Solution.DO.csproj"
             }
           }
         }
@@ -5810,7 +5810,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

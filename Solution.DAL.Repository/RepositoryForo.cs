@@ -31,6 +31,13 @@ namespace Solution.DAL.Repository
                 .SingleOrDefaultAsync(m => m.ForoId == id);
         }
 
+        public async Task<Foro> GetOneWithAsAsyncPropuesta(int id)
+        {
+            return await _db.Foro
+                .Include(m => m.Propuesta).
+                SingleOrDefaultAsync(m => m.PropuestaId == id);
+        }
+
         private SolutionDbContext _db
         {
             get { return dbContext as SolutionDbContext; }

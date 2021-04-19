@@ -91,74 +91,121 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Departamentos")" class="nav-link">
-                                <i class="fa fa-home nav-icon"></i>
-                                <p>
-                                    Departamentos
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-file-alt nav-icon"></i>
-                                <p>
-                                    Propuestas
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Propuestas")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>GestionPropuestas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "PropuestaDepartamentos")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>PropuestaDepartamento</p>
-                                    </a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Foros")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ForosPropuesta</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "Comentarios")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ComentariosPropuesta</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="@Url.Action("Index", "VotoPropuestas")" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>VotoPropuesta</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="@Url.Action("Index", "Noticias")" class="nav-link">
+                            <a href="@Url.Action("IndexEmpleado", "Noticias")" class="nav-link">
                                 <i class="far fa-newspaper nav-icon"></i>
                                 <p>
-                                    Noticias
+                                    Ver Noticias
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="@Url.Action("Index", "Admin")" class="nav-link">
-                                <i class="fas fa-users nav-icon"></i>
+                            <a href="@Url.Action("IndexEmpleado", "Propuestas")" class="nav-link">
+                                <i class="far fa-file-alt nav-icon"></i>
                                 <p>
-                                    Usuarios
+                                    Votar Propuestas
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Proponer", "Propuestas")" class="nav-link">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>
+                                    Crear Propuestas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("IndexEmpleado", "Foros")" class="nav-link">
+                                <i class="fab fa-forumbee nav-icon"></i>
+                                <p>
+                                    Foros
+                                </p>
+                            </a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Departamentos")" class="nav-link">
+                                    <i class="fa fa-home nav-icon"></i>
+                                    <p>
+                                        Departamentos
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-file-alt nav-icon"></i>
+                                    <p>
+                                        Propuestas
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Propuestas")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>GestionPropuestas</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("IndexAprobacion", "Propuestas")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Aprobaci&oacute;nPropuestas</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "PropuestaDepartamentos")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>PropuestaDepartamento</p>
+                                        </a>
+                                    </li>
 
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "Foros")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>ForosPropuesta</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Index", "ReporteVotos")" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>ReporteVotos</p>
+                                        </a>
+                                    </li>
+                                    <!--
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Comentarios")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>ComentariosPropuesta</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "VotoPropuestas")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>VotoPropuesta</p>
+                    </a>
+                </li>
+                    -->
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Noticias")" class="nav-link">
+                                    <i class="far fa-newspaper nav-icon"></i>
+                                    <p>
+                                        Noticias
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Admin")" class="nav-link">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>
+                                        Usuarios
+                                    </p>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

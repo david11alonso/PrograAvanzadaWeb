@@ -58,5 +58,11 @@ namespace Solution.DAL
             return await _repo.GetOneWithAsync(id);
 
         }
+        public async Task<IEnumerable<data.Propuesta>> GetAllWithAsyncPendiente()
+        {
+            return await _repo.GetAllWithAsyncPendiente();
+
+        }
+        
     }
 }

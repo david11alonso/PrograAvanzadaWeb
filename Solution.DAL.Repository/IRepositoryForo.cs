@@ -10,5 +10,6 @@ namespace Solution.DAL.Repository
     {
         Task<IEnumerable<data.Foro>> GetAllWithAsAsync();
         Task<data.Foro> GetOneWithAsAsync(int id);
+        Task<data.Foro> GetOneWithAsAsyncPropuesta(int id);
     }
 }

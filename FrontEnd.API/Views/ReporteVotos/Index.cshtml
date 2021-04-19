@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FrontEnd.API.Models.ReporteVotos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Reporte Votos</h1>
+<hr />
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%; height:100%">
+        <div class="container-fluid2">
+
+            <!-- Default box -->
+            <div class="card" style="height:70%">
+
+                <div class="card-body p-0 container-fluid3">
+                    
+                    <br />
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Propuesta.Titulo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DeSacuerdo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Neutral)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DeAcuerdo)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Propuesta.Titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeSacuerdo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Neutral)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DeAcuerdo)
+                                </td>
+                                <td class="project-actions text-right">
+                                   
+                                    <a class="btn btn-primary btn-sm" asp-action="IndexComentarios" asp-route-id="@item.Propuesta.PropuestaId">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Ver Comentarios
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<!-- /.content -->
