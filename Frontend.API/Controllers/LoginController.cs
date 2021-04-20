@@ -20,13 +20,13 @@ namespace FrontEnd.API.Controllers
             this.signInManager = signInManager;
             this.userManager = usrmgr;
         }
-        /*
+        
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("index", "home");
-        }*/
+            return RedirectToAction("Index", "Login");
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index()
