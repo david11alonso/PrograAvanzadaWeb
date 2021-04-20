@@ -734,6 +734,7 @@ C:\Users\User\Documents\PAW-Proyecto-Final\FrontEnd\obj\Debug\netcoreapp3.1\Fron
 C:\Users\User\Documents\PAW-Proyecto-Final\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.dll
 C:\Users\User\Documents\PAW-Proyecto-Final\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.pdb
 C:\Users\User\Documents\PAW-Proyecto-Final\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.genruntimeconfig.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs
 E:\Visual\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\appsettings.Development.json
 E:\Visual\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\appsettings.json
 E:\Visual\PrograAvanzadaWeb\FrontEnd\bin\Debug\netcoreapp3.1\FrontEnd.StaticWebAssets.xml
@@ -982,4 +983,3 @@ E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.csproj.Cop
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.dll
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.pdb
 E:\Visual\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\FrontEnd.genruntimeconfig.cache
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\FrontEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_notificationPartial.cshtml.g.cs

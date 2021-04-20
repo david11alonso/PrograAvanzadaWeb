@@ -77,7 +77,7 @@ namespace FrontEnd.API.Controllers
         // GET: Noticias/Create
         public IActionResult Create()
         {
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Name");
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email");
             return View();
         }
 
@@ -127,7 +127,7 @@ namespace FrontEnd.API.Controllers
                     }
                 }
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -144,7 +144,7 @@ namespace FrontEnd.API.Controllers
             {
                 return NotFound();
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", noticia.UsuarioId);
             return View(noticia);
         }
 
@@ -193,7 +193,7 @@ namespace FrontEnd.API.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Id", noticia.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", noticia.UsuarioId);
             return View(noticia);
         }
 
