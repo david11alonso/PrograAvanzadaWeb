@@ -117,14 +117,9 @@ namespace FrontEnd.API.Controllers
                     user.Email = email;
                 else
                     ModelState.AddModelError("", "El email no puede estar vacío");
-
-                if (!string.IsNullOrEmpty(password))
-                    user.PasswordHash = passwordHasher.HashPassword(user, password);
-                else
-                    ModelState.AddModelError("", "La contraseña no puede estar vacía");
-
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
+                    user.PasswordHash = passwordHasher.HashPassword(user, password);
                     IdentityResult result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
@@ -154,7 +149,7 @@ namespace FrontEnd.API.Controllers
         }
 
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
 
@@ -164,8 +159,6 @@ namespace FrontEnd.API.Controllers
                 IdentityResult result = await userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    var currentRole = GetRoleByUserId(id).FirstOrDefault().RoleId;
-                    DeleteUserRole(id, currentRole);
                     NotifyDelete("El registro se ha eliminado correctamente");
                     return RedirectToAction("Index");
                 }
@@ -177,16 +170,16 @@ namespace FrontEnd.API.Controllers
             return View("Index", userManager.Users);
         }
 
-        // POST: Departamentoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
+        //// POST: Departamentoes/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(string id)
+        //{
  
-                    NotifyDelete("El registro se ha eliminado correctamente");
-                    return RedirectToAction("Index");
+        //            NotifyDelete("El registro se ha eliminado correctamente");
+        //            return RedirectToAction("Index");
 
-        }
+        //}
 
         private List<data.Departamento> getAllDepartamentos()
         {

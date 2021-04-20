@@ -244,7 +244,6 @@ C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.dll
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.pdb
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.genruntimeconfig.cache
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.csprojAssemblyReference.cache
 C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.dll
 C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.pdb
 C:\Users\User\Documents\PAW-Proyecto-Final\Frontend.API\bin\Debug\netcoreapp3.1\appsettings.Development.json
@@ -764,3 +763,4 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.cs
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.dll
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.pdb
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.genruntimeconfig.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.csprojAssemblyReference.cache
