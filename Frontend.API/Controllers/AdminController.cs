@@ -117,9 +117,13 @@ namespace FrontEnd.API.Controllers
                     user.Email = email;
                 else
                     ModelState.AddModelError("", "El email no puede estar vacío");
-                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                if (!string.IsNullOrEmpty(email))
                 {
-                    user.PasswordHash = passwordHasher.HashPassword(user, password);
+                    if(password != null)
+                    {
+                        user.PasswordHash = passwordHasher.HashPassword(user, password);
+                    }
+                    
                     IdentityResult result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
