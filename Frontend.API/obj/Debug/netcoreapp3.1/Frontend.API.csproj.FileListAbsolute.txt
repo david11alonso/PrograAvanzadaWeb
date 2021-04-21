@@ -764,3 +764,5 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.dl
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.pdb
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.genruntimeconfig.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.csprojAssemblyReference.cache
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\HomeEmpleado\PasswordReset.cshtml.g.cs
+C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Empleado\PasswordReset.cshtml.g.cs

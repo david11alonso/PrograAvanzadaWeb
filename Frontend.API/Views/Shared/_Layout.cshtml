@@ -56,8 +56,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>
                     </li>
+                    @if (User.IsInRole("Empleado"))
+                    {
+
                     <li class="nav-item">
-                        <form class="form-inline"method="post" asp-controller="Login" aspcontroller="Logout">
+                        <a href="@Url.Action("PasswordReset", "Empleado")" class="nav-link text-dark">
+                            <p>
+                                Cambiar contraseña
+                            </p>
+                        </a>
+                    </li>
+                    }
+                    <li class="nav-item">
+                        <form class="form-inline" method="post" asp-controller="Login" aspcontroller="Logout">
                             <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                         </form>
                     </li>
@@ -65,8 +76,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 else
                 {
                     @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
-                        </li>*@
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
+            </li>*@
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Login")" class="nav-link">
                             <i class="fas fa-sign-in-alt"></i>

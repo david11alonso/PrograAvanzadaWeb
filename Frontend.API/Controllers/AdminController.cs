@@ -16,7 +16,6 @@ namespace FrontEnd.API.Controllers
 {
     public class AdminController : BaseController
     {
-        private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
         private IPasswordHasher<IdentityUser> passwordHasher;
         string baseurl = "http://45.79.241.73/";

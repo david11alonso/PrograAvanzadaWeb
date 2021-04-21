@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,10 @@ namespace FrontEnd.API.Controllers
 {
     public class HomeEmpleadoController : Controller
     {
+
+
         // GET: HomeEmpleadoController
+
         public ActionResult Index()
         {
             return View();
@@ -83,5 +87,7 @@ namespace FrontEnd.API.Controllers
                 return View();
             }
         }
+
+
     }
 }
