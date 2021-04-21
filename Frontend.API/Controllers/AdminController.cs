@@ -121,7 +121,14 @@ namespace FrontEnd.API.Controllers
                 {
                     if(password != null)
                     {
-                        user.PasswordHash = passwordHasher.HashPassword(user, password);
+                        try
+                        {
+                            user.PasswordHash = passwordHasher.HashPassword(user, password);
+                        } catch (Exception e)
+                        {
+                            ModelState.AddModelError("", e.Message);
+                        }
+                        
                     }
                     
                     IdentityResult result = await userManager.UpdateAsync(user);
