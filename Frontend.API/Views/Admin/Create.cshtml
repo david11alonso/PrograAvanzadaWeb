@@ -1,25 +1,66 @@
 ﻿@model Microsoft.AspNetCore.Identity.IdentityUser
 
-<h1 class="bg-info text-white">Crear Usuario</h1>
-<div asp-validation-summary="All" class="text-danger"></div>
+<h1>Formulario Nuevo Usuario</h1>
+<hr />
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
+<!-- Main content -->
+<section class="content">
+    <div class="container-index">
+        <img src="~/img/Business.jpg" style="opacity: .8; width:100%">
+        <div class="container-fluid2">
+
+            <!-- SECTION TITLE  -->
+            <div class=" card card-default col-md-6">
+
+                <!-- /.card-header -->
+
+                <div class="card-body">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PasswordHash">Contraseña</label>
+                            <input type="password" asp-for="PasswordHash" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Rol</label>
+                            <select id="rol" name="rol" class="form-control" asp-items="ViewBag.Roles"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Departamento</label>
+                            <select id="rol" name="departamento" class="form-control" asp-items="ViewBag.Departamentos"></select>
+                        </div>
+                        <div class="form-group">
+
+                            <button type="submit" class="btn btn-primary">Crear usuario</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.container-fluid -->
     </div>
-    <div class="form-group">
-        <label asp-for="PasswordHash">Contraseña</label>
-        <input type="password" asp-for="PasswordHash" class="form-control" />
+</section>
+<!-- /.content -->
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+
+        <div>
+            <a asp-action="Index">Volver a Usuarios</a>
+        </div>
     </div>
-    <div class="form-group">
-        <label class="control-label">Rol</label>
-        <select id="rol" name="rol" class="form-control" asp-items="ViewBag.Roles"></select>
-    </div>
-    <div class="form-group">
-        <label class="control-label">Departamento</label>
-        <select id="rol" name="departamento" class="form-control" asp-items="ViewBag.Departamentos"></select>
-    </div>
-    <button type="submit" class="btn btn-primary">Crear</button>
-    <a asp-action="Index" class="btn btn-secondary">Regresar</a>
-</form>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
