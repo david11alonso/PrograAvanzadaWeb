@@ -32,10 +32,17 @@ namespace Frontend.API.Controllers
         public async Task<IActionResult> PasswordReset(IFormCollection values)
         {
             string newPassword = values["passwordNuevo"];
+            string confirmPassword = values["passwordConfirmar"];
+
+            
 
             IdentityUser user = await userManager.FindByIdAsync(values["Id"]);
             try
             {
+                if (!(newPassword == confirmPassword))
+                {
+                    throw new Exception("Las contraseñas no son iguales");
+                }
                 if (user != null)
                 {
                     if (newPassword != null)
