@@ -766,7 +766,8 @@ E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.ge
 <<<<<<< HEAD
 E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.csprojAssemblyReference.cache
 =======
-C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Frontend.API.csprojAssemblyReference.cache
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\HomeEmpleado\PasswordReset.cshtml.g.cs
 C:\Users\Win10\source\repos\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Empleado\PasswordReset.cshtml.g.cs
 >>>>>>> 9e3443195b9bd15a93c54457ce68852586c8c1a7
+E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\Empleado\PasswordReset.cshtml.g.cs
+E:\Visual\PrograAvanzadaWeb\Frontend.API\obj\Debug\netcoreapp3.1\Razor\Views\HomeEmpleado\PasswordReset.cshtml.g.cs
