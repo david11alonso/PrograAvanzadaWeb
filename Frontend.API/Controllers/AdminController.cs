@@ -16,7 +16,6 @@ namespace FrontEnd.API.Controllers
 {
     public class AdminController : BaseController
     {
-        private readonly PrograAvanzadaWebContext _context = new PrograAvanzadaWebContext();
         private UserManager<IdentityUser> userManager;
         private IPasswordHasher<IdentityUser> passwordHasher;
         string baseurl = "http://45.79.241.73/";
@@ -66,19 +65,31 @@ namespace FrontEnd.API.Controllers
                 string id = appUser.Id;
                 IdentityResult result = await userManager.CreateAsync(appUser, user.PasswordHash);
 
-                if (result.Succeeded)
+                try
                 {
-                    CreateUserRole(id, role);
-                    CreateUserDepartment(id, Int32.Parse(dept));
+                    if (result.Succeeded)
+                    {
+                        CreateUserRole(id, role);
+                        CreateUserDepartment(id, Int32.Parse(dept));
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                            throw new Exception(error.Description);
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    foreach (IdentityError error in result.Errors)
-                        ModelState.AddModelError("", error.Description);
+                    NotifyError(e.Message);
+                    ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
+                    ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+                    return RedirectToAction("Create");
                 }
+
             }
+
             ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
             ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
             return View(user);
@@ -111,34 +122,49 @@ namespace FrontEnd.API.Controllers
             string dept = formValues["departamento"];
 
             IdentityUser user = await userManager.FindByIdAsync(id);
-            if (user != null)
+
+            try
             {
-                if (!string.IsNullOrEmpty(email))
-                    user.Email = email;
-                else
-                    ModelState.AddModelError("", "El email no puede estar vacío");
-                if (!string.IsNullOrEmpty(email))
+                if (user != null)
                 {
-                    if(password != null)
-                    {
-                        user.PasswordHash = passwordHasher.HashPassword(user, password);
-                    }
-                    
-                    IdentityResult result = await userManager.UpdateAsync(user);
-                    if (result.Succeeded)
-                    {
-                        DeleteUserRole(id, currentRole);
-                        CreateUserRole(id, role);
-                        DeleteUserDepartment(userDeptObj.UsuarioDepartamentoId);
-                        CreateUserDepartment(id, Int32.Parse(dept));
-                        return RedirectToAction("Index");
-                    }
+                    if (!string.IsNullOrEmpty(email))
+                        user.Email = email;
                     else
-                        Errors(result);
+                        ModelState.AddModelError("", "El email no puede estar vacío");
+                    if (!string.IsNullOrEmpty(email))
+                    {
+                        if (password != null)
+                        {
+                            user.PasswordHash = passwordHasher.HashPassword(user, password);
+
+                        }
+
+                        IdentityResult result = await userManager.UpdateAsync(user);
+                        if (result.Succeeded)
+                        {
+                            DeleteUserRole(id, currentRole);
+                            CreateUserRole(id, role);
+                            DeleteUserDepartment(userDeptObj.UsuarioDepartamentoId);
+                            CreateUserDepartment(id, Int32.Parse(dept));
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            foreach (IdentityError error in result.Errors)
+                                throw new Exception(error.Description);
+                        }
+
+                    }
                 }
             }
-            else
-                ModelState.AddModelError("", "Usuario no encontrado");
+            catch (Exception e)
+            {
+                NotifyError(e.Message);
+                ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name", currentRole);
+                ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", userDeptObj.DepartamentoId);
+
+                return View(user);
+            }
 
             ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name", currentRole);
             ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", userDeptObj.DepartamentoId);
