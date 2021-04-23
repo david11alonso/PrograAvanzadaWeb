@@ -21,7 +21,7 @@ namespace FrontEnd.API.Controllers
             this.userManager = usrmgr;
         }
         
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -33,6 +33,8 @@ namespace FrontEnd.API.Controllers
         {
             return View();
         }
+
+
         private List<AspNetUserRoles> GetRoleByUserId(string id)
         {
             List<AspNetUserRoles> aux = new List<AspNetUserRoles>();

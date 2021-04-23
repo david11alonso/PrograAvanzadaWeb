@@ -68,9 +68,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     }
                     <li class="nav-item">
-                        <form class="form-inline" method="post" asp-controller="Login" aspcontroller="Logout">
-                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                        </form>
+                        <a href="@Url.Action("Logout", "Login")" class="nav-link text-dark">
+                            <p>
+                                Logout
+                            </p>
+                        </a>
                     </li>
                 }
                 else
@@ -123,6 +125,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <i class="far fa-file-alt nav-icon"></i>
                                 <p>
                                     Crear Propuestas
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("PropuestasEmpleado", "Propuestas")" class="nav-link">
+                                <i class="far fa-file-alt nav-icon"></i>
+                                <p>
+                                    Mis Propuestas
                                 </p>
                             </a>
                         </li>

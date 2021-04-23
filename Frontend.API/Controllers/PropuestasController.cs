@@ -42,6 +42,8 @@ namespace FrontEnd.API.Controllers
                     aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
                 }
             }
+            if (User.IsInRole("Empleado"))
+                return RedirectToAction("PropuestasEmpleado");
             return View(aux);
         }
         // GET: Propuestas
@@ -244,6 +246,8 @@ namespace FrontEnd.API.Controllers
 
                     if (postTask.IsSuccessStatusCode)
                     {
+                        if (User.IsInRole("Empleado"))
+                            return RedirectToAction("PropuestasEmpleado");
                         return RedirectToAction(nameof(Index));
                     }
                 }
@@ -338,6 +342,7 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
+                    propuesta.Pendiente = true;
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
@@ -349,7 +354,8 @@ namespace FrontEnd.API.Controllers
 
                         if (postTask.IsSuccessStatusCode)
                         {
-                            
+                            if (User.IsInRole("Empleado"))
+                                return RedirectToAction("PropuestasEmpleado");
                             return RedirectToAction("Index");
                         }
                     }
@@ -474,6 +480,8 @@ namespace FrontEnd.API.Controllers
 
                 if (res.IsSuccessStatusCode)
                 {
+                    if (User.IsInRole("Empleado"))
+                        return RedirectToAction("PropuestasEmpleado");
                     return RedirectToAction("Index");
                 }
             }
@@ -524,6 +532,27 @@ namespace FrontEnd.API.Controllers
             }
 
             return aux;
+        }
+
+        public async Task<IActionResult> PropuestasEmpleado()
+        {
+            List<data.Propuesta> aux = new List<data.Propuesta>();
+            using (var cl = new HttpClient())
+            {
+                cl.BaseAddress = new Uri(baseurl);
+                cl.DefaultRequestHeaders.Clear();
+                cl.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage res = await cl.GetAsync("api/Propuesta");
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var auxres = res.Content.ReadAsStringAsync().Result;
+                    aux = JsonConvert.DeserializeObject<List<data.Propuesta>>(auxres);
+                }
+            }
+
+            IdentityUser user = await userManager.GetUserAsync(User);
+            return View("PropuestasEmpleado", aux.Where(p => p.UsuarioId == user.Id) );
         }
     }
 }
