@@ -34,7 +34,7 @@ namespace Frontend.API.Controllers
             string newPassword = values["passwordNuevo"];
             string confirmPassword = values["passwordConfirmar"];
 
-            
+
 
             IdentityUser user = await userManager.FindByIdAsync(values["Id"]);
             try
@@ -63,7 +63,7 @@ namespace Frontend.API.Controllers
                     }
 
                 }
-                
+
             }
             catch (Exception e)
             {
