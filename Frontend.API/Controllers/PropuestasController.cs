@@ -342,7 +342,8 @@ namespace FrontEnd.API.Controllers
             {
                 try
                 {
-                    propuesta.Pendiente = true;
+                    if (User.IsInRole("Empleado"))
+                        propuesta.Pendiente = true;
                     using (var cl = new HttpClient())
                     {
                         cl.BaseAddress = new Uri(baseurl);
