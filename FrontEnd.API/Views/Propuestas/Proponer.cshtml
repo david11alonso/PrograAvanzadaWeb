@@ -4,7 +4,7 @@
     ViewData["Title"] = "Crear Propuesta";
 }
 
-<h1>Formulario Nueva Propuesta</h1>
+<h1>Formulario nueva propuesta</h1>
 <hr />
 
 <!-- Main content -->
@@ -24,12 +24,12 @@
                             <div class="col-md-6">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
-                                    <label asp-for="Titulo" class="control-label"></label>
+                                    <label>T&iacute;tulo</label>
                                     <input asp-for="Titulo" class="form-control" />
                                     <span asp-validation-for="Titulo" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Descripcion" class="control-label"></label>
+                                    <label>Descripci&oacute;n</label>
                                     <input asp-for="Descripcion" class="form-control" />
                                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                                 </div>
@@ -39,7 +39,7 @@
                                     <span asp-validation-for="Problema" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="UsuarioId" class="control-label"></label>
+                                    <label>ID Usuario</label>
                                     <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
                                 </div>
                                 <br />
@@ -49,18 +49,18 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="FechaPublicacion" class="control-label"></label>
+                                    <label>Fecha Publicaci&oacute;n</label>
                                     <input asp-for="FechaPublicacion" class="form-control" />
                                     <span asp-validation-for="FechaPublicacion" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="FechaFinalizacion" class="control-label"></label>
+                                    <label>Fecha Finalizaci&oacute;n</label>
                                     <input asp-for="FechaFinalizacion" class="form-control" />
                                     <span asp-validation-for="FechaFinalizacion" class="text-danger"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label asp-for="ResultadoEsperado" class="control-label"></label>
+                                    <label>Resultado Esperado</label>
                                     <input asp-for="ResultadoEsperado" class="form-control" />
                                     <span asp-validation-for="ResultadoEsperado" class="text-danger"></span>
                                 </div>
