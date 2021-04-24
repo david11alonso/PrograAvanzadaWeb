@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Aprobaci&oacute;n Propuestas</h1>
+<h1>Propuestas pendientes</h1>
 <hr />
 <!-- Main content -->
 <section class="content">
@@ -23,9 +23,6 @@
                                     T&iacute;tulo
                                 </th>
                                 <th>
-                                    Descripci&oacute;n
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.Pendiente)
                                 </th>
                                 <th>
@@ -42,16 +39,17 @@
                                         @Html.DisplayFor(modelItem => item.Titulo)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Descripcion)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.Pendiente)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.FechaPublicacion)
                                     </td>
                                     <td class="project-actions text-right">
-
+                                        <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.PropuestaId">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            Ver detalles
+                                        </a>
                                         <a class="btn btn-success btn-sm" asp-action="Aprobar" asp-route-id="@item.PropuestaId">
                                             <i class="fas fa-check">
                                             </i>

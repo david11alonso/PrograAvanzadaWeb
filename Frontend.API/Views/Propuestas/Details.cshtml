@@ -20,7 +20,7 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Titulo)
+                                    T&iacute;tulo
                                 </th>
                                 <td>
                                     @Html.DisplayFor(model => model.Titulo)
@@ -28,7 +28,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                    Descripci&oacute;n
                                 </th>
                                 <td>
                                     @Html.DisplayFor(model => model.Descripcion)
@@ -44,7 +44,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.FechaPublicacion)
+                                    Fecha Publicaci&oacute;n
                                 </th>
                                 <td>
                                     @Html.DisplayFor(model => model.FechaPublicacion)
@@ -52,7 +52,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.FechaFinalizacion)
+                                    Fecha Finalizaci&oacute;n
                                 </th>
                                 <td>
                                     @Html.DisplayFor(model => model.FechaFinalizacion)
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ResultadoEsperado)
+                                    Resultado Esperado
                                 </th>
                                 <td>
                                     @Html.DisplayFor(model => model.ResultadoEsperado)
@@ -95,7 +95,7 @@
                                     @Html.DisplayNameFor(model => model.Usuario)
                                 </th>
                                 <td>
-                                    @Html.DisplayFor(model => model.Usuario.Id)
+                                    @Html.DisplayFor(model => model.Usuario.UserName)
                                 </td>
                             </tr>
                         </tbody>
@@ -113,12 +113,5 @@
 <br />
 
 
-<section class="content">
-    <div class="container-fluid">
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.PropuestaId">Editar Propuesta</a> |
-            <a asp-action="Index">Volver a Propuestas</a>
 
-        </div>
-    </div>
-</section>
+
