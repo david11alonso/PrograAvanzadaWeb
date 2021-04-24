@@ -28,18 +28,6 @@
                                 <th>
                                     Descripci&oacute;n
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Propuesta.Problema)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Propuesta.ResultadoEsperado)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Propuesta.Riesgos)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Propuesta.Beneficios)
-                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -53,23 +41,16 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Propuesta.Descripcion)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Propuesta.Problema)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Propuesta.ResultadoEsperado)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Propuesta.Riesgos)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Propuesta.Beneficios)
-                                </td>
                                 <td class="project-actions text-right">
                                     <a class="btn btn-info btn-sm" asp-action="IndexComentarios" asp-route-id="@item.ForoId">
                                         <i class="fas fa-search">
                                         </i>
                                         Comentarios
+                                    </a>
+                                    <a class="btn btn-primary btn-sm" href="~/Propuestas/Details?id=@item.PropuestaId">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Ver detalles
                                     </a>
                                 </td>
                             </tr>
