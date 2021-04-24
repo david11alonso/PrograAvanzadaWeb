@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Reporte Votos</h1>
+<h1>Reporte de votos por propuesta</h1>
 <hr />
 
 <!-- Main content -->
@@ -22,16 +22,16 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Propuesta.Titulo)
+                                    T&iacute;tulo propuesta
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DeSacuerdo)
+                                <th style="text-align:center">
+                                    En desacuerdo
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Neutral)
+                                <th style="text-align:center">
+                                    Neutral
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.DeAcuerdo)
+                                <th style="text-align:center">
+                                    De acuerdo
                                 </th>
                             </tr>
                         </thead>
@@ -42,13 +42,13 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Propuesta.Titulo)
                                 </td>
-                                <td>
+                                <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.DeSacuerdo)
                                 </td>
-                                <td>
+                                <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.Neutral)
                                 </td>
-                                <td>
+                                <td style="text-align:center">
                                     @Html.DisplayFor(modelItem => item.DeAcuerdo)
                                 </td>
                                 <td class="project-actions text-right">

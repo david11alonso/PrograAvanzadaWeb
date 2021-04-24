@@ -12,7 +12,7 @@ namespace Frontend.API.Controllers
 {
     public class BaseController : Controller
     {
-        public void NotifyDelete(string message, string title = "Atencion!",
+        public void NotifyDelete(string message, string title = "Atención!",
                                     NotificationType notificationType = NotificationType.success)
         {
             var msg = new
@@ -27,7 +27,7 @@ namespace Frontend.API.Controllers
             TempData["Message"] = JsonConvert.SerializeObject(msg);
         }
 
-        public void NotifyError(string message, string title = "Atencion!",
+        public void NotifyError(string message, string title = "Atención!",
                             NotificationType notificationType = NotificationType.success)
         {
             var msg = new

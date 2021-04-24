@@ -192,7 +192,7 @@ namespace FrontEnd.API.Controllers
                     }
                     else
                     {
-                        NotifyError("El registro no puede ser creado ya que ya existe.", notificationType: NotificationType.error);
+                        NotifyError("El foro no puede ser creado porque ya existe uno asociado a la propuesta.", notificationType: NotificationType.error);
                         return RedirectToAction(nameof(Index));
 
 
