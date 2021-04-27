@@ -114,7 +114,7 @@ namespace FrontEnd.API.Controllers
                     }
                     else
                     {
-                        NotifyError("El comentario no puede ser creado.", notificationType: NotificationType.error);
+                        NotifyError("Debe completar todos los campos para guardar un comentario.", notificationType: NotificationType.error);
                         return RedirectToAction(nameof(IndexComentarios), new { id = comentario.ForoId });
                     }
                 }
