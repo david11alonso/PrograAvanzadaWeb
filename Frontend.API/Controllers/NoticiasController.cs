@@ -11,12 +11,14 @@ using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 using Frontend.API.Controllers;
 using static Frontend.API.Enums.Enums;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace FrontEnd.API.Controllers
 {
     public class NoticiasController : BaseController
     {
+        private UserManager<IdentityUser> userManager;
+
         string baseurl = "http://45.79.241.73/";
 
         // GET: Noticias
@@ -125,9 +127,20 @@ namespace FrontEnd.API.Controllers
                     {
                         return RedirectToAction(nameof(Index));
                     }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que no se completaron todos los datos.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Create));
+                    }
                 }
             }
-            ViewData["UsuarioId"] = new SelectList(GetAllUsers(), "Id", "Email", noticia.UsuarioId);
+
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+
+            List<IdentityUser> listUser = new List<IdentityUser>();
+            listUser.Add(user);
+            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", noticia.UsuarioId);
+
             return View(noticia);
         }
 

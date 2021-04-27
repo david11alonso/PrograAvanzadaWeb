@@ -85,6 +85,11 @@ namespace FrontEnd.API.Controllers
                     {
                         return RedirectToAction(nameof(Index));
                     }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que no se completaron todos los datos.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Create));
+                    }
                 }
             }
             return View(departamento);

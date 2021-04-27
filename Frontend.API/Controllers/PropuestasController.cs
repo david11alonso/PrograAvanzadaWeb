@@ -163,37 +163,57 @@ namespace FrontEnd.API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Votar([Bind("VotoPropuestaId,PropuestaId,Votacion,UsuarioId,VotoPropuesta,Comentario")] VotoPropuesta votoPropuesta)
         {
-            if (ModelState.IsValid)
+            try
             {
-                using (var cl = new HttpClient())
+                if (ModelState.IsValid)
                 {
-                    cl.BaseAddress = new Uri(baseurl);
-                    var content = JsonConvert.SerializeObject(votoPropuesta);
-                    var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-                    var byteContent = new ByteArrayContent(buffer);
-                    byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-                    var postTask = cl.PostAsync("api/VotoPropuesta", byteContent).Result;
-
-                    if (postTask.IsSuccessStatusCode)
+                    if (String.IsNullOrEmpty(votoPropuesta.Comentario))
                     {
-                        NotifyDelete("El registro se ha agregado correctamente");
+                        NotifyError("El voto no pudo ser registrado ya que falto informacion por llenar. Intente de nuevo.", notificationType: NotificationType.error);
                         return RedirectToAction(nameof(IndexEmpleado));
                     }
                     else
                     {
-                        NotifyError("El registro no puede ser creado ya que falto informacion de digitar", notificationType: NotificationType.error);
-                        return RedirectToAction(nameof(IndexEmpleado));
+                        using (var cl = new HttpClient())
+                        {
+                            cl.BaseAddress = new Uri(baseurl);
+                            var content = JsonConvert.SerializeObject(votoPropuesta);
+                            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
+                            var byteContent = new ByteArrayContent(buffer);
+                            byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                            var postTask = cl.PostAsync("api/VotoPropuesta", byteContent).Result;
+
+
+                            if (postTask.IsSuccessStatusCode)
+                            {
+                                NotifyDelete("El registro se ha agregado correctamente");
+                                return RedirectToAction(nameof(IndexEmpleado));
+                            }
+                            else
+                            {
+                                NotifyError("Error inesperado. Contacte a su administrador", notificationType: NotificationType.error);
+                                return RedirectToAction(nameof(IndexEmpleado));
+                            }
+                        }
                     }
+
                 }
+                var user = await userManager.FindByNameAsync(User.Identity.Name);
+                List<IdentityUser> listUser = new List<IdentityUser>();
+                listUser.Add(user);
+                List<Propuesta> listPropuesta = new List<Propuesta>();
+                listPropuesta.Add(GetById(votoPropuesta.PropuestaId));
+                ViewData["PropuestaId"] = new SelectList(listPropuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
+                ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", votoPropuesta.UsuarioId);
+                return View(votoPropuesta);
             }
-            var user = await userManager.FindByNameAsync(User.Identity.Name);
-            List<IdentityUser> listUser = new List<IdentityUser>();
-            listUser.Add(user);
-            List<Propuesta> listPropuesta = new List<Propuesta>();
-            listPropuesta.Add(GetById(votoPropuesta.PropuestaId));
-            ViewData["PropuestaId"] = new SelectList(listPropuesta, "PropuestaId", "Beneficios", votoPropuesta.PropuestaId);
-            ViewData["UsuarioId"] = new SelectList(listUser, "Id", "Email", votoPropuesta.UsuarioId);
-            return View(votoPropuesta);
+            catch (Exception)
+            {
+                NotifyError("Error inesperado. Contacte a su administrador", notificationType: NotificationType.error);
+                return RedirectToAction(nameof(IndexEmpleado));
+            }
+
+
         }
 
 
