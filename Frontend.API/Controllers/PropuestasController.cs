@@ -270,6 +270,11 @@ namespace FrontEnd.API.Controllers
                             return RedirectToAction("PropuestasEmpleado");
                         return RedirectToAction(nameof(Index));
                     }
+                    else
+                    {
+                        NotifyError("El registro no puede ser creado ya que no se completaron todos los datos.", notificationType: NotificationType.error);
+                        return RedirectToAction(nameof(Create));
+                    }
                 }
             }
             var user = await userManager.FindByNameAsync(User.Identity.Name);
