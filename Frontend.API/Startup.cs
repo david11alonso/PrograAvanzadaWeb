@@ -39,6 +39,15 @@ namespace Frontend.API
                 AddEntityFrameworkStores<IdentityDBContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.ConfigureApplicationCookie(options => {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Login";
+                options.AccessDeniedPath = "/Login";
+                options.SlidingExpiration = true;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

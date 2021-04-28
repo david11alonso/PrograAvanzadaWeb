@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FrontEnd.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 
 
@@ -29,8 +30,12 @@ namespace FrontEnd.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery(Name = "returnUrl")] string url)
         {
+            if (url !=null)
+            {
+                ModelState.AddModelError(string.Empty, "Error. Por favor ingresar con un usuario autorizado.");
+            }
             return View();
         }
 
@@ -55,7 +60,7 @@ namespace FrontEnd.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(LoginViewModel model)
+        public async Task<IActionResult> Index([FromQuery(Name = "returnUrl")] string url,LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +68,15 @@ namespace FrontEnd.API.Controllers
                     model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                   if (url != null)
+                    {
+                        RedirectToAction(url);
+                    }
+                    else {
+                        return RedirectToAction("index", "home");
+                    }
+
+                    
                     
                 }
 

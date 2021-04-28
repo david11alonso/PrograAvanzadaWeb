@@ -48,19 +48,21 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Comentario1)
                                 </td>
-                                @if(User.Identity.Name == item.Usuario.UserName)
-                                { 
-                                
                                 <td class="project-actions text-right">
+                                    @if (User.Identity.Name == item.Usuario.UserName)
+                                    {
+
+
+
+                                        <a class="btn btn-danger btn-sm" asp-action="DeleteComentario" asp-route-id="@item.ComentarioId">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Eliminar
+                                        </a>
                                     
-                                    <a class="btn btn-danger btn-sm" asp-action="DeleteComentario" asp-route-id="@item.ComentarioId">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Eliminar
-                                    </a>
-                                </td>
                                 }
-                            </tr>
+                                </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

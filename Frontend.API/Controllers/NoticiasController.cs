@@ -12,9 +12,11 @@ using data = FrontEnd.API.Models;
 using Frontend.API.Controllers;
 using static Frontend.API.Enums.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.API.Controllers
 {
+    [Authorize]
     public class NoticiasController : BaseController
     {
         private UserManager<IdentityUser> userManager;

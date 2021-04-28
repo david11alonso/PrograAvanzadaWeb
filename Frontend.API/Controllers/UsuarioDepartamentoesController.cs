@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FrontEnd.API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsuarioDepartamentoesController : Controller
     {
         private readonly PrograAvanzadaWebContext _context;

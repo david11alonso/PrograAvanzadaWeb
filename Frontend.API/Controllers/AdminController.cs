@@ -11,9 +11,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using data = FrontEnd.API.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace FrontEnd.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {
         private UserManager<IdentityUser> userManager;

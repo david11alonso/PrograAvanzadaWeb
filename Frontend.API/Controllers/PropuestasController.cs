@@ -12,9 +12,11 @@ using Newtonsoft.Json;
 using Frontend.API.Controllers;
 using static Frontend.API.Enums.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEnd.API.Controllers
 {
+    [Authorize]
     public class PropuestasController : BaseController
     {
         private UserManager<IdentityUser> userManager;

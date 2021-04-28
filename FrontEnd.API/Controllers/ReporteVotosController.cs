@@ -11,10 +11,11 @@ using Newtonsoft.Json;
 using data = FrontEnd.API.Models;
 using Frontend.API.Controllers;
 using static Frontend.API.Enums.Enums;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Frontend.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReporteVotosController : Controller
     {
         string baseurl = "http://45.79.241.73/";
