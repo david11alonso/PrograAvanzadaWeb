@@ -12,6 +12,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using data = FrontEnd.API.Models;
 using Microsoft.AspNetCore.Authorization;
+using static Frontend.API.Enums.Enums;
+
 namespace FrontEnd.API.Controllers
 {
     [Authorize(Roles = "Admin")]
@@ -49,6 +51,9 @@ namespace FrontEnd.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AspNetUsers user, IFormCollection formValues)
         {
+            try
+            {
+            
             string role = formValues["rol"];
             string dept = formValues["departamento"];
 
@@ -94,6 +99,14 @@ namespace FrontEnd.API.Controllers
             ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
             ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
             return View(user);
+            }
+            catch (Exception)
+            {
+                NotifyError("Error.Faltan datos por completar.", notificationType: NotificationType.error);
+                ViewData["roles"] = new SelectList(getAllRoles(), "Id", "Name");
+                ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre");
+                return RedirectToAction("Create");
+            }
         }
 
         public async Task<IActionResult> Update(string id)
@@ -117,6 +130,9 @@ namespace FrontEnd.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(string id, string email, string password, IFormCollection formValues)
         {
+            try
+            {
+           
             string role = formValues["rol"];
             var currentRole = GetRoleByUserId(id).FirstOrDefault().RoleId;
             var userDeptObj= getAllUserDept().Where(m => m.UsuarioId == id).FirstOrDefault();
@@ -171,6 +187,12 @@ namespace FrontEnd.API.Controllers
             ViewData["departamentos"] = new SelectList(getAllDepartamentos(), "DepartamentoId", "Nombre", userDeptObj.DepartamentoId);
 
             return View(user);
+            }
+            catch (Exception)
+            {
+                NotifyError("Error.Faltan datos por completar.", notificationType: NotificationType.error);
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private void Errors(IdentityResult result)
